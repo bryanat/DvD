@@ -12,7 +12,7 @@ export default function TabTwoScreen() {
       </View>
       <View style={styles.rightView}>
         <View style={styles.rightTitleView}>
-          <Text style={styles.title}>User Right</Text>
+          <Text style={styles.title}>Adam Levine</Text>
         </View>
       </View>
     </View>
