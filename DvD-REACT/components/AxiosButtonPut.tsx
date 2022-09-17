@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
     borderColor: '#ffffff',
     height: 32,
     paddingLeft: 10,
-    paddingRight: 80,
+    paddingRight: 60,
   },
   inputViewName: {
   },
