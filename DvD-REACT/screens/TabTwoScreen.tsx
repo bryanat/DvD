@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   rightView: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#ff0000',
+    backgroundColor: '#2f95dc',
   },
   container: {
     flexDirection: 'row',
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   rightTitleView: {
-    backgroundColor: '#ff0000',
+    backgroundColor: '#2f95dc',
     alignItems: 'center',
   },
 });

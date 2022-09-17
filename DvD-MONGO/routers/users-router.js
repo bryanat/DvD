@@ -1,26 +1,5 @@
 import { Router } from 'express';
-import { Collection } from 'mongodb';
-
-////////////////////////////////////////////////
-/////// MOVE TO om-client.js //////////////////
-
-import { MongoClient } from 'mongodb';
-
-// create mongo client 
-const url = 'mongodb://localhost:27017'
-const client = new MongoClient(url);
-
-// client connect to server before proceeding
-await client.connect()
-console.log('mongo client connected...')
-
-// alias the database name as db
-const db = client.db('dvd')
-// instantiate variables for collections
-const users = db.collection('users')
-const versus = db.collection('versus')
-
-////////////////////////////////////////////////
+import { users } from '../om/om-client.js'
 
 export const router = Router()
 
@@ -50,22 +29,11 @@ router.get('/getUSER', async (req, res) => {
   res.send(fetchResult)
 })
 
-// R (read) get user from users collection
-router.get('/getUSER2', async (req, res) => {
-  // note the [brackets] get first array result
-  const [fetchResult] = await users.aggregate([
-    //{ $match: { age: 25}},
-    { $sample: { size: 1}}
-  ]).toArray()
-  //const fetchResult = await users.findOne({})
-  console.log(fetchResult)
-  res.send(fetchResult)
-})
-
-// R (read) get user from users collection
-router.get('/id34234', async (req, res) => {
-  const findResults = await Collection.find({})
-  console.log(`Read document: ${findResults}`)
+// D (delete) delete user by name from users collection
+router.delete('/deleteUSER/:id', async(req, res) => {
+  const deleteResult = await users.deleteOne({name: req.params.id})
+  console.log(`Deleted mongo document ${deleteResult}`)
+  res.send({log: `Deleted mongo document: ${deleteResult}`})
 })
 
 router.get('/test', async (req, res) => {
