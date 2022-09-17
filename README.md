@@ -1,7 +1,7 @@
 # DvD
 ![](readme-wip-images/Screenshot_2022-09-17-07-21-09-19_f73b71075b1de7323614b647fe394240.jpg)
 ![](readme-wip-images/Screenshot_2022-09-17-07-21-20-96_f73b71075b1de7323614b647fe394240.jpg)
-![](readme-wip-images/Screenshot_2022-09-17-07-21-09-19_f73b71075b1de7323614b647fe394240.jpg)
+![](readme-wip-images/Screenshot_2022-09-17-07-21-46-29_f73b71075b1de7323614b647fe394240.jpg)
 ## - [&nbsp;&nbsp;] ???
 ## - [&nbsp;&nbsp;] Theme
 ## - [&nbsp;&nbsp;] Duel/VS
