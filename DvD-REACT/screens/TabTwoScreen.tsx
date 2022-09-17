@@ -5,19 +5,44 @@ import { Text, View } from '../components/Themed';
 export default function TabTwoScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
+      <View style={styles.leftView}>
+        <View style={styles.leftTitleView}>
+          <Text style={styles.title}>User Left</Text>
+        </View>
+      </View>
+      <View style={styles.rightView}>
+        <View style={styles.rightTitleView}>
+          <Text style={styles.title}>User Right</Text>
+        </View>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  leftView: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'column',
+  },
+  rightView: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: '#ff0000',
+  },
+  container: {
+    flexDirection: 'row',
+    flex: 1,
   },
   title: {
+    
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  leftTitleView: {
+    alignItems: 'center',
+  },
+  rightTitleView: {
+    backgroundColor: '#ff0000',
+    alignItems: 'center',
   },
 });

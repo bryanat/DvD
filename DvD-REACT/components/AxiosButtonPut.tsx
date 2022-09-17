@@ -12,6 +12,7 @@ export default function AxiosButtonPut({uri, title}: {uri: string, title: string
       age: 36,
       weight: 168,
       height: 73,
+      color: '#ff0000'
     })
       .then( function (response: any) {
         console.log(response.data)

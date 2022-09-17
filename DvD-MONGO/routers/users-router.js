@@ -32,6 +32,7 @@ router.put('/putUSER', async(req, res) => {
     age: req.body.age ?? null,
     weight: req.body.weight ?? null,
     height: req.body.height ?? null,
+    color: req.body.color ?? null,
   })
   console.log(`Created document: ${insertResult}`)
   res.send({log: `Created mongo document _id: ${insertResult.insertedId}`})
@@ -39,6 +40,18 @@ router.put('/putUSER', async(req, res) => {
 
 // R (read) get user from users collection
 router.get('/getUSER', async (req, res) => {
+  // note the [brackets] get first array result
+  const [fetchResult] = await users.aggregate([
+    //{ $match: { age: 25}},
+    { $sample: { size: 1}}
+  ]).toArray()
+  //const fetchResult = await users.findOne({})
+  console.log(fetchResult)
+  res.send(fetchResult)
+})
+
+// R (read) get user from users collection
+router.get('/getUSER2', async (req, res) => {
   // note the [brackets] get first array result
   const [fetchResult] = await users.aggregate([
     //{ $match: { age: 25}},
