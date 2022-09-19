@@ -1,50 +1,86 @@
-import { StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
+import { VictoryChart, VictoryLine, VictoryTheme, VictoryBar } from 'victory-native'
 import AxiosButtonGet from '../components/AxiosButtonGet';
+import LineChartVictory from '../components/LineChartVictory';
+import ImageBMI from '../components/ImageBMI';
 
 export default function GetUserScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
 
   return (
-    <View style={styles.container}>
+    <ScrollView>
       <View style={styles.viewWeight}>
-        <Text>Weight</Text>
+        <Text style={styles.titleWeight}>Weight</Text>
+        <VictoryChart theme={VictoryTheme.material}>
+          <VictoryLine
+            style={{
+              data: { stroke: "#c43a31" },
+              parent: { border: "1px solid #ccc"}
+            }}
+            data={[
+              { x: 1, y: 2 },
+              { x: 2, y: 3 },
+              { x: 3, y: 5 },
+              { x: 4, y: 4 },
+              { x: 5, y: 7 }
+            ]}
+          />
+        </VictoryChart>
       </View>
+
       <View style={styles.viewBMI}>
-        <Text>BMI</Text>
+        <Text style={styles.titleBMI}>BMI</Text>
+        <ImageBMI sex="male"/>
       </View>
+
       <View style={styles.viewCalories}>
-        <Text>Calories</Text>
+        <Text style={styles.titleCalories}>Calories</Text>
+        <VictoryChart theme={VictoryTheme.material} domainPadding={10}>
+          <VictoryBar
+            style={{ data: { fill: "#c43a31" } }}
+            data={[
+              { x: 1, y: 2 },
+              { x: 2, y: 3 },
+              { x: 3, y: 5 },
+              { x: 4, y: 4 },
+              { x: 5, y: 7 }
+            ]}
+          />
+        </VictoryChart>
       </View>
-      <Text style={styles.title}>Get User</Text>
+
+      <Text>Get User</Text>
       <AxiosButtonGet title="/getUser" uri="http://192.168.1.214:8088/users/getUser" />
-    </View>
+  </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  title: {
+  titleWeight: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  imageBMI: {
+    width: '100%',
+  },
+  titleBMI: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+  },
+  titleCalories: {
     fontSize: 20,
     fontWeight: 'bold',
   },
   viewWeight: {
     backgroundColor: '#0000ff',
-    flex: 1,
-    width: '100%',
   },
   viewBMI: {
-    backgroundColor: '#00ff00',
-    flex: 1,
-    width: '100%',
   },
   viewCalories: {
     backgroundColor: '#ff0000',
-    flex:1,
-    width: '100%',
   }
 });

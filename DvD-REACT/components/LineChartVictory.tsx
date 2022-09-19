@@ -3,8 +3,7 @@ import { StyleSheet } from 'react-native';
 import { View, Text } from './Themed'
 import { VictoryChart, VictoryLine, VictoryTheme } from 'victory-native'
 
-// Going to compare the two top RN charting libraries: victory-native and react-native-chart-kit
-// victory-native charts (also check out "area hover styles" victory-native chart)
+// FUTURE: also check out "area hover styles" victory-native chart
 export default function LineChartVictory() {
   return (
     <VictoryChart theme={VictoryTheme.material}>

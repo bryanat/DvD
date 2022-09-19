@@ -241,6 +241,7 @@ export default function AxiosButtonPut({uri, title}: {uri: string, title: string
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
+    width: '100%',
   },
   inputText: {
     borderWidth: 1,
