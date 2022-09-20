@@ -5,9 +5,9 @@ import { Svg, Polygon } from 'react-native-svg';
 
 // FUTURE: add arrow with bmi number beneath bmi scale (using react-native-svg and math to calc bmi)
 // return male or female bmi image
-export default function ImageBMI({sex} : {sex: string}) {
+export default function ImageBMI({sex}) {
 
-  const [imageState, getImageState] = React.useState<string>('../assets/images/bmi-male.png');
+  const [imageState, getImageState] = React.useState('../assets/images/bmi-male.png');
   // useEffect with image too?
 
   const [windowWidth, windowHeight] = [Dimensions.get("screen").width, Dimensions.get("screen").height]

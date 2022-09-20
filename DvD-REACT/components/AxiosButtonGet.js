@@ -3,12 +3,12 @@ import { StyleSheet, Pressable } from 'react-native'
 import { Text, View } from './Themed'
 import axios from 'axios'
 
-export default function AxiosButtonGet({uri, title}: {uri: string, title: string}) {
-  const [axiosState, setAxiosState] = React.useState<String>("Get Axios (before)")
+export default function AxiosButtonGet({uri, title}) {
+  const [axiosState, setAxiosState] = React.useState("Get Axios (before)")
 
   function axiosPressFunction() {
     axios.get(uri)
-      .then( function (response: any) {
+      .then( function (response) {
         console.log(response.data)
         const returnedUser = response.data
         setAxiosState(`
@@ -20,7 +20,7 @@ export default function AxiosButtonGet({uri, title}: {uri: string, title: string
         `)
         //setAxiosState(response.data.name)
       })
-      .catch( function (error: any) {
+      .catch( function (error) {
         console.log(error)
       })
   }

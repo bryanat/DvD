@@ -4,14 +4,14 @@ import { Text, View, TextInput } from './Themed'
 import { Picker } from '@react-native-picker/picker'
 import axios from 'axios'
 
-export default function AxiosButtonPut({uri, title}: {uri: string, title: string}) {
-  const [axiosState, setAxiosState] = React.useState<String>("Put Axios (before)")
-  const [nameState, setNameState] = React.useState<String>();
-  const [ageState, setAgeState] = React.useState<Number>();
-  const [weightState, setWeightState] = React.useState<Number>();
-  const [heightState, setHeightState] = React.useState<Number>();
-  const [sexState, setSexState] = React.useState<Boolean>();
-  const [colorState, setColorState] = React.useState<Number>();
+export default function AxiosButtonPut({uri, title}) {
+  const [axiosState, setAxiosState] = React.useState("Put Axios (before)")
+  const [nameState, setNameState] = React.useState();
+  const [ageState, setAgeState] = React.useState();
+  const [weightState, setWeightState] = React.useState();
+  const [heightState, setHeightState] = React.useState();
+  const [sexState, setSexState] = React.useState();
+  const [colorState, setColorState] = React.useState();
 
   function axiosPressFunction() {
     axios.put(uri, {
@@ -22,12 +22,12 @@ export default function AxiosButtonPut({uri, title}: {uri: string, title: string
       sex: sexState ?? null,
       color: colorState ?? null, //'#ff0000'
     })
-      .then( function (response: any) {
+      .then( function (response) {
         console.log(response.data)
         const returnedUser = response.data
         setAxiosState(response.data.log ?? "undefined")
       })
-      .catch( function (error: any) {
+      .catch( function (error) {
         console.log(error)
       })
   }

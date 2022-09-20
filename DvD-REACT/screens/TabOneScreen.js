@@ -1,10 +1,9 @@
 import { StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
 import AxiosButtonGet from '../components/AxiosButtonGet';
 import AxiosButtonPut from '../components/AxiosButtonPut';
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function TabOneScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Users CRUD</Text>

@@ -1,13 +1,12 @@
 import { ScrollView, StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
 import { VictoryChart, VictoryLine, VictoryTheme, VictoryBar } from 'victory-native'
 import AxiosButtonGet from '../components/AxiosButtonGet';
 import LineChartVictory from '../components/LineChartVictory';
 import ImageBMI from '../components/ImageBMI';
 
 // user health stats (diet, charts, bmi, calorie history)
-export default function GetUserScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function GetUserScreen({ navigation }) {
 
   return (
     <ScrollView>

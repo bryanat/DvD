@@ -1,9 +1,8 @@
 import { StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
 import AxiosButtonPut from '../components/AxiosButtonPut';
 
-export default function CreateUserScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function CreateUserScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create User</Text>
