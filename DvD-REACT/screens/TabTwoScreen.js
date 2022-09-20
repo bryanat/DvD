@@ -1,18 +1,19 @@
-import { StyleSheet } from 'react-native';
+// TabTwoScreen is current basis of VS dieter screen
 
+import { StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
 
 export default function TabTwoScreen() {
   return (
-    <View style={styles.container}>
+    <View style={styles.topView}>
       <View style={styles.leftView}>
         <View style={styles.leftTitleView}>
-          <Text style={styles.title}>User Left</Text>
+          <Text style={styles.topText}>User Left</Text>
         </View>
       </View>
       <View style={styles.rightView}>
         <View style={styles.rightTitleView}>
-          <Text style={styles.title}>Adam Levine</Text>
+          <Text style={styles.topText}>Adam Levine</Text>
         </View>
       </View>
     </View>
@@ -20,6 +21,10 @@ export default function TabTwoScreen() {
 }
 
 const styles = StyleSheet.create({
+  topView: {
+    flexDirection: 'row',
+    flex: 1,
+  },
   leftView: {
     flex: 1,
     flexDirection: 'column',
@@ -29,12 +34,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#2f95dc',
   },
-  container: {
-    flexDirection: 'row',
-    flex: 1,
-  },
-  title: {
-    
+  topText: {
     fontSize: 20,
     fontWeight: 'bold',
   },

@@ -4,20 +4,20 @@ import AxiosButtonPut from '../components/AxiosButtonPut';
 
 export default function CreateUserScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Create User</Text>
+    <View style={styles.topView}>
+      <Text style={styles.topText}>Create User</Text>
       <AxiosButtonPut title="Create User" uri="http://192.168.1.214:8088/users/putUser" />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  topView: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
+  topText: {
     fontSize: 20,
     fontWeight: 'bold',
   },

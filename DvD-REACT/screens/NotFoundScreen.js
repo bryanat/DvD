@@ -4,8 +4,8 @@ import { Text, View } from '../components/Themed';
 
 export default function NotFoundScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>This screen doesn't exist.</Text>
+    <View style={styles.topView}>
+      <Text style={styles.topText}>This screen doesn't exist.</Text>
       <TouchableOpacity onPress={() => navigation.replace('Root')} style={styles.link}>
         <Text style={styles.linkText}>Go to home screen!</Text>
       </TouchableOpacity>
@@ -14,13 +14,13 @@ export default function NotFoundScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  topView: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
   },
-  title: {
+  topText: {
     fontSize: 20,
     fontWeight: 'bold',
   },
