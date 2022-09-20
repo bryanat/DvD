@@ -6,6 +6,7 @@ import AxiosButtonGet from '../components/AxiosButtonGet';
 import LineChartVictory from '../components/LineChartVictory';
 import ImageBMI from '../components/ImageBMI';
 
+// user health stats (diet, charts, bmi, calorie history)
 export default function GetUserScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
 
   return (
