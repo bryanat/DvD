@@ -19,6 +19,7 @@ import TabTwoScreen from '../screens/TabTwoScreen';
 import LinkingConfiguration from './LinkingConfiguration';
 import CreateUserScreen from '../screens/CreateUserScreen';
 import GetUserScreen from '../screens/GetUserScreen';
+import Onboarding from '../components/Onboarding';
 
 export default function Navigation({ colorScheme }) {
   return (
@@ -39,6 +40,7 @@ const Stack = createNativeStackNavigator();
 function RootNavigator() {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="OnBoarding" component={Onboarding} options={{ headerShown: false }} />
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
