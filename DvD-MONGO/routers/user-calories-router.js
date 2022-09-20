@@ -7,7 +7,7 @@ export const router = Router()
 // priority of model is to maximize query speed / data access, as processing bandwidth is more expensive than storage
 // mongo database models revolve around the {object}, so how to best store calorie data in user {object}
 // current method: calories stored under user, with each caloric entry associated with a datetime 
-// {_id: '874928374', user: 'john doe', calorieHistory: [{time: 612983238, weight: 165}, {time: 61238723, calories: 1590}]}
+// {_id: '874928374', user: 'john doe', calorieHistory: [{time: 612983238, weight: 165}, {time: 61238723, calories: 1590}]} 
 // calories are stored under user as they will be queried by {user}, aggregations will revolve around {user} for user stats/ranks
 
 // R (read) get user calories entries from calorieHistory
