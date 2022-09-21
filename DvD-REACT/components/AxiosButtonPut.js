@@ -3,8 +3,10 @@ import { StyleSheet, Pressable, TouchableOpacity } from 'react-native'
 import { Text, View, TextInput } from './Themed'
 import { Picker } from '@react-native-picker/picker'
 import axios from 'axios'
-
-export default function AxiosButtonPut({uri, title}) {
+import {Routes, Route, useNavigate} from 'react-router-dom';
+import Navigation from '../navigation'
+import Onboarding from './Onboarding'
+export default function AxiosButtonPut({uri, title, navigation}) {
   const [axiosState, setAxiosState] = React.useState("Put Axios (before)")
   const [nameState, setNameState] = React.useState();
   const [ageState, setAgeState] = React.useState();
@@ -32,6 +34,16 @@ export default function AxiosButtonPut({uri, title}) {
       })
   }
 
+  // const navigate = useNavigate();
+
+  // const navigateHome = () => {
+  //   navigate('Onboarding');
+  // };
+
+  // const navigateSignUp = () => {
+  //   navigate('/')
+  // };
+
   return (
     <View style={styles.container}>
       <Text style={styles.logo}>DvD</Text>
@@ -56,7 +68,12 @@ export default function AxiosButtonPut({uri, title}) {
       <TouchableOpacity>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={axiosPressFunction} style={styles.loginBtn}><Text>Login</Text></TouchableOpacity>
+      <TouchableOpacity onPress={
+        () => { {axiosPressFunction};  }
+      } style={styles.loginBtn}><Text>Login</Text></TouchableOpacity>
+      {/* <TouchableOpacity onPress={
+        () => { {navigateHome}; {axiosPressFunction};  }
+      } style={styles.loginBtn}><Text>Login</Text></TouchableOpacity> */}
       <Text style={styles.loginText}>Don't have an account?</Text>
       <TouchableOpacity>
         <Text style={styles.signUpText}>SignUp</Text>
