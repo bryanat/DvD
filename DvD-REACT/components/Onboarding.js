@@ -4,8 +4,8 @@ import { View, Text, StyleSheet, SafeAreaView, Image, Button } from "react-nativ
 import AppIntroSlider from 'react-native-app-intro-slider'
 import CreateUserScreen from '../screens/CreateUserScreen'
 import AuthProvider from '../hooks/AuthProvider'
-
-
+import Navigation from '../navigation';
+import LoginScreen from '../screens/LoginScreen'
 const Onboarding = () => {
 
     // const context = useContext(AuthContext)
@@ -33,9 +33,9 @@ const Onboarding = () => {
     return(
         <>
         {showApp ? (
-            <SafeAreaView style={styles.container}>
-                <CreateUserScreen />
-            </SafeAreaView>
+            // <SafeAreaView style={styles.container}>
+                <LoginScreen />
+            // </SafeAreaView>
         ) : (
             <AppIntroSlider
                 data={slides}
