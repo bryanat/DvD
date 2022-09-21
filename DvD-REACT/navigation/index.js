@@ -34,13 +34,11 @@ export default function Navigation({ colorScheme }) {
   let isAuthenticated = false
 
   return (
-    <AuthProvider>
       <NavigationContainer
         linking={LinkingConfiguration}
         theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         {isAuthenticated ? <RootNavigator /> : <AuthenticationNavigator />}
       </NavigationContainer>
-    </AuthProvider>
   );
 }
 

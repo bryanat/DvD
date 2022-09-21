@@ -8,7 +8,7 @@ import AuthProvider from '../hooks/AuthProvider'
 
 const Onboarding = () => {
 
-    const context = useContext(AuthContext)
+    // const context = useContext(AuthContext)
 
 
     const [showApp, setShowApp] = useState(false);
