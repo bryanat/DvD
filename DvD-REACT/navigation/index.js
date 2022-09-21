@@ -21,6 +21,7 @@ import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import LinkingConfiguration from './LinkingConfiguration';
 import CreateUserScreen from '../screens/CreateUserScreen';
+import LoginScreen from '../screens/LoginScreen';
 import GetUserScreen from '../screens/GetUserScreen';
 import BlogfeedScreen from '../screens/BlogfeedScreen';
 import PersonalchallengeScreen from '../screens/PersonalchallengeScreen';
@@ -31,7 +32,7 @@ import AuthProvider from '../hooks/AuthProvider';
 
 export default function Navigation({ colorScheme }) {
   // need to impliment const AuthContext = React.createContext
-  let isAuthenticated = false
+  let isAuthenticated = true
 
   return (
       <NavigationContainer
@@ -90,7 +91,7 @@ function BottomTabNavigator() {
         name="TabOne"
         component={TopTabUserNavigator}
         options={({ navigation }) => ({
-          title: 'User Stats',
+          title: 'Home',
           tabBarIcon: ({ color }) => <Ionicons name="home-outline" size={32} color={color} style={{ marginBottom: -3 }} />,
           headerRight: () => (
             <View style={{ flexDirection: 'row' }}>
@@ -176,7 +177,7 @@ const Tab = createMaterialTopTabNavigator();
 function TopTabUserNavigator() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Create User" component={CreateUserScreen} />
+      <Tab.Screen name="Login Screen" component={LoginScreen} />
       <Tab.Screen name="Get User" component={GetUserScreen} />
     </Tab.Navigator>
   )

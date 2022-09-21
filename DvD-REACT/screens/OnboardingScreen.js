@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image, Button } from "react-native"
 
 import AppIntroSlider from 'react-native-app-intro-slider'
-import LoginScreen from './LoginScreen'
+import CreateUserScreen from './CreateUserScreen';
 const OnboardingScreen = () => {
 
     // const context = useContext(AuthContext)
@@ -31,7 +31,7 @@ const OnboardingScreen = () => {
         <>
         {showApp ? (
             // <SafeAreaView style={styles.container}>
-                <LoginScreen />
+                <CreateUserScreen />
             // </SafeAreaView>
         ) : (
             <AppIntroSlider

@@ -1,6 +1,7 @@
 // Blog Feed : heavily image based, upload picture for foods or exercise
 // Blog Feed features : heart(like),  
 
+import * as React from 'react'
 import { StyleSheet, FlatList } from 'react-native';
 import { Text, View } from '../components/Themed';
 import * as SecureStore from 'expo-secure-store'
