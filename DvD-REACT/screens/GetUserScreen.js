@@ -4,11 +4,16 @@
 
 import { StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
+import AxiosButtonGet from '../components/AxiosButtonGet';
+import AxiosButtonPut from '../components/AxiosButtonPut';
 
-export default function GetUserScreen() {
+export default function TabOneScreen() {
   return (
     <View style={styles.topView}>
-      <Text style={styles.topText}>Get User Health History</Text>
+      <Text style={styles.topText}>Users Test Routes</Text>
+      <AxiosButtonGet title="/users/getUser" uri="http://192.168.1.214:8088/users/getUser" />
+      <AxiosButtonGet title="/logins/getLoginTest" uri="http://192.168.1.214:8088/logins/getLoginTest" />
+      <AxiosButtonGet title="/logins/putLoginTest" uri="http://192.168.1.214:8088/logins/putLoginTest" />
     </View>
   );
 }
@@ -16,6 +21,8 @@ export default function GetUserScreen() {
 const styles = StyleSheet.create({
   topView: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   topText: {
     fontSize: 20,

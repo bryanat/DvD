@@ -1,4 +1,5 @@
 import { Router } from 'express';
+// users is a collection accessed through Mongo client
 import { users } from '../om/om-client.js'
 
 export const router = Router()

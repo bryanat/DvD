@@ -1,3 +1,5 @@
+// FUTURE: om with mongoose
+
 import { MongoClient } from 'mongodb';
 
 // create mongo client 
@@ -14,6 +16,8 @@ console.log('mongo client connected...')
 const db = client.db('dvd')
 // instantiate variables for collections
 export const users = db.collection('users')
+// logins could be merged under users, consider query performance
+export const logins = db.collection('logins')
 export const versus = db.collection('versus')
 
 export default client

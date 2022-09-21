@@ -11,6 +11,8 @@ export default function AxiosButtonGet({uri, title}) {
       .then( function (response) {
         console.log(response.data)
         const returnedUser = response.data
+        setAxiosState(`Route ${uri} returned: ${returnedUser[0].email}`)
+        /*
         setAxiosState(`
         user created:
         name: ${response.data.name}
@@ -18,6 +20,7 @@ export default function AxiosButtonGet({uri, title}) {
         height: ${response.data.weight}
         weight: ${response.data.height}
         `)
+        */
         //setAxiosState(response.data.name)
       })
       .catch( function (error) {
