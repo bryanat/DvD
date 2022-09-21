@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image, Button } from "react-native"
 
-import AppIntroSlider from 'react-native-app-intro-slider';
-import CreateUserScreen from '../screens/CreateUserScreen';
+import AppIntroSlider from 'react-native-app-intro-slider'
+import CreateUserScreen from '../screens/CreateUserScreen'
+import AuthProvider from '../hooks/AuthProvider'
 
 
 const Onboarding = () => {
+
+    const context = useContext(AuthContext)
+
+
     const [showApp, setShowApp] = useState(false);
 
     const onDone = () => {
@@ -51,7 +56,7 @@ const slides = [
     {
         key: '1',
         text: 'Welcome to D vs D!',
-        title: 'Diter vs Diter',
+        title: 'Dieter vs. Dieter',
         image: require('../assets/images/bmi-female.png'),
         backgroundColor: '#20d2bb',
     },

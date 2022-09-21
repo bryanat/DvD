@@ -27,13 +27,20 @@ import PersonalchallengeScreen from '../screens/PersonalchallengeScreen';
 import GroupchatScreen from '../screens/GroupchatScreen';
 import Onboarding from '../components/Onboarding';
 
+import AuthProvider from '../hooks/AuthProvider';
+
 export default function Navigation({ colorScheme }) {
+  // need to impliment const AuthContext = React.createContext
+  let isAuthenticated = false
+
   return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <RootNavigator />
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer
+        linking={LinkingConfiguration}
+        theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        {isAuthenticated ? <RootNavigator /> : <AuthenticationNavigator />}
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
 
@@ -43,11 +50,18 @@ export default function Navigation({ colorScheme }) {
  */
 const Stack = createNativeStackNavigator();
 
+function AuthenticationNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="OnBoarding" component={Onboarding} options={{ headerShown: false }} />
+    </Stack.Navigator>
+  )
+}
+
 function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="OnBoarding" component={Onboarding} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Friendslist" component={FriendslistModal} />
@@ -57,6 +71,7 @@ function RootNavigator() {
     </Stack.Navigator>
   );
 }
+
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.

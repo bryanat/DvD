@@ -39,7 +39,8 @@
     "react-native-screens": "~3.11.1",
     "react-native-svg": "12.3.0",
     "react-native-tab-view": "^3.1.1",
-    "victory-native": "^36.6.7"
+    "victory-native": "^36.6.7",
+    "expo-secure-store": "~11.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
