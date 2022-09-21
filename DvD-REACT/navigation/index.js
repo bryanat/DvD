@@ -31,7 +31,7 @@ import AuthProvider from '../hooks/AuthProvider';
 
 export default function Navigation({ colorScheme }) {
   // need to impliment const AuthContext = React.createContext
-  let isAuthenticated = true
+  let isAuthenticated = false
 
   return (
       <NavigationContainer
