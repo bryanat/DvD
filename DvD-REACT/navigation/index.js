@@ -25,7 +25,7 @@ import GetUserScreen from '../screens/GetUserScreen';
 import BlogfeedScreen from '../screens/BlogfeedScreen';
 import PersonalchallengeScreen from '../screens/PersonalchallengeScreen';
 import GroupchatScreen from '../screens/GroupchatScreen';
-import Onboarding from '../components/Onboarding';
+import OnboardingScreen from '../screens/OnboardingScreen';
 
 import AuthProvider from '../hooks/AuthProvider';
 
@@ -51,7 +51,7 @@ const Stack = createNativeStackNavigator();
 function AuthenticationNavigator() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="OnBoarding" component={Onboarding} options={{ headerShown: false }} />
+      <Stack.Screen name="OnBoardingScreen" component={OnboardingScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 }

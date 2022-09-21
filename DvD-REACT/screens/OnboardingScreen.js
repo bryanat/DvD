@@ -2,11 +2,8 @@ import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image, Button } from "react-native"
 
 import AppIntroSlider from 'react-native-app-intro-slider'
-import CreateUserScreen from '../screens/CreateUserScreen'
-import AuthProvider from '../hooks/AuthProvider'
-import Navigation from '../navigation';
-import LoginScreen from '../screens/LoginScreen'
-const Onboarding = () => {
+import LoginScreen from './LoginScreen'
+const OnboardingScreen = () => {
 
     // const context = useContext(AuthContext)
 
@@ -110,4 +107,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default Onboarding;
+export default OnboardingScreen;

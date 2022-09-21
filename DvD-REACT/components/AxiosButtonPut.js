@@ -4,9 +4,7 @@ import { Text, View, TextInput } from './Themed'
 import { Picker } from '@react-native-picker/picker'
 import axios from 'axios'
 import {Routes, Route, useNavigate} from 'react-router-dom';
-import Navigation from '../navigation'
-import Onboarding from './Onboarding'
-export default function AxiosButtonPut({uri, title, navigation}) {
+export default function AxiosButtonPut({uri, title}) {
   const [axiosState, setAxiosState] = React.useState("Put Axios (before)")
   const [nameState, setNameState] = React.useState();
   const [ageState, setAgeState] = React.useState();
@@ -37,7 +35,7 @@ export default function AxiosButtonPut({uri, title, navigation}) {
   // const navigate = useNavigate();
 
   // const navigateHome = () => {
-  //   navigate('Onboarding');
+  //   navigate('OnboardingScreen');
   // };
 
   // const navigateSignUp = () => {
