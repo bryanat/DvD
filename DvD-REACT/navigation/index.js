@@ -25,6 +25,7 @@ import GetUserScreen from '../screens/GetUserScreen';
 import BlogfeedScreen from '../screens/BlogfeedScreen';
 import PersonalchallengeScreen from '../screens/PersonalchallengeScreen';
 import GroupchatScreen from '../screens/GroupchatScreen';
+import Onboarding from '../components/Onboarding';
 
 export default function Navigation({ colorScheme }) {
   return (
@@ -46,6 +47,7 @@ function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+      <Stack.Screen name="OnBoarding" component={Onboarding} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Friendslist" component={FriendslistModal} />
