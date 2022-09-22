@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, Dimensions } from "react-native"
 
 import AppIntroSlider from 'react-native-app-intro-slider'
 import CreateUserScreen from '../CreateUserScreen';
-const OnboardingScreen = () => {
+const OnboardingScreen = ({ navigation }) => {
 
     const [showApp, setShowApp] = useState(false);
     // const context = useContext(AuthContext)
@@ -15,7 +15,8 @@ const OnboardingScreen = () => {
     //{maxWidth: screenWidth, maxHeight: screenHeight*0.5, width: screenWidth, height: 1000}
 
     const onDone = () => {
-        setShowApp(true);
+        navigation.navigate('Root')
+        // setShowApp(true);
     }
 
     const onSkip = () => {
