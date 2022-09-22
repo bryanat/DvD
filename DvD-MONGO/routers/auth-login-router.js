@@ -12,13 +12,26 @@ router.put('/getLogin', async (req, res) => {
   console.log(`== Express req.body result below ==`)
   console.log(req.body)
   const queryEmail = req.body.email
+  console.log(`the email query is: ${queryEmail}`)
   // find the mongo user login object via email
-  const result = await (await logins.find({}).toArray()).pop()
-  //const result = await logins.find({email: {$exists: queryEmail}}).toArray()[0]
-  console.log("== Mongo logins.find() result below ==")
-  console.log(result)
-  // check that password matches email
-  res.send(result)
+  const result = await (await logins.find({email: {$eq: queryEmail}}).toArray()).pop()
+
+  // if a user is found (because result is not undefined)
+  if (result != undefined) {
+    // check that password (from client) matches email password (from mongo server)
+    if (result.password == req.body.password) {
+      console.log({log: 'username and password found and match', data: result})
+      res.send({log: 'username and password found and match', data: result})
+    } else {
+      res.send({log: `incorrent password for ${req.body.email}`})
+      console.log(`client password ${req.body.password} does not match server password`)
+    }
+  } 
+  // if a user is not found, guide to go to signup screen 
+  else {
+    console.log(`The client entered username ${queryEmail} does not match any server user`)
+    res.send({log: 'username was not found'})
+  }
 })
 
 // C (create/insert/put) user login into logins collection
@@ -30,6 +43,13 @@ router.put('/putLogin', async (req, res) => {
   res.send({ log: `Successfully added user ${req.body.email}` })
 })
 
+
+
+
+
+
+
+//////////////////////////////////////////////////
 // dev route, will be deleted
 router.get('/putLoginTest', async (req, res) => {
   const result = await logins.insertOne({
