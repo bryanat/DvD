@@ -1,15 +1,32 @@
 import * as React from 'react'
 import { StyleSheet, Pressable, TouchableOpacity } from 'react-native';
 import { Text, View, TextInput } from '../../components/Themed';
+import axios from 'axios'
 
 import { Picker } from '@react-native-picker/picker'
-import axios from 'axios'
 import {Routes, Route, useNavigate} from 'react-router-dom';
 
 export default function LoginScreen() {
 
-  const [axiosState, setAxiosState] = React.useState("Put Axios (before)")
-  const [nameState, setNameState] = React.useState();
+  const [axiosState, setAxiosState] = React.useState("login has not been submitted yet")
+  const [nameState, setNameState] = React.useState()
+
+  const [emailState, setEmailState] = React.useState()
+  const [passwordState, setPasswordState] = React.useState()
+
+  function loginSubmitPress() {
+    axios.put('http://192.168.1.214:8088/logins/putLogin', {
+      email: emailState,
+      password: passwordState,
+    })
+      .then( function (response) {
+        console.log(response.data)
+        setAxiosState(response.data.log ?? "undefined")
+      })
+      .catch( function (error) {
+        console.log(error)
+      })
+  }
 
   return (
     <View style={styles.topView}>
@@ -19,7 +36,7 @@ export default function LoginScreen() {
           style={styles.inputText}
           placeholder="Email:"
           placeholderTextColor="white"
-          onChangeText={setNameState}
+          onChangeText={setEmailState}
           value={nameState}
           />
       </View>
@@ -28,16 +45,15 @@ export default function LoginScreen() {
           style={styles.inputText}
           placeholder="Password:"
           placeholderTextColor="white"
-          onChangeText={setNameState}
+          onChangeText={setPasswordState}
           value={nameState}
           />
       </View>
       <Pressable>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </Pressable>
-      <Pressable onPress={
-        () => { {axiosPressFunction};  }
-        } style={styles.loginBtn}><Text>Login</Text>
+      <Pressable onPress={loginSubmitPress} style={styles.loginBtn}>
+        <Text>Login</Text>
       </Pressable>
       {/* <TouchableOpacity onPress={
         () => { {navigateHome}; {axiosPressFunction};  }
@@ -46,6 +62,7 @@ export default function LoginScreen() {
       <Pressable>
         <Text style={styles.signUpText}>SignUp</Text>
       </Pressable>
+      <Text style={{ color: "#000000" }}>{"\n"}{axiosState}</Text>
   </View>
   );
 }

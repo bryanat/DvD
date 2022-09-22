@@ -19,7 +19,7 @@ router.put('/putLogin', async (req, res) => {
     email: req.body.email ?? null,
     password: req.body.password ?? null,
   })
-  res.send({ log: 'Successfully added user' })
+  res.send({ log: `Successfully added user ${req.body.email}` })
 })
 
 // dev route, will be deleted
