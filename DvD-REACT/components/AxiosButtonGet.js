@@ -1,3 +1,5 @@
+// gonna delete these AxiosButton components cause they seem to cause some confusion
+
 import * as React from 'react'
 import { StyleSheet, Pressable } from 'react-native'
 import { Text, View } from './Themed'

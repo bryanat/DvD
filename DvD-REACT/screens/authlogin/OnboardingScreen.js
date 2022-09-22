@@ -1,14 +1,18 @@
 import React, { useState, useContext } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, Image, Button } from "react-native"
+import { View, Text, StyleSheet, Image, Dimensions } from "react-native"
 
 import AppIntroSlider from 'react-native-app-intro-slider'
 import CreateUserScreen from '../CreateUserScreen';
 const OnboardingScreen = () => {
 
+    const [showApp, setShowApp] = useState(false);
     // const context = useContext(AuthContext)
 
-
-    const [showApp, setShowApp] = useState(false);
+    const [screenWidth, screenHeight] = [Dimensions.get('screen').width, Dimensions.get('screen').height]
+    const aspectRatio = screenWidth/906 //divide by screen width by actual image width (612)
+    // fullImageSize is: {width: screenWidth, height: 1483*aspectRatio}
+    // need to multiply fullImageSize*shrink to center it at a good size
+    //{maxWidth: screenWidth, maxHeight: screenHeight*0.5, width: screenWidth, height: 1000}
 
     const onDone = () => {
         setShowApp(true);
@@ -20,9 +24,11 @@ const OnboardingScreen = () => {
 
     const RenderItem = ({ item }) => {
         return (
-            <View style={styles.container}>
+            <View style={[{backgroundColor: item.backgroundColor}, styles.container]}>
                 <Text style={styles.introTitle}>{item.title}</Text>
-                <Image style={styles.introImage} source={item.image} />
+                    <View style={{height: screenHeight*0.5}}>
+                        <Image style={[styles.introImage]} source={item.image} />
+                    </View>
                 <Text style={styles.introText}>{item.text}</Text>
             </View>
         )
@@ -54,35 +60,34 @@ const slides = [
         key: '1',
         text: 'Welcome to D vs D!',
         title: 'Dieter vs. Dieter',
-        image: require('../../assets/images/bmi-female.png'),
-        backgroundColor: '#20d2bb',
+        image: require('../../assets/images/dieters.png'),
+        backgroundColor: '#F7999A',
     },
     {
         key: '2',
         text: 'Here is our explanation',
         title: 'Explanation',
-        image: require('../../assets/images/bmi-female.png'),
-        backgroundColor: '#febe29',
+        image: require('../../assets/images/health-charts.jpg'),
+        backgroundColor: '#457B9D',
     },
     {
         key: '3',
         text: 'Lets get started',
         title: 'getStarted',
-        image: require('../../assets/images/bmi-female.png'),
-        backgroundColor: '#22bcb5',
+        image: require('../../assets/images/personal-challenge-onboarding.jpg'),
+        backgroundColor: '#F7999A',
     },
     {
         key: '4',
         text: 'Login & SignUp',
         title: 'Login and sign up',
-        image: require('../../assets/images/bmi-female.png'),
-        backgroundColor: '#22bcb5',
+        image: require('../../assets/images/tmp-blog-img.jpg'),
+        backgroundColor: '#457B9D',
     },
 ]
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'pink',
         alignItems: 'center',
         justifyContent: 'space-around',
         paddingBottom: 100,
@@ -101,8 +106,12 @@ const styles = StyleSheet.create({
         paddingVertical: 30,
     },
     introImage: {
-        width: 200,
-        height: 200,
+        flex: 1,
+        resizeMode: 'contain'
+    },
+    introImageShrinkWrapper: {
+        flex: 1,
+        height: 400,
     }
 
 })

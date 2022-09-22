@@ -1,3 +1,5 @@
+// gonna delete these AxiosButton components cause they seem to cause some confusion
+
 import * as React from 'react'
 import { StyleSheet, Pressable, TouchableOpacity } from 'react-native'
 import { Text, View, TextInput } from './Themed'
@@ -43,40 +45,8 @@ export default function AxiosButtonPut({uri, title}) {
   // };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.logo}>DvD</Text>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.inputText}
-          placeholder="Email:"
-          placeholderTextColor="white"
-          onChangeText={setNameState}
-          value={nameState}
-          />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.inputText}
-          placeholder="Password:"
-          placeholderTextColor="white"
-          onChangeText={setNameState}
-          value={nameState}
-          />
-      </View>
-      <TouchableOpacity>
-        <Text style={styles.forgot}>Forgot Password?</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={
-        () => { {axiosPressFunction};  }
-      } style={styles.loginBtn}><Text>Login</Text></TouchableOpacity>
-      {/* <TouchableOpacity onPress={
-        () => { {navigateHome}; {axiosPressFunction};  }
-      } style={styles.loginBtn}><Text>Login</Text></TouchableOpacity> */}
-      <Text style={styles.loginText}>Don't have an account?</Text>
-      <TouchableOpacity>
-        <Text style={styles.signUpText}>SignUp</Text>
-      </TouchableOpacity>
-
+    <View>
+      <Text>{axiosState}</Text>
     </View>
   )
 }
