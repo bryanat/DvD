@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, Image, Button } from "react-native"
 
 import AppIntroSlider from 'react-native-app-intro-slider'
-import CreateUserScreen from './CreateUserScreen';
+import CreateUserScreen from '../CreateUserScreen';
 const OnboardingScreen = () => {
 
     // const context = useContext(AuthContext)
@@ -54,28 +54,28 @@ const slides = [
         key: '1',
         text: 'Welcome to D vs D!',
         title: 'Dieter vs. Dieter',
-        image: require('../assets/images/bmi-female.png'),
+        image: require('../../assets/images/bmi-female.png'),
         backgroundColor: '#20d2bb',
     },
     {
         key: '2',
         text: 'Here is our explanation',
         title: 'Explanation',
-        image: require('../assets/images/bmi-female.png'),
+        image: require('../../assets/images/bmi-female.png'),
         backgroundColor: '#febe29',
     },
     {
         key: '3',
         text: 'Lets get started',
         title: 'getStarted',
-        image: require('../assets/images/bmi-female.png'),
+        image: require('../../assets/images/bmi-female.png'),
         backgroundColor: '#22bcb5',
     },
     {
         key: '4',
         text: 'Login & SignUp',
         title: 'Login and sign up',
-        image: require('../assets/images/bmi-female.png'),
+        image: require('../../assets/images/bmi-female.png'),
         backgroundColor: '#22bcb5',
     },
 ]

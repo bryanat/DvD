@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { StyleSheet, Pressable, TouchableOpacity } from 'react-native';
-import { Text, View, TextInput } from '../components/Themed';
+import { Text, View, TextInput } from '../../components/Themed';
 
 import { Picker } from '@react-native-picker/picker'
 import axios from 'axios'
 import {Routes, Route, useNavigate} from 'react-router-dom';
 
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen() {
 
   const [axiosState, setAxiosState] = React.useState("Put Axios (before)")
   const [nameState, setNameState] = React.useState();

@@ -1,11 +1,11 @@
 // Personal Challenge : 
 
 import { ScrollView, StyleSheet } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { Text, View } from '../../components/Themed';
 import { VictoryChart, VictoryLine, VictoryTheme, VictoryBar } from 'victory-native'
-import AxiosButtonGet from '../components/AxiosButtonGet';
-import LineChartVictory from '../components/LineChartVictory';
-import ImageBMI from '../components/ImageBMI';
+import AxiosButtonGet from '../../components/AxiosButtonGet';
+import LineChartVictory from '../../components/LineChartVictory';
+import ImageBMI from '../../components/ImageBMI';
 
 // user health stats (diet, charts, bmi, calorie history)
 export default function PersonalchallengeScreen({ navigation }) {

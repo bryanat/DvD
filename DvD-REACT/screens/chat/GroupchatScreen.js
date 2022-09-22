@@ -2,7 +2,7 @@
 // reason why: they can make group to share the info
 
 import { StyleSheet } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { Text, View } from '../../components/Themed';
 
 export default function GroupchatScreen() {
   return (

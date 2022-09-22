@@ -3,7 +3,7 @@
 
 import * as React from 'react'
 import { StyleSheet, FlatList } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { Text, View } from '../../components/Themed';
 import * as SecureStore from 'expo-secure-store'
 
 export default function BlogfeedScreen() {

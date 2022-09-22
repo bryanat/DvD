@@ -13,20 +13,20 @@ import { ColorSchemeName, Pressable, useColorScheme } from 'react-native';
 import { View } from '../components/Themed'
 
 import Colors from '../constants/Colors';
-import FriendslistModal from '../screens/FriendslistModal';
-import NotificationsModal from '../screens/NotificationsModal';
-import SettingsModal from '../screens/SettingsModal';
+import FriendslistModal from '../screens/menubuttons/FriendslistModal';
+import NotificationsModal from '../screens/menubuttons/NotificationsModal';
+import SettingsModal from '../screens/menubuttons/SettingsModal';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import TabOneScreen from '../screens/TabOneScreen';
+import CreateUserScreen from '../screens/CreateUserScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import LinkingConfiguration from './LinkingConfiguration';
-import CreateUserScreen from '../screens/CreateUserScreen';
-import LoginScreen from '../screens/LoginScreen';
+import LoginScreen from '../screens/authlogin/LoginScreen';
 import GetUserScreen from '../screens/GetUserScreen';
-import BlogfeedScreen from '../screens/BlogfeedScreen';
-import PersonalchallengeScreen from '../screens/PersonalchallengeScreen';
-import GroupchatScreen from '../screens/GroupchatScreen';
-import OnboardingScreen from '../screens/OnboardingScreen';
+import BlogfeedScreen from '../screens/blog/BlogfeedScreen';
+import PersonalchallengeScreen from '../screens/personalchallenge/PersonalchallengeScreen';
+import GroupchatScreen from '../screens/chat/GroupchatScreen';
+import OnboardingScreen from '../screens/authlogin/OnboardingScreen';
 
 import AuthProvider from '../hooks/AuthProvider';
 
