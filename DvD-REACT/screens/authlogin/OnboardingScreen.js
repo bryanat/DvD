@@ -19,7 +19,9 @@ const OnboardingScreen = ({ navigation }) => {
     }
 
     const onSkip = () => {
+        // useContext authenticated=false // guest mode
         navigation.navigate('LoginScreen')
+
     }
 
     const RenderItem = ({ item }) => {
@@ -65,22 +67,22 @@ const slides = [
     },
     {
         key: '2',
-        text: 'Here is our explanation',
-        title: 'Explanation',
+        text: "Compete with other users who are also dieting and exercising. Why? For extra motivation, just for fun, or for those who really don't like losing. Keep up with the community that is keeping up with themselves.",
+        title: 'Dieter Vs Dieter',
         image: require('../../assets/images/health-charts.jpg'),
         backgroundColor: '#457B9D',
     },
     {
         key: '3',
-        text: 'Lets get started',
-        title: 'getStarted',
+        text: 'Create an account to commit to personal goals and challenges. Watch your progress grow as you hit new personal records.',
+        title: 'Challenge Yourself With Personal Challenges!',
         image: require('../../assets/images/personal-challenge-onboarding.jpg'),
         backgroundColor: '#F7A6A4',
     },
     {
         key: '4',
-        text: 'Login & SignUp',
-        title: 'Login and sign up',
+        text: "If you don't sign up I'll beat you up.",
+        title: 'SignUp & Login',
         image: require('../../assets/images/tmp-blog-img.jpg'),
         backgroundColor: '#457B9D',
     },
@@ -96,20 +98,23 @@ const styles = StyleSheet.create({
         fontSize: 25,
         color: 'white',
         textAlign: 'center',
-        marginBottom: 16,
+        marginTop: 16,
+        marginLeft: 16,
+        marginRight: 16,
         fontWeight: 'bold'
     },
     introText: {
-        fontSize: 18,
+        fontSize: 17,
         color: 'white',
         textAlign: 'center',
         paddingVertical: 30,
+        textAlign: 'justify',
+        width: '90%',
     },
     introImage: {
         flex: 1,
         resizeMode: 'contain'
     },
-
 })
 
 export default OnboardingScreen;

@@ -1,3 +1,11 @@
+/**
+ * LoginScreen's purpose is to 
+ * - take email and password, 
+ * - check they authenticate
+ * - if yes email and password authenticate set useContext authenticated to true
+ * - proceed to HomeScreen, may be a side effect of useContext switching to RootNavigator and not from navigation.navigate('HomeScreen')
+ */
+
 import * as React from 'react'
 import { StyleSheet, Pressable, Image, Dimensions } from 'react-native';
 import { Text, View, TextInput } from '../../components/Themed';
@@ -20,7 +28,12 @@ export default function LoginScreen({ navigation }) {
   const aspectRatio = screenWidth/824 //divide actual image width (824) by screen width
   const imageHeight = 825*aspectRatio //multiple actual image height (825) by aspect ratio
 
+  // Purpose is to collect email and password and check they authenticate with server
   function loginSubmitPress() {
+    // check that email and password state fields are not empty
+      // if not empty proceed
+      // if empty setAxiosState to "Enter email and password"
+    // check email and password authenticate with server by sending them via axios
     axios.get('http://192.168.1.214:8088/logins/getLogin', {
       email: emailState,
       password: passwordState,
@@ -34,7 +47,7 @@ export default function LoginScreen({ navigation }) {
       })
   }
   
-  const onSkip = () => {
+  const navigateSignup = () => {
     navigation.navigate('SignupScreen')
   }
 
@@ -72,7 +85,7 @@ export default function LoginScreen({ navigation }) {
         () => { {navigateHome}; {axiosPressFunction};  }
       } style={styles.loginBtn}><Text>Login</Text></TouchableOpacity> */}
       <Text style={styles.loginText}>Don't have an account?</Text>
-      <Pressable onPress={onSkip}>
+      <Pressable onPress={navigateSignup}>
         <Text style={styles.signUpText}>SignUp</Text>
       </Pressable>
       <Text style={{ color: "#000000" }}>{"\n"}{axiosState}</Text>
