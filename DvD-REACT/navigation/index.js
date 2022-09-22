@@ -53,6 +53,7 @@ function AuthenticationNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="OnBoardingScreen" component={OnboardingScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 }

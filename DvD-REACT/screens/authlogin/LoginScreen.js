@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleSheet, Pressable, TouchableOpacity } from 'react-native';
+import { StyleSheet, Pressable, Image, Dimensions } from 'react-native';
 import { Text, View, TextInput } from '../../components/Themed';
 import axios from 'axios'
 
@@ -13,6 +13,12 @@ export default function LoginScreen() {
 
   const [emailState, setEmailState] = React.useState()
   const [passwordState, setPasswordState] = React.useState()
+
+  // method 1 (of two methods) to scale image is being used below
+  // method 2 is other method is style={{resizeMode: 'contain', flex:1}} then wrap that in a view with style={{height: screenHeight*0.35}}) 0.35 is scale
+  const [screenWidth, screenHeight] = [Dimensions.get('screen').width, Dimensions.get('screen').height] 
+  const aspectRatio = screenWidth/824 //divide actual image width (824) by screen width
+  const imageHeight = 825*aspectRatio //multiple actual image height (825) by aspect ratio
 
   function loginSubmitPress() {
     axios.put('http://192.168.1.214:8088/logins/putLogin', {
@@ -30,7 +36,7 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.topView}>
-      <Text style={styles.logo}>DvD</Text>
+      <Image style={[{width: screenWidth*0.5, height: imageHeight*0.5}, styles.logo]} source={require('../../assets/images/logo-dieters.png')} />
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
@@ -79,10 +85,12 @@ const styles = StyleSheet.create({
     color:"white"
   },
   logo:{
-    fontWeight:"bold",
-    fontSize:50,
-    color:"#1D3557",
-    marginBottom:40
+    marginBottom: 40
+  },
+  logo2: {
+    flex: 1,
+    resizeMode: 'contain',
+    marginBottom: 40,
   },
   inputView:{
     width:"80%",

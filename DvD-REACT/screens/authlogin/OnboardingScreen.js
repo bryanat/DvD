@@ -15,7 +15,7 @@ const OnboardingScreen = ({ navigation }) => {
     //{maxWidth: screenWidth, maxHeight: screenHeight*0.5, width: screenWidth, height: 1000}
 
     const onDone = () => {
-        navigation.navigate('Root')
+        navigation.navigate('LoginScreen')
         // setShowApp(true);
     }
 
@@ -27,7 +27,7 @@ const OnboardingScreen = ({ navigation }) => {
         return (
             <View style={[{backgroundColor: item.backgroundColor}, styles.container]}>
                 <Text style={styles.introTitle}>{item.title}</Text>
-                    <View style={{height: screenHeight*0.5}}>
+                    <View style={{height: screenHeight*0.45}}>
                         <Image style={[styles.introImage]} source={item.image} />
                     </View>
                 <Text style={styles.introText}>{item.text}</Text>
@@ -61,7 +61,7 @@ const slides = [
         key: '1',
         text: 'Welcome to D vs D!',
         title: 'Dieter vs. Dieter',
-        image: require('../../assets/images/dieters.png'),
+        image: require('../../assets/images/logo-dieters.png'),
         backgroundColor: '#F7999A',
     },
     {
