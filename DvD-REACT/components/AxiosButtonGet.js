@@ -6,14 +6,23 @@ import { Text, View } from './Themed'
 import axios from 'axios'
 
 export default function AxiosButtonGet({uri, title}) {
-  const [axiosState, setAxiosState] = React.useState("Get Axios (before)")
+  const [axiosState, setAxiosState] = React.useState("Axios get with email data")
 
   function axiosPressFunction() {
-    axios.get(uri)
+    //axios.get(uri, {
+    axios({
+      method: 'put',
+      url: uri,
+      data: {
+        // <TextInput> to [emailState] to axios.data.email
+        email: 'user1111@gmail.com',
+        // <TextInput> to [passwordState] to axios.data.password
+        password: 'cutieY',
+      },
+    })
       .then( function (response) {
         console.log(response.data)
-        const returnedUser = response.data
-        setAxiosState(`Route ${uri} returned: ${returnedUser[0].email}`)
+        setAxiosState(`Route ${uri} returned: ${response.data.email}`)
         /*
         setAxiosState(`
         user created:

@@ -8,8 +8,16 @@ export const router = Router()
 
 
 // R (read/find/get) user login from logins collection
-router.get('/getLogin', async (req, res) => {
-  const result = await logins.find({}).toArray()[0]
+router.put('/getLogin', async (req, res) => {
+  console.log(`== Express req.body result below ==`)
+  console.log(req.body)
+  const queryEmail = req.body.email
+  // find the mongo user login object via email
+  const result = await (await logins.find({}).toArray()).pop()
+  //const result = await logins.find({email: {$exists: queryEmail}}).toArray()[0]
+  console.log("== Mongo logins.find() result below ==")
+  console.log(result)
+  // check that password matches email
   res.send(result)
 })
 
@@ -20,12 +28,6 @@ router.put('/putLogin', async (req, res) => {
     password: req.body.password ?? null,
   })
   res.send({ log: `Successfully added user ${req.body.email}` })
-})
-
-// dev route, will be deleted
-router.get('/getLoginTest', async (req, res) => {
-  const result = await logins.find({}).toArray()
-  res.send(result)
 })
 
 // dev route, will be deleted

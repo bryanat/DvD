@@ -88,7 +88,8 @@ export default function LoginScreen({ navigation }) {
       <Pressable onPress={navigateSignup}>
         <Text style={styles.signUpText}>SignUp</Text>
       </Pressable>
-      <Text style={{ color: "#000000" }}>{"\n"}{axiosState}</Text>
+      <Text style={{ color: "#000000" }}>{"\n"}{axiosState}{"\n"}</Text>
+      <Text style={{ color: "#000000" }}>dev note to Jiyoung: click on "SignUp"</Text>
   </View>
   );
 }

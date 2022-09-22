@@ -73,9 +73,11 @@ export default function SignupScreen({ navigation }) {
       } style={styles.loginBtn}><Text>Login</Text></TouchableOpacity> */}
       <Text style={styles.loginText}>Already have an account?</Text>
       <Pressable onPress={onSkip}>
-        <Text style={styles.signUpText}>Go back to login</Text>
+        <Text style={styles.signUpText}>Back to Login</Text>
       </Pressable>
-      <Text style={{ color: "#000000" }}>{"\n"}{axiosState}</Text>
+      <Text style={{ color: "#000000" }}>{"\n"}{axiosState}{"\n"}</Text>
+      <Text style={{ color: "#000000" }}>dev note to Jiyoung: click on "Back to Login"</Text>
+
   </View>
   );
 }
