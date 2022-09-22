@@ -13,14 +13,14 @@ const linking = {
     screens: {
       Root: {
         screens: {
-          TabOne: {
+          Home: {
             screens: {
-              TabOneScreen: 'one',
+              HomeScreen: 'home',
             },
           },
-          TabTwo: {
+          Blog: {
             screens: {
-              TabTwoScreen: 'two',
+              BlogScreen: 'blog',
             },
           },
         },

@@ -9,7 +9,7 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import * as React from 'react';
-import { ColorSchemeName, Pressable, useColorScheme } from 'react-native';
+import { Pressable, useColorScheme } from 'react-native';
 import { View } from '../components/Themed'
 
 import Colors from '../constants/Colors';
@@ -17,12 +17,10 @@ import FriendslistModal from '../screens/menubuttons/FriendslistModal';
 import NotificationsModal from '../screens/menubuttons/NotificationsModal';
 import SettingsModal from '../screens/menubuttons/SettingsModal';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import TabOneScreen from '../screens/TabOneScreen';
-import CreateUserScreen from '../screens/CreateUserScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import DieterVsDieterScreen from '../screens/vs/DieterVsDieterScreen'
 import LinkingConfiguration from './LinkingConfiguration';
 import LoginScreen from '../screens/authlogin/LoginScreen';
-import GetUserScreen from '../screens/GetUserScreen';
+import GetUserDevScreen from '../screens/GetUserDevScreen';
 import BlogfeedScreen from '../screens/blog/BlogfeedScreen';
 import PersonalchallengeScreen from '../screens/personalchallenge/PersonalchallengeScreen';
 import GroupchatScreen from '../screens/chat/GroupchatScreen';
@@ -33,7 +31,7 @@ import AuthProvider from '../hooks/AuthProvider';
 
 export default function Navigation({ colorScheme }) {
   // need to impliment const AuthContext = React.createContext
-  let isAuthenticated = true
+  let isAuthenticated = false
 
   return (
       <NavigationContainer
@@ -86,12 +84,12 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name="TabOne"
+        name="Home"
         component={TopTabUserNavigator}
         options={({ navigation }) => ({
           title: 'Home',
@@ -148,8 +146,8 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="VS"
+        component={DieterVsDieterScreen}
         options={{
           title: 'Duel',
           tabBarIcon: ({ color }) => <Entypo name='align-horizontal-middle' size={32} color={color} style={{ marginBottom: -3 }} />,
@@ -181,7 +179,7 @@ function TopTabUserNavigator() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Login Screen" component={LoginScreen} />
-      <Tab.Screen name="Get User" component={GetUserScreen} />
+      <Tab.Screen name="Get User Dev Screen" component={GetUserDevScreen} />
     </Tab.Navigator>
   )
 }

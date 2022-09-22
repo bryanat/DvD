@@ -3,7 +3,6 @@
 import { ScrollView, StyleSheet } from 'react-native';
 import { Text, View } from '../../components/Themed';
 import { VictoryChart, VictoryLine, VictoryTheme, VictoryBar } from 'victory-native'
-import AxiosButtonGet from '../../components/AxiosButtonGet';
 import LineChartVictory from '../../components/LineChartVictory';
 import ImageBMI from '../../components/ImageBMI';
 
@@ -51,9 +50,6 @@ export default function PersonalchallengeScreen({ navigation }) {
           />
         </VictoryChart>
       </View>
-
-      <Text>Get User</Text>
-      <AxiosButtonGet title="/getUser" uri="http://192.168.1.214:8088/users/getUser" />
   </ScrollView>
   );
 }

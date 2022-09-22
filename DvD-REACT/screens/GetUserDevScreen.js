@@ -4,7 +4,7 @@ import { Text, View } from '../components/Themed';
 import axios from 'axios'
 
 
-export default function TabOneScreen() {
+export default function GetUserDevScreen() {
   const [axiosState, setAxiosState] = React.useState("Axios get with email data")
 
   // express api endpoint that axios is hitting

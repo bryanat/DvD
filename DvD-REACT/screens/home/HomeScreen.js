@@ -7,7 +7,7 @@ import { Text, View } from '../../components/Themed';
 export default function HomeScreen() {
   return (
     <View style={styles.topView}>
-      <Text style={styles.topText}>Group Chat</Text>
+      <Text style={styles.topText}>Home Screen</Text>
     </View>
   );
 }

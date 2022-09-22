@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from "react-native"
 
 import AppIntroSlider from 'react-native-app-intro-slider'
-import CreateUserScreen from '../CreateUserScreen';
+import HomeScreen from '../home/HomeScreen';
 const OnboardingScreen = ({ navigation }) => {
 
     const [showApp, setShowApp] = useState(false);
@@ -39,7 +39,7 @@ const OnboardingScreen = ({ navigation }) => {
         <>
         {showApp ? (
             // <SafeAreaView style={styles.container}>
-                <CreateUserScreen />
+                <HomeScreen />
             // </SafeAreaView>
         ) : (
             <AppIntroSlider
