@@ -1,5 +1,5 @@
 # DvD
-![](readme-images/dieters-red-vs-blue-middle.png)
+![](readme-images/dieters-red-vs-blue-middle.png) 
 ![](readme-images/dieters-logo.png)
 ![](readme-images/dieters-color-palette.png)
 ![](readme-images/auth-signup-success.jpg)
