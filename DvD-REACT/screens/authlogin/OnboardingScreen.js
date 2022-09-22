@@ -31,7 +31,7 @@ const OnboardingScreen = ({ navigation }) => {
                     <View style={{height: screenHeight*0.45}}>
                         <Image style={[styles.introImage]} source={item.image} />
                     </View>
-                <Text style={styles.introText}>{item.text}</Text>
+                    <Text style={styles.introText}>{item.text}</Text>
             </View>
         )
     }
@@ -69,7 +69,7 @@ const slides = [
         key: '2',
         text: "Compete with other users who are also dieting and exercising. Why? For extra motivation, just for fun, or for those who really don't like losing. Keep up with the community that is keeping up with themselves.",
         title: 'Dieter Vs Dieter',
-        image: require('../../assets/images/health-charts.jpg'),
+        image: require('../../assets/images/dieters-red-vs-blue-middle.png'),
         backgroundColor: '#457B9D',
     },
     {
@@ -106,14 +106,15 @@ const styles = StyleSheet.create({
     introText: {
         fontSize: 17,
         color: 'white',
-        textAlign: 'center',
         paddingVertical: 30,
         textAlign: 'justify',
+        justifyContent: 'center',
+        alignItems: 'center',
         width: '90%',
     },
     introImage: {
         flex: 1,
-        resizeMode: 'contain'
+        resizeMode: 'contain',
     },
 })
 
