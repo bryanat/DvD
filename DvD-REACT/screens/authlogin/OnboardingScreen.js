@@ -16,11 +16,10 @@ const OnboardingScreen = ({ navigation }) => {
 
     const onDone = () => {
         navigation.navigate('LoginScreen')
-        // setShowApp(true);
     }
 
     const onSkip = () => {
-        setShowApp(true);
+        navigation.navigate('LoginScreen')
     }
 
     const RenderItem = ({ item }) => {
@@ -59,10 +58,10 @@ const OnboardingScreen = ({ navigation }) => {
 const slides = [
     {
         key: '1',
-        text: 'Welcome to D vs D!',
-        title: 'Dieter vs. Dieter',
-        image: require('../../assets/images/logo-dieters.png'),
-        backgroundColor: '#F7999A',
+        text: 'Welcome to Dieter vs Dieter!',
+        title: 'Welcome!',
+        image: require('../../assets/images/logo-dieters-sundown.png'),
+        backgroundColor: '#F7A6A4',
     },
     {
         key: '2',
@@ -76,7 +75,7 @@ const slides = [
         text: 'Lets get started',
         title: 'getStarted',
         image: require('../../assets/images/personal-challenge-onboarding.jpg'),
-        backgroundColor: '#F7999A',
+        backgroundColor: '#F7A6A4',
     },
     {
         key: '4',
@@ -110,10 +109,6 @@ const styles = StyleSheet.create({
         flex: 1,
         resizeMode: 'contain'
     },
-    introImageShrinkWrapper: {
-        flex: 1,
-        height: 400,
-    }
 
 })
 

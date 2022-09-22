@@ -27,6 +27,7 @@ import BlogfeedScreen from '../screens/blog/BlogfeedScreen';
 import PersonalchallengeScreen from '../screens/personalchallenge/PersonalchallengeScreen';
 import GroupchatScreen from '../screens/chat/GroupchatScreen';
 import OnboardingScreen from '../screens/authlogin/OnboardingScreen';
+import SignupScreen from '../screens/authlogin/SignupScreen';
 
 import AuthProvider from '../hooks/AuthProvider';
 
@@ -54,6 +55,7 @@ function AuthenticationNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="OnBoardingScreen" component={OnboardingScreen} options={{ headerShown: false }} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="SignupScreen" component={SignupScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 }

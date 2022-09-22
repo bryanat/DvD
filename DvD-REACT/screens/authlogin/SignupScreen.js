@@ -6,9 +6,9 @@ import axios from 'axios'
 import { Picker } from '@react-native-picker/picker'
 import {Routes, Route, useNavigate} from 'react-router-dom';
 
-export default function LoginScreen({ navigation }) {
+export default function SignupScreen({ navigation }) {
 
-  const [axiosState, setAxiosState] = React.useState("dev note: login has not been submitted yet")
+  const [axiosState, setAxiosState] = React.useState("dev note: signup has not been submitted yet")
   const [nameState, setNameState] = React.useState()
 
   const [emailState, setEmailState] = React.useState()
@@ -20,8 +20,8 @@ export default function LoginScreen({ navigation }) {
   const aspectRatio = screenWidth/824 //divide actual image width (824) by screen width
   const imageHeight = 825*aspectRatio //multiple actual image height (825) by aspect ratio
 
-  function loginSubmitPress() {
-    axios.get('http://192.168.1.214:8088/logins/getLogin', {
+  function signupSubmitPress() {
+    axios.put('http://192.168.1.214:8088/logins/putLogin', {
       email: emailState,
       password: passwordState,
     })
@@ -33,16 +33,16 @@ export default function LoginScreen({ navigation }) {
         console.log(error)
       })
   }
-  
+
   const onSkip = () => {
-    navigation.navigate('SignupScreen')
+    navigation.navigate('LoginScreen')
   }
 
   return (
     <View style={styles.topView}>
       <Image 
         style={[{width: screenWidth*0.5, height: imageHeight*0.5}, styles.logo]} 
-        source={require('../../assets/images/logo-dieters-sundown.png')} 
+        source={require('../../assets/images/logo-dieters-hippieblue.png')} 
       />
       <View style={styles.inputView}>
         <TextInput
@@ -65,15 +65,15 @@ export default function LoginScreen({ navigation }) {
       <Pressable>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </Pressable>
-      <Pressable onPress={loginSubmitPress} style={styles.loginBtn}>
-        <Text>Login</Text>
+      <Pressable onPress={signupSubmitPress} style={styles.loginBtn}>
+        <Text>Signup</Text>
       </Pressable>
       {/* <TouchableOpacity onPress={
         () => { {navigateHome}; {axiosPressFunction};  }
       } style={styles.loginBtn}><Text>Login</Text></TouchableOpacity> */}
-      <Text style={styles.loginText}>Don't have an account?</Text>
+      <Text style={styles.loginText}>Already have an account?</Text>
       <Pressable onPress={onSkip}>
-        <Text style={styles.signUpText}>SignUp</Text>
+        <Text style={styles.signUpText}>Go back to login</Text>
       </Pressable>
       <Text style={{ color: "#000000" }}>{"\n"}{axiosState}</Text>
   </View>
@@ -92,16 +92,11 @@ const styles = StyleSheet.create({
     color:"white"
   },
   logo:{
-    marginBottom: 40
-  },
-  logo2: {
-    flex: 1,
-    resizeMode: 'contain',
     marginBottom: 40,
   },
   inputView:{
     width:"80%",
-    backgroundColor:"#457b9d",
+    backgroundColor:"#f7a6a4",
     borderRadius:25,
     height:50,
     marginBottom:20,
@@ -114,7 +109,7 @@ const styles = StyleSheet.create({
   },
   loginBtn:{
     width:"40%",
-    backgroundColor:"#f7a6a4",
+    backgroundColor:"#457b9d",
     borderRadius:25,
     height:50,
     alignItems:"center",
