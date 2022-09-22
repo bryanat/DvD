@@ -1,4 +1,6 @@
 # DvD
+![](readme-images/auth-signup-success.jpg)
+![](readme-images/auth-login-success.jpg)
 ![](readme-images/dieters-red-vs-blue-middle.png)
 ![](readme-images/dieters-logo.png)
 ![](readme-images/dieters-color-palette.png)

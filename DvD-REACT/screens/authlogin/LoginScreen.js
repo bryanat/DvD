@@ -17,6 +17,7 @@ import {Routes, Route, useNavigate} from 'react-router-dom';
 export default function LoginScreen({ navigation }) {
 
   const [axiosState, setAxiosState] = React.useState("dev note: login has not been submitted yet")
+  const [loginresultText, setLoginresultText] = React.useState()
   const [nameState, setNameState] = React.useState()
 
   const [emailState, setEmailState] = React.useState()
@@ -29,22 +30,36 @@ export default function LoginScreen({ navigation }) {
   const imageHeight = 825*aspectRatio //multiple actual image height (825) by aspect ratio
 
   // Purpose is to collect email and password and check they authenticate with server
-  function loginSubmitPress() {
+  function pressLoginButton() {
     // check that email and password state fields are not empty
       // if not empty proceed
       // if empty setAxiosState to "Enter email and password"
     // check email and password authenticate with server by sending them via axios
-    axios.get('http://192.168.1.214:8088/logins/getLogin', {
+    axios.put('http://192.168.1.214:8088/logins/getLogin', {
       email: emailState,
       password: passwordState,
     })
+      // if response from server is true then set react auth Context to loggedIn true
       .then( function (response) {
+        // could be a ternary operator instead... response.loggedIn == true ? AuthContext.loggedIn = true : AuthContext.loggedIn = false
+        if (response.data.authenticated == true) {
+          // set auth context to loggedIn = true (causing to switch to RootNavigator and move to home screen)
+          setLoginresultText("Successfully logged in!")
+          console.log("LOGGED IN.")
+        } else {
+          // set auth context to authenticated = false (or just dont change it at all)
+          setLoginresultText("Incorrect username or password, try again.")
+          console.log("NOT LOGGED IN. retry...")
+        }
+        console.log('before')
         console.log(response.data)
+        console.log('after')
         setAxiosState(response.data.log ?? "undefined")
       })
       .catch( function (error) {
         console.log(error)
       })
+    
   }
   
   const navigateSignup = () => {
@@ -78,7 +93,7 @@ export default function LoginScreen({ navigation }) {
       <Pressable>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </Pressable>
-      <Pressable onPress={loginSubmitPress} style={styles.loginBtn}>
+      <Pressable onPress={pressLoginButton} style={styles.loginBtn}>
         <Text>Login</Text>
       </Pressable>
       {/* <TouchableOpacity onPress={
@@ -88,6 +103,7 @@ export default function LoginScreen({ navigation }) {
       <Pressable onPress={navigateSignup}>
         <Text style={styles.signUpText}>SignUp</Text>
       </Pressable>
+      <Text style={{ color: "#000000" }}>{"\n"}{loginresultText}{"\n"}</Text>
       <Text style={{ color: "#000000" }}>{"\n"}{axiosState}{"\n"}</Text>
       <Text style={{ color: "#000000" }}>dev note to Jiyoung: click on "SignUp"</Text>
   </View>

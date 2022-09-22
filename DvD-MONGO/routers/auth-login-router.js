@@ -15,22 +15,21 @@ router.put('/getLogin', async (req, res) => {
   console.log(`the email query is: ${queryEmail}`)
   // find the mongo user login object via email
   const result = await (await logins.find({email: {$eq: queryEmail}}).toArray()).pop()
-
   // if a user is found (because result is not undefined)
   if (result != undefined) {
     // check that password (from client) matches email password (from mongo server)
     if (result.password == req.body.password) {
-      console.log({log: 'username and password found and match', data: result})
-      res.send({log: 'username and password found and match', data: result})
+      console.log({log: 'username and password found and match', authenticated: true})
+      res.send({log: 'username and password found and match', authenticated: true})
     } else {
-      res.send({log: `incorrent password for ${req.body.email}`})
+      res.send({log: `incorrent password for ${req.body.email},`, authenticated: false})
       console.log(`client password ${req.body.password} does not match server password`)
     }
   } 
   // if a user is not found, guide to go to signup screen 
   else {
     console.log(`The client entered username ${queryEmail} does not match any server user`)
-    res.send({log: 'username was not found'})
+    res.send({log: 'username was not found', authenticated: false})
   }
 })
 
