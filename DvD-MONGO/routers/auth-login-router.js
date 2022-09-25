@@ -8,7 +8,7 @@ export const router = Router()
 
 
 // R (read/find/get) user login from logins collection
-router.put('/getLogin', async (req, res) => {
+router.put('/submitlogin', async (req, res) => {
   // find the mongo user login object via email
   const result = await (await logins.find({email: {$eq: req.body.email}}).toArray()).pop()
   // if a user is found (because result is not undefined)
@@ -36,4 +36,8 @@ router.put('/putLogin', async (req, res) => {
     password: req.body.password ?? null,
   })
   res.send({ log: `Successfully added user ${req.body.email}` })
+})
+
+router.get('/testRoute', async (req, res) => {
+  res.send({log: "TEST ROUTE HIT"})
 })

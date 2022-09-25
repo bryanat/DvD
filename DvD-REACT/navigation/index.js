@@ -26,18 +26,26 @@ import PersonalchallengeScreen from '../screens/personalchallenge/Personalchalle
 import GroupchatScreen from '../screens/chat/GroupchatScreen';
 import OnboardingScreen from '../screens/authlogin/OnboardingScreen';
 import SignupScreen from '../screens/authlogin/SignupScreen';
-
 import AuthProvider from '../hooks/AuthProvider';
+import { AuthContext } from '../hooks/AuthProvider';
 
-export default function Navigation({ colorScheme }) {
-  // need to impliment const AuthContext = React.createContext
-  let isAuthenticated = false
+export default function DVDNav() {
+  return (
+    <AuthProvider>
+      <Navigation />
+    </AuthProvider>
+  )
+}
+
+//export default function Navigation({ colorScheme }) {
+export  function Navigation({ colorScheme }) {
+  const {isAuthenticated, setIsAuthenticated} = React.useContext(AuthContext)
 
   return (
       <NavigationContainer
         linking={LinkingConfiguration}
         theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        {isAuthenticated ? <RootNavigator /> : <AuthenticationNavigator />}
+        {isAuthenticated? <RootNavigator/> : <AuthenticationNavigator />}
       </NavigationContainer>
   );
 }
@@ -81,7 +89,6 @@ const BottomTab = createBottomTabNavigator();
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-
   return (
     <BottomTab.Navigator
       initialRouteName="Home"

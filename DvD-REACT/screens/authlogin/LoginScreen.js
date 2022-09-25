@@ -10,16 +10,17 @@ import * as React from 'react'
 import { StyleSheet, Pressable, Image, Dimensions } from 'react-native';
 import { Text, View, TextInput } from '../../components/Themed';
 import axios from 'axios'
+import { AuthContext } from '../../hooks/AuthProvider';
 
 import { Picker } from '@react-native-picker/picker'
 import {Routes, Route, useNavigate} from 'react-router-dom';
 
 export default function LoginScreen({ navigation }) {
+  const { isAuthenticated, setIsAuthenticated } = React.useContext(AuthContext)
 
   const [axiosState, setAxiosState] = React.useState("dev note: login has not been submitted yet")
   const [loginresultText, setLoginresultText] = React.useState()
   const [nameState, setNameState] = React.useState()
-
   const [emailState, setEmailState] = React.useState()
   const [passwordState, setPasswordState] = React.useState()
 
@@ -35,7 +36,7 @@ export default function LoginScreen({ navigation }) {
       // if not empty proceed
       // if empty setAxiosState to "Enter email and password"
     // check email and password authenticate with server by sending them via axios
-    axios.put('http://192.168.1.214:8088/logins/getLogin', {
+    axios.put('http://192.168.1.214:8088/logins/submitlogin', {
       email: emailState,
       password: passwordState,
     })
@@ -44,8 +45,11 @@ export default function LoginScreen({ navigation }) {
         // could be a ternary operator instead... response.loggedIn == true ? AuthContext.loggedIn = true : AuthContext.loggedIn = false
         if (response.data.authenticated == true) {
           // set auth context to loggedIn = true (causing to switch to RootNavigator and move to home screen)
+          //useAuthContext = true //IMPORTANT 
+          setIsAuthenticated(true)
+          console.log(isAuthenticated)
           setLoginresultText("Successfully logged in!")
-          console.log("LOGGED IN.")
+          console.log(`LOGGED IN. isLoggedIn result: ${isAuthenticated}`)
         } else {
           // set auth context to authenticated = false (or just dont change it at all)
           setLoginresultText("Incorrect username or password, try again.")
