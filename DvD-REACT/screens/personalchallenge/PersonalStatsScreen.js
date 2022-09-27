@@ -1,4 +1,4 @@
-// Personal Challenge : 
+// Personal Stats
 
 import { ScrollView, StyleSheet } from 'react-native';
 import { Text, View } from '../../components/Themed';
@@ -7,7 +7,7 @@ import LineChartVictory from '../../components/LineChartVictory';
 import ImageBMI from '../../components/ImageBMI';
 
 // user health stats (diet, charts, bmi, calorie history)
-export default function PersonalchallengeScreen({ navigation }) {
+export default function PersonalStatsScreen({ navigation }) {
 
   return (
     <ScrollView style={styles.topView}>

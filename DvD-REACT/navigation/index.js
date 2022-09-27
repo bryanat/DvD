@@ -20,16 +20,35 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import DieterVsDieterScreen from '../screens/vs/DieterVsDieterScreen'
 import LinkingConfiguration from './LinkingConfiguration';
 import LoginScreen from '../screens/authlogin/LoginScreen';
-import GetUserDevScreen from '../screens/GetUserDevScreen';
 import BlogfeedScreen from '../screens/blog/BlogfeedScreen';
-import PersonalchallengeScreen from '../screens/personalchallenge/PersonalchallengeScreen';
+import PersonalChallengeScreen from '../screens/personalchallenge/PersonalChallengeScreen';
+import PersonalStatsScreen from '../screens/personalchallenge/PersonalStatsScreen';
 import GroupchatScreen from '../screens/chat/GroupchatScreen';
 import OnboardingScreen from '../screens/authlogin/OnboardingScreen';
 import SignupScreen from '../screens/authlogin/SignupScreen';
 import AuthProvider from '../hooks/AuthProvider';
 import { AuthContext } from '../hooks/AuthProvider';
+import HomeScreen from '../screens/home/HomeScreen';
 
-export default function DVDNav() {
+
+// FUTURE: next step is to get colorScheme working with AuthProvider wrapper / default export
+//// 1 current problem: if auth is default export, then auth context doesnt work / is undefined 
+//// 2 current problem: if colorscheme is not default export, then colorscheme doesnt work
+//// 3 current problem: have to put colorscheme in NavigationContainer (only NavigationContainer has theme prop)
+//// below is a way that solves 123 if can get Navigation to conditionally render via a ternary operator
+export function AlmostNav({ colorScheme}) {
+  return (
+    <AuthProvider>
+      <NavigationContainer
+      linking={LinkingConfiguration}
+      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+      >
+        <Navigation/>
+      </NavigationContainer>
+    </AuthProvider>
+  )
+}
+export default function DVDNav({ colorScheme}) {
   return (
     <AuthProvider>
       <Navigation />
@@ -38,15 +57,14 @@ export default function DVDNav() {
 }
 
 //export default function Navigation({ colorScheme }) {
-export  function Navigation({ colorScheme }) {
-  const {isAuthenticated, setIsAuthenticated} = React.useContext(AuthContext)
-
+export function Navigation({ ...props }) {
   return (
-      <NavigationContainer
-        linking={LinkingConfiguration}
-        theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        {isAuthenticated? <RootNavigator/> : <AuthenticationNavigator />}
-      </NavigationContainer>
+    <NavigationContainer
+    linking={LinkingConfiguration}
+    theme={props.colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+    >
+      {React.useContext(AuthContext).isAuthenticated? <RootNavigator/> : <AuthenticationNavigator />}
+    </NavigationContainer>
   );
 }
 
@@ -97,7 +115,7 @@ function BottomTabNavigator() {
       }}>
       <BottomTab.Screen
         name="Home"
-        component={TopTabUserNavigator}
+        component={HomeScreen}
         options={({ navigation }) => ({
           title: 'Home',
           tabBarIcon: ({ color }) => <Ionicons name="home-outline" size={32} color={color} style={{ marginBottom: -3 }} />,
@@ -161,10 +179,10 @@ function BottomTabNavigator() {
         }}
       />
       <BottomTab.Screen 
-        name='Personalchallenge'
-        component={PersonalchallengeScreen}
+        name='Personal'
+        component={PersonalTopTabsNavigator}
         options={{
-          title: 'Personal Challenge',
+          title: 'Personal ',
           tabBarIcon: ({ color }) => <Ionicons name='fitness-outline' size={32} color={color} style={{ marginBottom: -3 }} />,
         }}
       />
@@ -182,11 +200,23 @@ function BottomTabNavigator() {
 
 const Tab = createMaterialTopTabNavigator();
 
-function TopTabUserNavigator() {
+function PersonalTopTabsNavigator() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Login Screen" component={LoginScreen} />
-      <Tab.Screen name="Get User Dev Screen" component={GetUserDevScreen} />
+      <Tab.Screen 
+        name="Personal Challenge" 
+        component={PersonalChallengeScreen}
+        options={{
+          title:'Personal Challenge'
+        }}
+      />
+      <Tab.Screen 
+        name="Personal Stats" 
+        component={PersonalStatsScreen}
+        options={{
+          title:'Personal Stats'
+        }}
+      />
     </Tab.Navigator>
   )
 }

@@ -32,7 +32,6 @@ export default function BlogfeedScreen() {
 
 const styles = StyleSheet.create({
   topView: {
-    flexDirection: 'row',
     flex: 1,
   },
   topText: {
