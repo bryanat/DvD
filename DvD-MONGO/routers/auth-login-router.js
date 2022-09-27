@@ -12,6 +12,7 @@ router.put('/submitlogin', async (req, res) => {
   // find the mongo user login object via email
   const result = await (await logins.find({email: {$eq: req.body.email}}).toArray()).pop()
   // if a user is found (because result is not undefined)
+  console.log(req.body)
   if (result != undefined) {
     // check that password (from client) matches email password (from mongo server)
     if (result.password == req.body.password) {

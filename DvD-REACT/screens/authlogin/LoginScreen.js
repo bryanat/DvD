@@ -12,21 +12,15 @@ import { Text, View, TextInput } from '../../components/Themed';
 import axios from 'axios'
 import { AuthContext } from '../../hooks/AuthProvider';
 
-import { Picker } from '@react-native-picker/picker'
-import {Routes, Route, useNavigate} from 'react-router-dom';
-
 export default function LoginScreen({ navigation }) {
   const { isAuthenticated, setIsAuthenticated } = React.useContext(AuthContext)
 
-  const [axiosState, setAxiosState] = React.useState("dev note: login has not been submitted yet")
-  const [loginresultText, setLoginresultText] = React.useState()
-  const [nameState, setNameState] = React.useState()
   const [emailState, setEmailState] = React.useState()
   const [passwordState, setPasswordState] = React.useState()
 
   // method 1 (of two methods) to scale image is being used below
   // method 2 is other method is style={{resizeMode: 'contain', flex:1}} then wrap that in a view with style={{height: screenHeight*0.35}}) 0.35 is scale
-  const [screenWidth, screenHeight] = [Dimensions.get('screen').width, Dimensions.get('screen').height] 
+  const screenWidth = Dimensions.get('screen').width
   const aspectRatio = screenWidth/824 //divide actual image width (824) by screen width
   const imageHeight = 825*aspectRatio //multiple actual image height (825) by aspect ratio
 
@@ -47,18 +41,12 @@ export default function LoginScreen({ navigation }) {
           // set auth context to loggedIn = true (causing to switch to RootNavigator and move to home screen)
           //useAuthContext = true //IMPORTANT 
           setIsAuthenticated(true)
-          console.log(isAuthenticated)
-          setLoginresultText("Successfully logged in!")
-          console.log(`LOGGED IN. isLoggedIn result: ${isAuthenticated}`)
+          console.log(`${response.data.email} logged in, isAuthenticated: ${isAuthenticated}`)
         } else {
           // set auth context to authenticated = false (or just dont change it at all)
-          setLoginresultText("Incorrect username or password, try again.")
-          console.log("NOT LOGGED IN. retry...")
+          console.log("Not logged in, retry...")
         }
-        console.log('before')
-        console.log(response.data)
-        console.log('after')
-        setAxiosState(response.data.log ?? "undefined")
+        // console.log(response.data)
       })
       .catch( function (error) {
         console.log(error)
@@ -82,7 +70,7 @@ export default function LoginScreen({ navigation }) {
           placeholder="Email:"
           placeholderTextColor="white"
           onChangeText={setEmailState}
-          value={nameState}
+          value={emailState}
           />
       </View>
       <View style={styles.inputView}>
@@ -91,7 +79,7 @@ export default function LoginScreen({ navigation }) {
           placeholder="Password:"
           placeholderTextColor="white"
           onChangeText={setPasswordState}
-          value={nameState}
+          value={passwordState}
           />
       </View>
       <Pressable>
@@ -107,8 +95,6 @@ export default function LoginScreen({ navigation }) {
       <Pressable onPress={navigateSignup}>
         <Text style={styles.signUpText}>SignUp</Text>
       </Pressable>
-      <Text style={{ color: "#000000" }}>{"\n"}{loginresultText}{"\n"}</Text>
-      <Text style={{ color: "#000000" }}>{"\n"}{axiosState}{"\n"}</Text>
       <Text style={{ color: "#000000" }}>dev note to Jiyoung: click on "SignUp"</Text>
   </View>
   );
