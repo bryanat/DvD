@@ -3,14 +3,7 @@ import { StyleSheet, Pressable, Image, Dimensions } from 'react-native';
 import { Text, View, TextInput } from '../../components/Themed';
 import axios from 'axios'
 
-import { Picker } from '@react-native-picker/picker'
-import {Routes, Route, useNavigate} from 'react-router-dom';
-
 export default function SignupScreen({ navigation }) {
-
-  const [axiosState, setAxiosState] = React.useState("dev note: signup has not been submitted yet")
-  const [nameState, setNameState] = React.useState()
-
   const [emailState, setEmailState] = React.useState()
   const [passwordState, setPasswordState] = React.useState()
 
@@ -21,13 +14,13 @@ export default function SignupScreen({ navigation }) {
   const imageHeight = 825*aspectRatio //multiple actual image height (825) by aspect ratio
 
   function signupSubmitPress() {
-    axios.put('http://192.168.1.214:8088/logins/putLogin', {
+    axios.put('http://192.168.1.214:8088/logins/signup', {
       email: emailState,
       password: passwordState,
     })
       .then( function (response) {
-        console.log(response.data)
-        setAxiosState(response.data.log ?? "undefined")
+        console.log(response.data.log ?? "undefined")
+        navigation.navigate('LoginScreen')
       })
       .catch( function (error) {
         console.log(error)
@@ -50,7 +43,7 @@ export default function SignupScreen({ navigation }) {
           placeholder="Email:"
           placeholderTextColor="white"
           onChangeText={setEmailState}
-          value={nameState}
+          value={emailState}
           />
       </View>
       <View style={styles.inputView}>
@@ -59,7 +52,7 @@ export default function SignupScreen({ navigation }) {
           placeholder="Password:"
           placeholderTextColor="white"
           onChangeText={setPasswordState}
-          value={nameState}
+          value={passwordState}
           />
       </View>
       <Pressable>
@@ -75,9 +68,6 @@ export default function SignupScreen({ navigation }) {
       <Pressable onPress={onSkip}>
         <Text style={styles.signUpText}>Back to Login</Text>
       </Pressable>
-      <Text style={{ color: "#000000" }}>{"\n"}{axiosState}{"\n"}</Text>
-      <Text style={{ color: "#000000" }}>dev note to Jiyoung: click on "Back to Login"</Text>
-
   </View>
   );
 }

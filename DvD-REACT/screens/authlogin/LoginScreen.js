@@ -30,7 +30,7 @@ export default function LoginScreen({ navigation }) {
       // if not empty proceed
       // if empty setAxiosState to "Enter email and password"
     // check email and password authenticate with server by sending them via axios
-    axios.put('http://192.168.1.214:8088/logins/submitlogin', {
+    axios.put('http://192.168.1.214:8088/logins/login', {
       email: emailState,
       password: passwordState,
     })
@@ -95,7 +95,6 @@ export default function LoginScreen({ navigation }) {
       <Pressable onPress={navigateSignup}>
         <Text style={styles.signUpText}>SignUp</Text>
       </Pressable>
-      <Text style={{ color: "#000000" }}>dev note to Jiyoung: click on "SignUp"</Text>
   </View>
   );
 }

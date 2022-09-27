@@ -1,4 +1,5 @@
 // FUTURE: encrypt & salt the passwords (bcrypt)
+// FUTURE: check that user email doesnt already exist before signup new email
 
 import { Router } from 'express'
 // logins is collection accessed through Mongo client
@@ -8,7 +9,7 @@ export const router = Router()
 
 
 // R (read/find/get) user login from logins collection
-router.put('/submitlogin', async (req, res) => {
+router.put('/login', async (req, res) => {
   // find the mongo user login object via email
   const result = await (await logins.find({email: {$eq: req.body.email}}).toArray()).pop()
   // if a user is found (because result is not undefined)
@@ -31,7 +32,7 @@ router.put('/submitlogin', async (req, res) => {
 })
 
 // C (create/insert/put) user login into logins collection
-router.put('/putLogin', async (req, res) => {
+router.put('/signup', async (req, res) => {
   const result = await logins.insertOne({
     email: req.body.email ?? null,
     password: req.body.password ?? null,
