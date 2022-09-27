@@ -36,36 +36,25 @@ import HomeScreen from '../screens/home/HomeScreen';
 //// 2 current problem: if colorscheme is not default export, then colorscheme doesnt work
 //// 3 current problem: have to put colorscheme in NavigationContainer (only NavigationContainer has theme prop)
 //// below is a way that solves 123 if can get Navigation to conditionally render via a ternary operator
-export function AlmostNav({ colorScheme}) {
+export default function AuthNavigation({ colorScheme}) {
   return (
     <AuthProvider>
       <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
       >
-        <Navigation/>
+        <SwitchStackNavigators/>
       </NavigationContainer>
     </AuthProvider>
   )
 }
-export default function DVDNav({ colorScheme}) {
-  return (
-    <AuthProvider>
-      <Navigation />
-    </AuthProvider>
-  )
-}
 
-//export default function Navigation({ colorScheme }) {
-export function Navigation({ ...props }) {
-  return (
-    <NavigationContainer
-    linking={LinkingConfiguration}
-    theme={props.colorScheme === 'dark' ? DarkTheme : DefaultTheme}
-    >
-      {React.useContext(AuthContext).isAuthenticated? <RootNavigator/> : <AuthenticationNavigator />}
-    </NavigationContainer>
-  );
+export function SwitchStackNavigators({ ...props }) {
+  if (React.useContext(AuthContext).isAuthenticated) {
+    return (<RootNavigator/>)
+  } else { 
+    return (<AuthenticationNavigator/>)
+  }
 }
 
 /**

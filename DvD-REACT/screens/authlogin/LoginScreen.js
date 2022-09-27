@@ -38,10 +38,9 @@ export default function LoginScreen({ navigation }) {
       .then( function (response) {
         // could be a ternary operator instead... response.loggedIn == true ? AuthContext.loggedIn = true : AuthContext.loggedIn = false
         if (response.data.authenticated == true) {
-          // set auth context to loggedIn = true (causing to switch to RootNavigator and move to home screen)
-          //useAuthContext = true //IMPORTANT 
-          setIsAuthenticated(true)
-          console.log(`${response.data.email} logged in, isAuthenticated: ${isAuthenticated}`)
+          // set auth context to loggedIn = true causes navigation to switch to RootNavigator and move to home screen
+          setIsAuthenticated(true) //IMPORTANT
+          console.log(`${emailState} logged in.`)
         } else {
           // set auth context to authenticated = false (or just dont change it at all)
           console.log("Not logged in, retry...")
