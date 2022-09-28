@@ -18,6 +18,8 @@ export default function LoginScreen({ navigation }) {
   const [emailState, setEmailState] = React.useState('')
   const [passwordState, setPasswordState] = React.useState('')
   const [emailValidityState, setEmailValidityState] = React.useState('')
+  const [passwordValidityState, setPasswordValidityState] = React.useState('')
+  const [loginDoesNotExistState, setLoginDoesNotExistState] = React.useState('')
 
   // method 1 (of two methods) to scale image is being used below
   // method 2 is other method is style={{resizeMode: 'contain', flex:1}} then wrap that in a view with style={{height: screenHeight*0.35}}) 0.35 is scale
@@ -27,16 +29,19 @@ export default function LoginScreen({ navigation }) {
 
   // Purpose is to collect email and password and check they authenticate with server
   function pressLoginButton() {
-    // if email not null then proceed (check that email passes regex test verifying valid email address)
+    setLoginDoesNotExistState('')
+    // if email has valid format similar to blahblahblah@mail.com
     if (emailState.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i) != null) {
-      console.log(`REGEX TRIGGERED, emailState: ${emailState}`)
-
-      // if empty setAxiosState to "Enter email and password"
-      // check email and password authenticate with server by sending them via axios
+      setEmailValidityState('')
+      // if password has at least 8 characters, one letter, one number (checked via regex match)
+      if (passwordState.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/) != null) {
+        setPasswordValidityState('')
+        // check email and password authenticate with server by sending them via axios
+      setEmailValidityState('')
       axios.put('http://192.168.1.214:8088/logins/login', {
-        email: emailState,
-        password: passwordState,
-      })
+          email: emailState,
+          password: passwordState,
+        })
         // if response from server is true then set react auth Context to loggedIn true
         .then( function (response) {
           // could be a ternary operator instead... response.loggedIn == true ? AuthContext.loggedIn = true : AuthContext.loggedIn = false
@@ -46,6 +51,7 @@ export default function LoginScreen({ navigation }) {
             console.log(`${emailState} logged in.`)
           } else {
             // set auth context to authenticated = false (or just dont change it at all)
+            setLoginDoesNotExistState('Email and Password not found.')
             console.log("Not logged in, retry...")
           }
           // console.log(response.data)
@@ -53,8 +59,12 @@ export default function LoginScreen({ navigation }) {
         .catch( function (error) {
           console.log(error)
         })
+      } else {
+        setPasswordValidityState("Enter a valid password containing at least one letter and one number")
+        console.log("enter a valid password")
+      }
     } else {
-      setEmailValidityState("Enter a valid email address in the format: abcdefgh@mail.com")
+      setEmailValidityState("Enter a valid email address in the format: blahblahblah@mail.com")
       console.log("enter an email address in the format: abcdefgh@mail.com")
     }
   }
@@ -78,7 +88,7 @@ export default function LoginScreen({ navigation }) {
           value={emailState}
           />
       </View>
-      <Text style={styles.emailInvalidText}>{emailValidityState}</Text>
+      <Text style={styles.validityText}>{emailValidityState}</Text>
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
@@ -88,12 +98,14 @@ export default function LoginScreen({ navigation }) {
           value={passwordState}
           />
       </View>
+      <Text style={styles.validityText}>{passwordValidityState}</Text>
       <Pressable>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </Pressable>
       <Pressable onPress={pressLoginButton} style={styles.loginBtn}>
         <Text>Login</Text>
       </Pressable>
+      <Text style={styles.validityLoginButtonText}>{loginDoesNotExistState}</Text>
       {/* <TouchableOpacity onPress={
         () => { {navigateHome}; {axiosPressFunction};  }
       } style={styles.loginBtn}><Text>Login</Text></TouchableOpacity> */}
@@ -133,10 +145,16 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     padding:20
   },
-  emailInvalidText: {
-    color:"black",
-    fontSize:11,
+  validityText: {
+    color: "black",
+    fontSize: 11,
     marginTop: -20,
+    marginBottom: 7,
+  },
+  validityLoginButtonText: {
+    color: "black",
+    fontSize: 11,
+    marginTop: -10,
     marginBottom: 7,
   },
   forgot:{

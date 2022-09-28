@@ -7,6 +7,7 @@ export default function SignupScreen({ navigation }) {
   const [emailState, setEmailState] = React.useState('')
   const [passwordState, setPasswordState] = React.useState('')
   const [emailValidityState, setEmailValidityState] = React.useState('')
+  const [passwordValidityState, setPasswordValidityState] = React.useState('')
 
   // method 1 (of two methods) to scale image is being used below
   // method 2 is other method is style={{resizeMode: 'contain', flex:1}} then wrap that in a view with style={{height: screenHeight*0.35}}) 0.35 is scale
@@ -15,23 +16,31 @@ export default function SignupScreen({ navigation }) {
   const imageHeight = 825*aspectRatio //multiple actual image height (825) by aspect ratio
 
   function signupSubmitPress() {
-    if (emailState.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i) != null) {
-      console.log(`REGEX TRIGGERED, emailState: ${emailState}`)
 
-      axios.put('http://192.168.1.214:8088/logins/signup', {
-        email: emailState,
-        password: passwordState,
-      })
-        .then( function (response) {
-          console.log(response.data.log ?? "undefined")
-          navigation.navigate('LoginScreen')
+    // if email has valid format similar to blahblahblah@mail.com
+    if (emailState.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i) != null) {
+      setEmailValidityState('')
+      // if password has at least 8 characters, one letter, one number (checked via regex match)
+      if (passwordState.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/) != null) {
+        setPasswordValidityState('')
+        axios.put('http://192.168.1.214:8088/logins/signup', {
+          email: emailState,
+          password: passwordState,
         })
-        .catch( function (error) {
-          console.log(error)
-        })
+          .then( function (response) {
+            console.log(response.data.log ?? "undefined")
+            navigation.navigate('LoginScreen')
+          })
+          .catch( function (error) {
+            console.log(error)
+          })
+      } else {
+        setPasswordValidityState("Enter a valid password containing at least one letter and one number")
+        console.log("enter a valid password")
+      }
     } else {
-      setEmailValidityState("Enter a valid email address in the format: abcdefgh@mail.com")
-      console.log("Enter a valid email address in the format: abcdefgh@mail.com")
+      setEmailValidityState("Enter a valid email address in the format: blahblahblah@mail.com")
+      console.log("enter an email address in the format: abcdefgh@mail.com")
     }
   }
 
@@ -54,7 +63,7 @@ export default function SignupScreen({ navigation }) {
           value={emailState}
           />
       </View>
-      <Text style={styles.emailValidityText}>{emailValidityState}</Text>
+      <Text style={styles.validityText}>{emailValidityState}</Text>
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
@@ -64,12 +73,14 @@ export default function SignupScreen({ navigation }) {
           value={passwordState}
           />
       </View>
+      <Text style={styles.validityText}>{passwordValidityState}</Text>
       <Pressable>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </Pressable>
       <Pressable onPress={signupSubmitPress} style={styles.loginBtn}>
         <Text>Signup</Text>
       </Pressable>
+      <Text style={styles.validityLoginButtonText}></Text>
       {/* <TouchableOpacity onPress={
         () => { {navigateHome}; {axiosPressFunction};  }
       } style={styles.loginBtn}><Text>Login</Text></TouchableOpacity> */}
@@ -104,10 +115,16 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     padding:20
   },
-  emailValidityText: {
+  validityText: {
     color:"black",
     fontSize:11,
     marginTop: -20,
+    marginBottom: 7,
+  },
+  validityLoginButtonText: {
+    color: "black",
+    fontSize: 11,
+    marginTop: -10,
     marginBottom: 7,
   },
   forgot:{
