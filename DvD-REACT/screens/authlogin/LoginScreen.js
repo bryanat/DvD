@@ -15,8 +15,9 @@ import { AuthContext } from '../../hooks/AuthProvider';
 export default function LoginScreen({ navigation }) {
   const { isAuthenticated, setIsAuthenticated } = React.useContext(AuthContext)
 
-  const [emailState, setEmailState] = React.useState()
-  const [passwordState, setPasswordState] = React.useState()
+  const [emailState, setEmailState] = React.useState('')
+  const [passwordState, setPasswordState] = React.useState('')
+  const [emailValidityState, setEmailValidityState] = React.useState('')
 
   // method 1 (of two methods) to scale image is being used below
   // method 2 is other method is style={{resizeMode: 'contain', flex:1}} then wrap that in a view with style={{height: screenHeight*0.35}}) 0.35 is scale
@@ -26,31 +27,36 @@ export default function LoginScreen({ navigation }) {
 
   // Purpose is to collect email and password and check they authenticate with server
   function pressLoginButton() {
-    // check that email and password state fields are not empty
-      // if not empty proceed
+    // if email not null then proceed (check that email passes regex test verifying valid email address)
+    if (emailState.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i) != null) {
+      console.log(`REGEX TRIGGERED, emailState: ${emailState}`)
+
       // if empty setAxiosState to "Enter email and password"
-    // check email and password authenticate with server by sending them via axios
-    axios.put('http://192.168.1.214:8088/logins/login', {
-      email: emailState,
-      password: passwordState,
-    })
-      // if response from server is true then set react auth Context to loggedIn true
-      .then( function (response) {
-        // could be a ternary operator instead... response.loggedIn == true ? AuthContext.loggedIn = true : AuthContext.loggedIn = false
-        if (response.data.authenticated == true) {
-          // set auth context to loggedIn = true causes navigation to switch to RootNavigator and move to home screen
-          setIsAuthenticated(true) //IMPORTANT
-          console.log(`${emailState} logged in.`)
-        } else {
-          // set auth context to authenticated = false (or just dont change it at all)
-          console.log("Not logged in, retry...")
-        }
-        // console.log(response.data)
+      // check email and password authenticate with server by sending them via axios
+      axios.put('http://192.168.1.214:8088/logins/login', {
+        email: emailState,
+        password: passwordState,
       })
-      .catch( function (error) {
-        console.log(error)
-      })
-    
+        // if response from server is true then set react auth Context to loggedIn true
+        .then( function (response) {
+          // could be a ternary operator instead... response.loggedIn == true ? AuthContext.loggedIn = true : AuthContext.loggedIn = false
+          if (response.data.authenticated == true) {
+            // set auth context to loggedIn = true causes navigation to switch to RootNavigator and move to home screen
+            setIsAuthenticated(true) //IMPORTANT
+            console.log(`${emailState} logged in.`)
+          } else {
+            // set auth context to authenticated = false (or just dont change it at all)
+            console.log("Not logged in, retry...")
+          }
+          // console.log(response.data)
+        })
+        .catch( function (error) {
+          console.log(error)
+        })
+    } else {
+      setEmailValidityState("Enter a valid email address in the format: abcdefgh@mail.com")
+      console.log("enter an email address in the format: abcdefgh@mail.com")
+    }
   }
   
   const navigateSignup = () => {
@@ -72,6 +78,7 @@ export default function LoginScreen({ navigation }) {
           value={emailState}
           />
       </View>
+      <Text style={styles.emailInvalidText}>{emailValidityState}</Text>
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
@@ -126,6 +133,12 @@ const styles = StyleSheet.create({
     justifyContent:"center",
     padding:20
   },
+  emailInvalidText: {
+    color:"black",
+    fontSize:11,
+    marginTop: -20,
+    marginBottom: 7,
+  },
   forgot:{
     color:"black",
     fontSize:11
@@ -146,7 +159,7 @@ const styles = StyleSheet.create({
   },
   loginText:{
     color:"black",
-    fontSize:11  
+    fontSize:11,
   },
   pickerAge: {
     backgroundColor: '#ffffff',

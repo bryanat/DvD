@@ -4,8 +4,9 @@ import { Text, View, TextInput } from '../../components/Themed';
 import axios from 'axios'
 
 export default function SignupScreen({ navigation }) {
-  const [emailState, setEmailState] = React.useState()
-  const [passwordState, setPasswordState] = React.useState()
+  const [emailState, setEmailState] = React.useState('')
+  const [passwordState, setPasswordState] = React.useState('')
+  const [emailValidityState, setEmailValidityState] = React.useState('')
 
   // method 1 (of two methods) to scale image is being used below
   // method 2 is other method is style={{resizeMode: 'contain', flex:1}} then wrap that in a view with style={{height: screenHeight*0.35}}) 0.35 is scale
@@ -14,17 +15,24 @@ export default function SignupScreen({ navigation }) {
   const imageHeight = 825*aspectRatio //multiple actual image height (825) by aspect ratio
 
   function signupSubmitPress() {
-    axios.put('http://192.168.1.214:8088/logins/signup', {
-      email: emailState,
-      password: passwordState,
-    })
-      .then( function (response) {
-        console.log(response.data.log ?? "undefined")
-        navigation.navigate('LoginScreen')
+    if (emailState.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i) != null) {
+      console.log(`REGEX TRIGGERED, emailState: ${emailState}`)
+
+      axios.put('http://192.168.1.214:8088/logins/signup', {
+        email: emailState,
+        password: passwordState,
       })
-      .catch( function (error) {
-        console.log(error)
-      })
+        .then( function (response) {
+          console.log(response.data.log ?? "undefined")
+          navigation.navigate('LoginScreen')
+        })
+        .catch( function (error) {
+          console.log(error)
+        })
+    } else {
+      setEmailValidityState("Enter a valid email address in the format: abcdefgh@mail.com")
+      console.log("Enter a valid email address in the format: abcdefgh@mail.com")
+    }
   }
 
   const onSkip = () => {
@@ -46,6 +54,7 @@ export default function SignupScreen({ navigation }) {
           value={emailState}
           />
       </View>
+      <Text style={styles.emailValidityText}>{emailValidityState}</Text>
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
@@ -94,6 +103,12 @@ const styles = StyleSheet.create({
     marginBottom:20,
     justifyContent:"center",
     padding:20
+  },
+  emailValidityText: {
+    color:"black",
+    fontSize:11,
+    marginTop: -20,
+    marginBottom: 7,
   },
   forgot:{
     color:"black",
