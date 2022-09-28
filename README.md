@@ -1,4 +1,6 @@
 # DvD
+![](readme-images/beautiful-drawings-homepage.jpg) 
+![](readme-images/beautiful-drawings-exercise.jpg) 
 ![](readme-images/dieters-red-vs-blue-middle.png) 
 ![](readme-images/dieters-logo.png)
 ![](readme-images/dieters-color-palette.png)
