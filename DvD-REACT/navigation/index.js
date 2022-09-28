@@ -19,16 +19,20 @@ import SettingsModal from '../screens/menubuttons/SettingsModal';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import DieterVsDieterScreen from '../screens/vs/DieterVsDieterScreen'
 import LinkingConfiguration from './LinkingConfiguration';
-import LoginScreen from '../screens/authlogin/LoginScreen';
 import BlogfeedScreen from '../screens/blog/BlogfeedScreen';
 import PersonalChallengeScreen from '../screens/personalchallenge/PersonalChallengeScreen';
 import PersonalStatsScreen from '../screens/personalchallenge/PersonalStatsScreen';
+import HomeScreen from '../screens/home/HomeScreen';
 import GroupchatScreen from '../screens/chat/GroupchatScreen';
+import LoginScreen from '../screens/authlogin/LoginScreen';
 import OnboardingScreen from '../screens/authlogin/OnboardingScreen';
 import SignupScreen from '../screens/authlogin/SignupScreen';
+import IntroDataScreen from '../screens/authlogin/IntroDataScreen';
+
 import AuthProvider from '../hooks/AuthProvider';
 import { AuthContext } from '../hooks/AuthProvider';
-import HomeScreen from '../screens/home/HomeScreen';
+import IntroDataProvider from '../hooks/IntroDataProvider';
+import { IntroDataContext } from '../hooks/IntroDataProvider';
 
 
 // FUTURE: next step is to get colorScheme working with AuthProvider wrapper / default export
@@ -69,6 +73,7 @@ function AuthenticationNavigator() {
       <Stack.Screen name="OnBoardingScreen" component={OnboardingScreen} options={{ headerShown: false }} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
       <Stack.Screen name="SignupScreen" component={SignupScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="IntroDataScreen" component={IntroDataScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 }

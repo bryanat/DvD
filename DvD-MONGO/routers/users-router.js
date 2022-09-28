@@ -5,7 +5,7 @@ import { users } from '../om/om-client.js'
 export const router = Router()
 
 // C (create) put user into users collection
-router.put('/putUSER', async(req, res) => {
+router.put('/userdata', async(req, res) => {
   const userReq = req.body
   const insertResult = await users.insertOne({
     name: req.body.name ?? 'UNKNOWN',

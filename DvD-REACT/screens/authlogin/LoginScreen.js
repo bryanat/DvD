@@ -47,7 +47,8 @@ export default function LoginScreen({ navigation }) {
           // could be a ternary operator instead... response.loggedIn == true ? AuthContext.loggedIn = true : AuthContext.loggedIn = false
           if (response.data.authenticated == true) {
             // set auth context to loggedIn = true causes navigation to switch to RootNavigator and move to home screen
-            setIsAuthenticated(true) //IMPORTANT
+            navigation.navigate('IntroDataScreen')
+            //setIsAuthenticated(true) //IMPORTANT
             console.log(`${emailState} logged in.`)
           } else {
             // set auth context to authenticated = false (or just dont change it at all)
@@ -106,9 +107,6 @@ export default function LoginScreen({ navigation }) {
         <Text>Login</Text>
       </Pressable>
       <Text style={styles.validityLoginButtonText}>{loginDoesNotExistState}</Text>
-      {/* <TouchableOpacity onPress={
-        () => { {navigateHome}; {axiosPressFunction};  }
-      } style={styles.loginBtn}><Text>Login</Text></TouchableOpacity> */}
       <Text style={styles.loginText}>Don't have an account?</Text>
       <Pressable onPress={navigateSignup}>
         <Text style={styles.signUpText}>SignUp</Text>
