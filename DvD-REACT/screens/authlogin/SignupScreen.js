@@ -21,7 +21,7 @@ export default function SignupScreen({ navigation }) {
     if (emailState.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i) != null) {
       setEmailValidityState('')
       // if password has at least 8 characters, one letter, one number (checked via regex match)
-      if (passwordState.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/) != null) {
+      if (passwordState.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/) != null) {
         setPasswordValidityState('')
         axios.put('http://192.168.1.214:8088/logins/signup', {
           email: emailState,

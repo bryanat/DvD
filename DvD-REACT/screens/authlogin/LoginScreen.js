@@ -20,7 +20,7 @@ export default function LoginScreen({ navigation }) {
   const [emailValidityState, setEmailValidityState] = React.useState('')
   const [passwordValidityState, setPasswordValidityState] = React.useState('')
   const [loginDoesNotExistState, setLoginDoesNotExistState] = React.useState('')
-
+  //
   // method 1 (of two methods) to scale image is being used below
   // method 2 is other method is style={{resizeMode: 'contain', flex:1}} then wrap that in a view with style={{height: screenHeight*0.35}}) 0.35 is scale
   const screenWidth = Dimensions.get('screen').width
@@ -34,7 +34,7 @@ export default function LoginScreen({ navigation }) {
     if (emailState.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i) != null) {
       setEmailValidityState('')
       // if password has at least 8 characters, one letter, one number (checked via regex match)
-      if (passwordState.match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/) != null) {
+      if (passwordState.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/) != null) {
         setPasswordValidityState('')
         // check email and password authenticate with server by sending them via axios
       setEmailValidityState('')
