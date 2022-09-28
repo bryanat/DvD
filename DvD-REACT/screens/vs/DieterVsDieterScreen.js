@@ -1,7 +1,4 @@
-
-// https://icons.expo.fyi/Ionicons/chatbubble-ellipses-outline
-// https://icons.expo.fyi/Ionicons/home-outline
-// https://icons.expo.fyi/MaterialCommunityIcons/post-outline
+// Dieter vs Dieter
 
 import * as React from 'react'
 import { StyleSheet } from 'react-native'

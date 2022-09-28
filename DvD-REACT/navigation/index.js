@@ -28,6 +28,7 @@ import LoginScreen from '../screens/authlogin/LoginScreen';
 import OnboardingScreen from '../screens/authlogin/OnboardingScreen';
 import SignupScreen from '../screens/authlogin/SignupScreen';
 import IntroDataScreen from '../screens/authlogin/IntroDataScreen';
+import ExerciseScreen from '../screens/home/ExerciseScreen';
 
 import AuthProvider from '../hooks/AuthProvider';
 import { AuthContext } from '../hooks/AuthProvider';
@@ -92,6 +93,21 @@ function RootNavigator() {
   );
 }
 
+const HomeStack = createNativeStackNavigator();
+
+function HomeStackNavigator() {
+  
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      />
+      <HomeStack.Screen name="ExerciseScreen" component={ExerciseScreen} options={{ headerShown: false }}/>
+    </HomeStack.Navigator>
+  )
+}
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
@@ -103,13 +119,13 @@ function BottomTabNavigator() {
   const colorScheme = useColorScheme();
   return (
     <BottomTab.Navigator
-      initialRouteName="Home"
+      initialRouteName="HomeScreen"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
+        name="HomeStackNavigator"
+        component={HomeStackNavigator}
         options={({ navigation }) => ({
           title: 'Home',
           tabBarIcon: ({ color }) => <Ionicons name="home-outline" size={32} color={color} style={{ marginBottom: -3 }} />,

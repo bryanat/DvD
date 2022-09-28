@@ -1,4 +1,4 @@
-// ModalScreen is current basis for screens like Settings and FriendsList
+// Friendslist 
 
 import { StatusBar } from 'expo-status-bar';
 import { Platform, StyleSheet } from 'react-native';

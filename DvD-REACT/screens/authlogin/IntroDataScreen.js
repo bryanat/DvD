@@ -91,6 +91,7 @@ export default function IntroDataScreen() {
       <TouchableOpacity>
         <Text style={styles.signUpText}>SignUp</Text>
       </TouchableOpacity>
+      <Text style={styles.loginText}>{"\n\n"}note: this page is incomplete</Text>
     </View>
   )
 }
@@ -102,15 +103,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  inputText: {
-    height:50,
-    color:"white"
-  },
   logo:{
     fontWeight:"bold",
     fontSize:50,
     color:"#1D3557",
     marginBottom:40
+  },
+  inputText: {
+    height:50,
+    color:"white"
   },
   inputView:{
     width:"80%",
