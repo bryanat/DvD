@@ -8,7 +8,7 @@ import Summary from '../../components/HomePage/Summary';
 export default function HomeScreen({navigation}) {
   return (
     <View style={styles.topView}>
-      <Text style={styles.topText}>Today</Text>
+      <Text style={styles.topText}>TODAY</Text>
       <Summary />
       
       {/* <View style={{

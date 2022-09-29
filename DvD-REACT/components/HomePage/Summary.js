@@ -12,7 +12,7 @@ const Summary = () => {
   return (
     <View style={styles.container}>
         <Card style={styles.card}>
-            <Card.Title title="Summary"/>
+            <Card.Title titleStyle={{ fontWeight: "bold", fontSize: 25 }} title="Summary" fontWeight="400"/>
                 <Card.Content style={styles.calroies}>
                     {/* Total calories they are eating */}
                     <View style={styles.smallBarContainer}>
@@ -100,7 +100,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'column',
-        // justifyContent: 'center',
         width: windowWidth,
         height: 100,
     },
@@ -125,5 +124,8 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         textAlign: 'center'
+    },
+    titleSize: {
+        fontWeight: 'bold'
     }
   });
