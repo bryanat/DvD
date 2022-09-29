@@ -1,21 +1,36 @@
-// Home
+// GroupChat
+// reason why: they can make group to share the info
 
-import { Pressable, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Text, View } from '../../components/Themed';
+import Summary from '../../components/HomePage/Summary';
 
-export default function HomeScreen({ navigation }) {
-
-  function pressGo() {
-    console.log("GOGOGOOGOGGOGO")
-    navigation.navigate('ExerciseScreen')
-  }
-
+export default function HomeScreen({navigation}) {
   return (
     <View style={styles.topView}>
-      <Text style={styles.topText}>Home Screen</Text>
-      <Pressable style={styles.goButton} onPress={pressGo}>
-        <Text style={styles.goText}>GO</Text>
-      </Pressable>
+      <Text style={styles.topText}>TODAY</Text>
+      <Summary />
+      
+      {/* <View style={{
+          flex: 1,
+          width: 500,
+          height: 100,
+        }} />
+        <View style={{
+          flex: 1,
+          width: 500,
+          height: 100,
+        }} />
+        <View style={{
+          flex: 1,
+          width: 500,
+          height: 100,
+        }} />
+        <View style={{
+          flex: 1,
+          width: 500,
+          height: 100,
+        }} /> */}
     </View>
   );
 }
@@ -23,27 +38,13 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   topView: {
     flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column'
   },
   topText: {
-    fontSize: 20,
+    padding: 20,
+    fontSize: 40,
     fontWeight: 'bold',
-  },
-  goButton: {
-    backgroundColor: '#E63946',
-    borderRadius: 50,
-    height: 50,
-    width: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    top: '90%',
-    right: '43%',
-
-  },
-  goText: {
-    fontSize: 20,
-    color: '#ffffff',
-    marginLeft: -1,
-    marginTop: -2,
   },
 });
