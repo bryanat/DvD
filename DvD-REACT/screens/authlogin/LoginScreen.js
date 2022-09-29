@@ -7,8 +7,8 @@
  */
 
 import * as React from 'react'
-import { StyleSheet, Pressable, Image, Dimensions } from 'react-native';
-import { Text, View, TextInput } from '../../components/Themed';
+import { StyleSheet, Pressable, Image, Dimensions, Text } from 'react-native';
+import { View, TextInput } from '../../components/Themed';
 import axios from 'axios'
 import { AuthContext } from '../../hooks/AuthProvider';
 
@@ -97,6 +97,26 @@ export default function LoginScreen({ navigation }) {
           onChangeText={setPasswordState}
           value={passwordState}
           />
+      </View>
+      {/* Need to be changed with Google OAUTH */}
+      <View style={styles.inputText}>
+      <TextInput
+          style={styles.inputText}
+          placeholder="Sign in with Google"
+          placeholderTextColor="white"
+          onChangeText={setPasswordState}
+          value={passwordState}
+          /> 
+      </View>
+      {/* Need to be changed with Apple OAUTH */}
+      <View style={styles.inputText}>
+      <TextInput
+          style={styles.inputText}
+          placeholder="Sign in with Apple"
+          placeholderTextColor="white"
+          onChangeText={setPasswordState}
+          value={passwordState}
+          /> 
       </View>
       <Text style={styles.validityText}>{passwordValidityState}</Text>
       <Pressable>

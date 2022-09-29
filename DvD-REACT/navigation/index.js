@@ -29,6 +29,7 @@ import SignupScreen from '../screens/authlogin/SignupScreen';
 import AuthProvider from '../hooks/AuthProvider';
 import { AuthContext } from '../hooks/AuthProvider';
 import HomeScreen from '../screens/home/HomeScreen';
+import QuestionScreen from '../screens/authlogin/QuestionScreen';
 
 
 // FUTURE: next step is to get colorScheme working with AuthProvider wrapper / default export
@@ -69,6 +70,7 @@ function AuthenticationNavigator() {
       <Stack.Screen name="OnBoardingScreen" component={OnboardingScreen} options={{ headerShown: false }} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
       <Stack.Screen name="SignupScreen" component={SignupScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="QuestionScreen" component={QuestionScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 }

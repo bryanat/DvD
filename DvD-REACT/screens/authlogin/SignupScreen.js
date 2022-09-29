@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { StyleSheet, Pressable, Image, Dimensions } from 'react-native';
+import { StyleSheet, Pressable, Image, Dimensions, Button } from 'react-native';
 import { Text, View, TextInput } from '../../components/Themed';
 import axios from 'axios'
+import QuestionScreen from './QuestionScreen';
 
 export default function SignupScreen({ navigation }) {
   const [emailState, setEmailState] = React.useState('')
@@ -48,6 +49,10 @@ export default function SignupScreen({ navigation }) {
     navigation.navigate('LoginScreen')
   }
 
+  const moveToQuestion = () => {
+    navigation.navigate('QuestionScreen')
+  }
+
   return (
     <View style={styles.topView}>
       <Image 
@@ -74,12 +79,28 @@ export default function SignupScreen({ navigation }) {
           />
       </View>
       <Text style={styles.validityText}>{passwordValidityState}</Text>
+      {/* Need to be changed with Google OAUTH */}
+
+      <Pressable
+        onPress={moveToQuestion}
+        style={{ backgroundColor: 'plum', padding: 10 }}
+      >
+       <Text>Story</Text>
+       </Pressable>
+
+      {/* Need to be changed with Apple OAUTH */}
+      {/* <Pressable onPress={moveToQuestion} style={styles.loginBtn}>
+        <Text> Sign Up with Apple </Text>
+      </Pressable> */}
+
       <Pressable>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </Pressable>
+
       <Pressable onPress={signupSubmitPress} style={styles.loginBtn}>
         <Text>Signup</Text>
       </Pressable>
+      
       <Text style={styles.validityLoginButtonText}></Text>
       {/* <TouchableOpacity onPress={
         () => { {navigateHome}; {axiosPressFunction};  }
