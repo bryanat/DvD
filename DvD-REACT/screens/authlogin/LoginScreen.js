@@ -38,7 +38,7 @@ export default function LoginScreen({ navigation }) {
         setPasswordValidityState('')
         // check email and password authenticate with server by sending them via axios
       setEmailValidityState('')
-      axios.put('http://192.168.1.214:8088/logins/login', {
+      axios.put('http://192.168.1.147:8088/logins/login', {
           email: emailState,
           password: passwordState,
         })
