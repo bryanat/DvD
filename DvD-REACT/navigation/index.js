@@ -55,7 +55,9 @@ export default function AuthNavigation({ colorScheme}) {
 }
 
 export function SwitchStackNavigators({ ...props }) {
-  if (React.useContext(AuthContext).isAuthenticated) {
+  // token._2 property is 1 (true) or 0 (false), if true a token exists then signin
+  if (React.useContext(AuthContext).token._2 == true) {
+  // if (React.useContext(AuthContext).isAuthenticated) {
     return (<RootNavigator/>)
   } else { 
     return (<AuthenticationNavigator/>)

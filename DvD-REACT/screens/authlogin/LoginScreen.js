@@ -11,16 +11,23 @@ import { StyleSheet, Pressable, Image, Dimensions } from 'react-native';
 import { Text, View, TextInput } from '../../components/Themed';
 import axios from 'axios'
 import { AuthContext } from '../../hooks/AuthProvider';
+import * as SecureStore from 'expo-secure-store'
 
 export default function LoginScreen({ navigation }) {
-  const { isAuthenticated, setIsAuthenticated } = React.useContext(AuthContext)
+
+  /////////////////////////////////////////////////////////////////////////////
+
+  
+
+  /////////////////////////////////////////////////////////////////////////////
+  const { isAuthenticated, setIsAuthenticated, token, setToken } = React.useContext(AuthContext)
 
   const [emailState, setEmailState] = React.useState('')
   const [passwordState, setPasswordState] = React.useState('')
   const [emailValidityState, setEmailValidityState] = React.useState('')
   const [passwordValidityState, setPasswordValidityState] = React.useState('')
   const [loginDoesNotExistState, setLoginDoesNotExistState] = React.useState('')
-  //
+
   // method 1 (of two methods) to scale image is being used below
   // method 2 is other method is style={{resizeMode: 'contain', flex:1}} then wrap that in a view with style={{height: screenHeight*0.35}}) 0.35 is scale
   const screenWidth = Dimensions.get('screen').width
@@ -38,7 +45,7 @@ export default function LoginScreen({ navigation }) {
         setPasswordValidityState('')
         // check email and password authenticate with server by sending them via axios
       setEmailValidityState('')
-      axios.put('http://192.168.1.147:8088/logins/login', {
+      axios.put('http://192.168.1.214:8088/logins/login', {
           email: emailState,
           password: passwordState,
         })
@@ -47,7 +54,13 @@ export default function LoginScreen({ navigation }) {
           // could be a ternary operator instead... response.loggedIn == true ? AuthContext.loggedIn = true : AuthContext.loggedIn = false
           if (response.data.authenticated == true) {
             // set auth context to loggedIn = true causes navigation to switch to RootNavigator and move to home screen
-            navigation.navigate('IntroDataScreen')
+            SecureStore.setItemAsync('token1', 'pass1')
+              .then(
+                setToken(SecureStore.getItemAsync('token1'))
+              ).then(
+                navigation.navigate('IntroDataScreen')
+              )
+            // CREATE TOKEN INSTEAD OF setIsAuthenticated to true
             //setIsAuthenticated(true) //IMPORTANT
             console.log(`${emailState} logged in.`)
           } else {
