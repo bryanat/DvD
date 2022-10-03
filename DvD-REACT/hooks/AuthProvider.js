@@ -1,14 +1,12 @@
 import * as React from 'react'
-export const AuthContext = React.createContext()
 import * as SecureStore from 'expo-secure-store'
+
+export const AuthContext = React.createContext()
 
 export default AuthProvider = ({children}) => {
   const [ isAuthenticated, setIsAuthenticated ] = React.useState(false);
   const [ token, setToken ] = React.useState(SecureStore.getItemAsync('token1'))
 
-  console.log('=== XXX ===')
-  console.log(SecureStore.getItemAsync('token1'))
-  console.log('=== XXX ===')
   //setToken(SecureStore.getItemAsync('token1'))
   
   /*

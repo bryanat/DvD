@@ -58,6 +58,8 @@ export default function LoginScreen({ navigation }) {
               .then(
                 setToken(SecureStore.getItemAsync('token1'))
               ).then(
+                // if (user health data == undefined) then { navigation.navigate('IntroDataScreen') }
+                // else if (user health data == exists ) then { navigation.navigate('HomeScreen') }
                 navigation.navigate('IntroDataScreen')
               )
             // CREATE TOKEN INSTEAD OF setIsAuthenticated to true
