@@ -2,6 +2,7 @@
 // FUTURE: check that user email doesnt already exist before signup new email
 
 import { Router } from 'express'
+import jwt from 'jsonwebtoken'
 // logins is collection accessed through Mongo client
 import { logins } from '../om/om-client.js'
 
@@ -18,7 +19,7 @@ router.put('/login', async (req, res) => {
     // check that password (from client) matches email password (from mongo server)
     if (result.password == req.body.password) {
       console.log({log: 'username and password found and match', authenticated: true})
-      res.send({log: 'username and password found and match', authenticated: true})
+      res.send({log: 'username and password found and match', authenticated: true, token: jwt.sign({payload: 'value'}, 'secretKey')})
     } else {
       res.send({log: `incorrent password for ${req.body.email},`, authenticated: false})
       console.log(`client password ${req.body.password} does not match server password`)
