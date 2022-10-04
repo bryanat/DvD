@@ -8,9 +8,8 @@ import { logins } from '../om/om-client.js'
 
 export const router = Router()
 
-
 // R (read/find/get) user login from logins collection
-router.put('/login', async (req, res) => {
+router.post('/login', async (req, res) => {
   // find the mongo user login object via email
   const result = await (await logins.find({email: {$eq: req.body.email}}).toArray()).pop()
   // if a user is found (because result is not undefined)
