@@ -54,9 +54,9 @@ export default function LoginScreen({ navigation }) {
           // could be a ternary operator instead... response.loggedIn == true ? AuthContext.loggedIn = true : AuthContext.loggedIn = false
           if (response.data.authenticated == true) {
             // set auth context to loggedIn = true causes navigation to switch to RootNavigator and move to home screen
-            SecureStore.setItemAsync('token1', 'pass1')
+            SecureStore.setItemAsync('token', response.data.token)
               .then(
-                setToken(SecureStore.getItemAsync('token1'))
+                setToken(SecureStore.getItemAsync('token'))
               ).then(
                 // if (user health data == undefined) then { navigation.navigate('IntroDataScreen') }
                 // else if (user health data == exists ) then { navigation.navigate('HomeScreen') }
