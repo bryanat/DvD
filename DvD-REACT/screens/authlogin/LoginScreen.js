@@ -62,8 +62,6 @@ export default function LoginScreen({ navigation }) {
                 // else if (user health data == exists ) then { navigation.navigate('HomeScreen') }
                 navigation.navigate('IntroDataScreen')
               )
-            // CREATE TOKEN INSTEAD OF setIsAuthenticated to true
-            //setIsAuthenticated(true) //IMPORTANT
             console.log(`${emailState} logged in.`)
           } else {
             // set auth context to authenticated = false (or just dont change it at all)

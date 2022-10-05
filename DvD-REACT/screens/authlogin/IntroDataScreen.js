@@ -6,7 +6,7 @@ import { AuthContext } from '../../hooks/AuthProvider';
 
 
 export default function IntroDataScreen() {
-  const { isAuthenticated, setIsAuthenticated } = React.useContext(AuthContext)
+  const { isAuthenticated, setIsAuthenticated, token, setToken } = React.useContext(AuthContext)
 
   const [nameState, setNameState] = React.useState();
   const [ageState, setAgeState] = React.useState();
@@ -32,7 +32,7 @@ export default function IntroDataScreen() {
       .catch( function (error) {
         console.log(error)
       })
-    setIsAuthenticated(true) //TEMPORARY
+    setIsAuthenticated(true) //think this is just triggering the context read in index.js
   }
 
   return (
