@@ -2,11 +2,10 @@ import React from 'react'
 import { View } from 'react-native'
 import { Text } from '../../components/Themed'
 
-
-export default function QuestionScreen({navigation}) {
+export default function Question1(props) {
     return (
       <View>
-        <Text>QuestionScreen</Text>
+        <Text>Name: <input name="name" /></Text>
       </View>
     )
 }
