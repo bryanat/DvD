@@ -5,7 +5,7 @@ export const AuthContext = React.createContext()
 
 export default AuthProvider = ({children}) => {
   const [ isAuthenticated, setIsAuthenticated ] = React.useState(false);
-  const [ token, setToken ] = React.useState(SecureStore.getItemAsync('token'))
+  const [ token, setToken ] = React.useState(SecureStore.getItemAsync('nulltoken'))
   
   /*
   // just testing some securestore stuff here

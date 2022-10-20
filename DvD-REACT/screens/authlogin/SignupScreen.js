@@ -15,8 +15,15 @@ export default function SignupScreen({ navigation }) {
   const aspectRatio = screenWidth/824 //divide actual image width (824) by screen width
   const imageHeight = 825*aspectRatio //multiple actual image height (825) by aspect ratio
 
-  function signupSubmitPress() {
+  function moveToQuestion() {
+    console.log('idk?')
+  }
 
+  function devSignupSubmitPress() {
+    navigation.navigate('SignupScreen2')
+  }
+
+  function signupSubmitPress() {
     // if email has valid format similar to blahblahblah@mail.com
     if (emailState.match(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i) != null) {
       setEmailValidityState('')
@@ -29,7 +36,7 @@ export default function SignupScreen({ navigation }) {
         })
           .then( function (response) {
             console.log(response.data.log ?? "undefined")
-            navigation.navigate('LoginScreen')
+            navigation.navigate('SignupScreen2')
           })
           .catch( function (error) {
             console.log(error)
@@ -87,6 +94,9 @@ export default function SignupScreen({ navigation }) {
       </Pressable>
       <Pressable onPress={signupSubmitPress} style={styles.loginBtn}>
         <Text>Signup</Text>
+      </Pressable>
+      <Pressable onPress={devSignupSubmitPress} style={styles.loginBtn}>
+        <Text>DEV SIGNUP BUTTON (skips email password)</Text>
       </Pressable>
       <Text style={styles.validityLoginButtonText}></Text>
       {/* <TouchableOpacity onPress={

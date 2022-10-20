@@ -57,11 +57,14 @@ export default function LoginScreen({ navigation }) {
             SecureStore.setItemAsync('token', response.data.token)
               .then(
                 setToken(SecureStore.getItemAsync('token'))
-              ).then(
+              )
+              /*
+              .then(
                 // if (user health data == undefined) then { navigation.navigate('IntroDataScreen') }
                 // else if (user health data == exists ) then { navigation.navigate('HomeScreen') }
                 navigation.navigate('IntroDataScreen')
               )
+              */
             console.log(`${emailState} logged in.`)
           } else {
             // set auth context to authenticated = false (or just dont change it at all)

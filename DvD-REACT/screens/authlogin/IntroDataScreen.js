@@ -1,3 +1,5 @@
+// THIS SCREEN WILL BE DELETED ONCE REPLACED BY SIGNUPSCREEN123456
+
 import * as React from 'react'
 import { StyleSheet, Pressable, TouchableOpacity, Switch } from 'react-native'
 import { Text, View, TextInput } from '../../components/Themed'
