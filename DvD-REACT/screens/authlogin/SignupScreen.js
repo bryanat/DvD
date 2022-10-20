@@ -74,6 +74,14 @@ export default function SignupScreen({ navigation }) {
           />
       </View>
       <Text style={styles.validityText}>{passwordValidityState}</Text>
+      {/* Need to be changed with Google OAUTH */}
+      <Pressable onPress={moveToQuestion} style={styles.loginBtn}>
+        <Text>Signup with Google</Text>
+      </Pressable>
+      {/* Need to be changed with Apple OAUTH */}
+      <Pressable onPress={moveToQuestion} style={styles.loginBtn}>
+        <Text>Signup with Apple</Text>
+      </Pressable>
       <Pressable>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </Pressable>
