@@ -18,8 +18,9 @@ export default function SignupScreen3({navigation}) {
 
   function pressableNext() {
     // will add numeric type checking later
-    if (heightState != undefined && weightState != undefined) {
-      axios.put('http://192.168.214:8088/users/userdata/heightweight', {
+    // skipping conditional if logic right now while developing screens (for speed)
+    //if (heightState != undefined && weightState != undefined) {
+      axios.put('http://192.168.1.214:8088/users/userdata/heightweight', {
         heigth: +heightState ?? null,
         weight: +weightState ?? null,
       }).then( function (response) {
@@ -28,16 +29,16 @@ export default function SignupScreen3({navigation}) {
       }).catch( function (error) {
         console.log(error)
       })
-    } else {
-      setErrorTextState('Enter height and weight to continue to next screen')
-    }
+    //} else {
+    //  setErrorTextState('Enter height and weight to continue to next screen')
+    //}
   }
 
   return (
     <View style={styles.topView}>
       <Text style={styles.topText}>What is your height?</Text>
       <TextInput
-        style={styles.inputHeight}
+        style={styles.textInput}
         placeholder="type height here"
         placeholderTextColor="white"
         onChangeText={setHeightState}
@@ -45,7 +46,7 @@ export default function SignupScreen3({navigation}) {
       />
       <Text style={styles.topText}>What is your weight?</Text>
       <TextInput
-        style={styles.inputWeight}
+        style={styles.textInput}
         placeholder="type weight here"
         placeholderTextColor="white"
         onChangeText={setWeightState}

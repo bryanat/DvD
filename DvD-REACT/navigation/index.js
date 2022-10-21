@@ -33,7 +33,6 @@ import SignupScreen2 from '../screens/authlogin/signupflow/SignupScreen2';
 import SignupScreen3 from '../screens/authlogin/signupflow/SignupScreen3';
 import SignupScreen4 from '../screens/authlogin/signupflow/SignupScreen4';
 import SignupScreen5 from '../screens/authlogin/signupflow/SignupScreen5';
-import SignupScreen6 from '../screens/authlogin/signupflow/SignupScreen6';
 
 import AuthProvider from '../hooks/AuthProvider';
 import { AuthContext } from '../hooks/AuthProvider';
@@ -88,7 +87,6 @@ function AuthenticationNavigator() {
       <Stack.Screen name="SignupScreen3" component={SignupScreen3} options={{ headerShown: false }} />
       <Stack.Screen name="SignupScreen4" component={SignupScreen4} options={{ headerShown: false }} />
       <Stack.Screen name="SignupScreen5" component={SignupScreen5} options={{ headerShown: false }} />
-      <Stack.Screen name="SignupScreen6" component={SignupScreen6} options={{ headerShown: false }} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
