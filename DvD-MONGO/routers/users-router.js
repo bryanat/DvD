@@ -42,3 +42,16 @@ router.get('/test', async (req, res) => {
   res.send({"testfield": "testvalue"})
 })
 
+// C (create) put user into users collection
+router.put('/userdata/heightweight', async(req, res) => {
+  const userReq = req.body
+  const insertResult = await users.insertOne({
+    name: req.body.name ?? 'UNKNOWN',
+    age: req.body.age ?? null,
+    weight: req.body.weight ?? null,
+    height: req.body.height ?? null,
+    color: req.body.color ?? null,
+  })
+  console.log(`Created document: ${insertResult}`)
+  res.send({log: `Created mongo document _id: ${insertResult.insertedId}`})
+})

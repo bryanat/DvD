@@ -3,8 +3,10 @@
  * : gather user data regarding gender and birthday
  */
 
+import * as React from 'react'
 import { Pressable, StyleSheet } from 'react-native';
 import { Text, View } from '../../../components/Themed';
+import axios from 'axios'
 
 export default function SignupScreen6({navigation}) {
   function pressableNext() {
