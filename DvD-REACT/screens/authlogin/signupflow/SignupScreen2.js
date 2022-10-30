@@ -8,20 +8,85 @@ import * as React from 'react'
 import { Pressable, StyleSheet } from 'react-native';
 import { Text, View } from '../../../components/Themed';
 import axios from 'axios'
+import { AuthContext } from '../../../hooks/AuthProviderBackup';
+import * as SecureStore from 'expo-secure-store'
 
 export default function SignupScreen2({navigation}) {
 
+  const userIDFromAuthContextToken = React.useContext(AuthContext).token._3
 
-  function pressableNext() {
-    navigation.navigate('SignupScreen3')
+  const [goalState, setGoalState] = React.useState()
+
+  function pressEatHealthier() {
+    setGoalState('eat healthier')
+  }
+  function pressLoosingWeight() {
+    setGoalState('loosing weight')
+  }
+  function pressGetMuscle() {
+    setGoalState('get muscle')
+  }
+  function pressBodyPositive() {
+    setGoalState('body positive')
+  }
+
+  function pressNext() {
+    console.log('before =====x====')
+    console.log(userIDFromAuthContextToken)
+    console.log('after =====x====')
+
+    axios.put('http://192.168.1.214:8088/users/userdata/goal', {
+        id: userIDFromAuthContextToken ?? null,
+        age: 55 ?? null,
+        random: 'tmpxx' ?? null,
+      }).then( function (response) {
+        console.log(response.data)
+        navigation.navigate('SignupScreen3')
+      }).catch( function (error) {
+        console.log(error)
+      })
   }
 
   return (
     <View style={styles.topView}>
+      <View>
       <Text style={styles.topText}>What is your goal?</Text>
-      <Pressable onPress={pressableNext} style={styles.nextPressable}>
-        <Text style={styles.nextText}>Next</Text>
+      <Text>{goalState}</Text>
+
+      <Pressable onPress={pressEatHealthier} style={({pressed}) => [ pressed
+        ? [styles.buttonStyle, {backgroundColor:"#FFFFFF"}] //if pressed
+        : [styles.buttonStyle, {backgroundColor:"#457B9D"}] //if not pressed
+      ]}>
+        <Text>eat healthier</Text>
       </Pressable>
+
+      <Pressable onPress={pressLoosingWeight} style={({pressed}) => [ pressed
+        ? [styles.buttonStyle, {backgroundColor:"#FFFFFF"}] //if pressed
+        : [styles.buttonStyle, {backgroundColor:"#457B9D"}] //if not pressed
+      ]}>
+        <Text>loosing weight</Text>
+      </Pressable>
+
+      <Pressable onPress={pressGetMuscle} style={({pressed}) => [ pressed
+        ? [styles.buttonStyle, {backgroundColor:"#FFFFFF"}] //if pressed
+        : [styles.buttonStyle, {backgroundColor:"#457B9D"}] //if not pressed
+      ]}>
+        <Text>get muscle</Text>
+      </Pressable>
+
+      <Pressable onPress={pressBodyPositive} style={({pressed}) => [ pressed
+        ? [styles.buttonStyle, {backgroundColor:"#FFFFFF"}] //if pressed
+        : [styles.buttonStyle, {backgroundColor:"#457B9D"}] //if not pressed
+      ]}>
+        <Text>feel better about my body</Text>
+      </Pressable>
+      </View>
+
+      <View style={{flex:1, justifyContent: 'flex-end'}}>
+        <Pressable onPress={pressNext} style={styles.nextPressable}>
+          <Text style={styles.nextText}>Next</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
@@ -35,6 +100,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  buttonStyle:{
+    width:"40%",
+    borderRadius:25,
+    height:50,
+    alignItems:"center",
+    justifyContent:"center",
+    marginTop:10,
+    marginBottom:10
+  },
   nextPressable: {
     width:"40%",
     backgroundColor:"#457b9d",
@@ -42,6 +116,7 @@ const styles = StyleSheet.create({
     height:50,
     alignItems:"center",
     justifyContent:"center",
+    alignSelf: "center",
     marginTop:10,
     marginBottom:10
   },

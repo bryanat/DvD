@@ -3,10 +3,10 @@
 import * as React from 'react'
 import { StyleSheet, Pressable } from 'react-native'
 import { View, Text } from '../../components/Themed'
-import { AuthContext } from '../../hooks/AuthProvider'
+import { AuthContext } from '../../hooks/AuthProviderBackup'
 
 export default function SettingsModal() {
-  const { isAuthenticated, setIsAuthenticated, token, setToken } = React.useContext(AuthContext)
+  const { token, setToken } = React.useContext(AuthContext)
 
 
   function pressSignOut() {

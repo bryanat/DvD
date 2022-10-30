@@ -10,8 +10,7 @@
  import { StyleSheet, Pressable, Image, Dimensions } from 'react-native';
  import { Text, View, TextInput } from '../../components/Themed';
  import axios from 'axios'
- //import { AuthContext } from '../../hooks/AuthProvider';
- import { AuthContext } from '../../navigation';
+ import { AuthContext } from '../../hooks/AuthProvider';
  import * as SecureStore from 'expo-secure-store'
  
  export default function LoginScreen({ navigation }) {
@@ -21,12 +20,8 @@
    
  
    /////////////////////////////////////////////////////////////////////////////
-   //const { loading, setLoading, token, setToken } = React.useContext(AuthContext)
-
-
-  const { signIn } = React.useContext(AuthContext);
-
-
+   const { token, setToken } = React.useContext(AuthContext)
+ 
    const [emailState, setEmailState] = React.useState('')
    const [passwordState, setPasswordState] = React.useState('')
    const [emailValidityState, setEmailValidityState] = React.useState('')
@@ -55,31 +50,19 @@
            password: passwordState,
          })
          // if response from server is true then set react auth Context to loggedIn true
-         .then( async function (response) {
+         .then( function (response) {
            // could be a ternary operator instead... response.loggedIn == true ? AuthContext.loggedIn = true : AuthContext.loggedIn = false
            if (response.data.authenticated == true) {
+             console.log("NSJDHNAHKSJD===")
+             console.log(token)
              // set auth context to loggedIn = true causes navigation to switch to RootNavigator and move to home screen
-             await SecureStore.setItemAsync('token', response.data.token)
-               .then( async function() {
-                // setLoading(false)
-                 //React.useContext(AuthContext).setToken(SecureStore.getItemAsync('token'))
-                 // PROBLEM IS SETTING TOKEN HERE DOESNT CHANGE THE GLOBAL CONTEXT TOKEN
-                //  setToken(await SecureStore.getItemAsync('token'))
-                //setToken(response.data.token)
-                // navigation.navigate('Root')
-                signIn({ emailState, passwordState })
-                 console.log('LOGINSCREEN==')
+             SecureStore.setItemAsync('token', response.data.token)
+               .then( function(){
+                 setToken(SecureStore.getItemAsync('token'))
+                 console.log("XXXXxxxNSJDHNAHKSJD===")
                  console.log(token)
-                 console.log("==================================================================")
-                }
+               }
                )
-               /*
-               .then(
-                 // if (user health data == undefined) then { navigation.navigate('IntroDataScreen') }
-                 // else if (user health data == exists ) then { navigation.navigate('HomeScreen') }
-                 navigation.navigate('IntroDataScreen')
-               )
-               */
              console.log(`${emailState} logged in.`)
            } else {
              // set auth context to authenticated = false (or just dont change it at all)

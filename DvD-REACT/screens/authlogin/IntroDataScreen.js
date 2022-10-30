@@ -4,11 +4,11 @@ import * as React from 'react'
 import { StyleSheet, Pressable, TouchableOpacity, Switch } from 'react-native'
 import { Text, View, TextInput } from '../../components/Themed'
 import axios from 'axios'
-import { AuthContext } from '../../hooks/AuthProvider';
+import { AuthContext } from '../../hooks/AuthProviderBackup';
 
 
 export default function IntroDataScreen() {
-  const { isAuthenticated, setIsAuthenticated, token, setToken } = React.useContext(AuthContext)
+  const { token, setToken } = React.useContext(AuthContext)
 
   const [nameState, setNameState] = React.useState();
   const [ageState, setAgeState] = React.useState();
@@ -34,7 +34,7 @@ export default function IntroDataScreen() {
       .catch( function (error) {
         console.log(error)
       })
-    setIsAuthenticated(true) //think this is just triggering the context read in index.js
+    //setIsAuthenticated(true) //think this is just triggering the context read in index.js
   }
 
   return (

@@ -34,18 +34,109 @@ import SignupScreen3 from '../screens/authlogin/signupflow/SignupScreen3';
 import SignupScreen4 from '../screens/authlogin/signupflow/SignupScreen4';
 import SignupScreen5 from '../screens/authlogin/signupflow/SignupScreen5';
 
-import AuthProvider from '../hooks/AuthProvider';
-import { AuthContext } from '../hooks/AuthProvider';
+import AuthProvider from '../hooks/AuthProviderBackup';
+//import { AuthContext } from '../hooks/AuthProviderBackup';
 import IntroDataProvider from '../hooks/IntroDataProvider';
 import { IntroDataContext } from '../hooks/IntroDataProvider';
+import * as SecureStore from 'expo-secure-store'
 
 
-// FUTURE: next step is to get colorScheme working with AuthProvider wrapper / default export
-//// 1 current problem: if auth is default export, then auth context doesnt work / is undefined 
-//// 2 current problem: if colorscheme is not default export, then colorscheme doesnt work
-//// 3 current problem: have to put colorscheme in NavigationContainer (only NavigationContainer has theme prop)
-//// below is a way that solves 123 if can get Navigation to conditionally render via a ternary operator
+
+export const AuthContext = React.createContext()
+
 export default function AuthNavigation({ colorScheme}) {
+
+  const [state, dispatch] = React.useReducer(
+    (prevState, action) => {
+      switch (action.type) {
+        case 'RESTORE_TOKEN':
+          return {
+            ...prevState,
+            userToken: action.token,
+            isLoading: false,
+          };
+        case 'SIGN_IN':
+          return {
+            ...prevState,
+            isSignout: false,
+            userToken: action.token,
+          };
+        case 'SIGN_OUT':
+          return {
+            ...prevState,
+            isSignout: true,
+            userToken: null,
+          };
+      }
+    },
+    {
+      isLoading: true,
+      isSignout: false,
+      userToken: null,
+    }
+  );
+
+  React.useEffect(() => {
+    // Fetch the token from storage then navigate to our appropriate place
+    const bootstrapAsync = async () => {
+      let userToken;
+
+      try {
+        userToken = await SecureStore.getItemAsync('userToken');
+      } catch (e) {
+        // Restoring token failed
+      }
+
+      // After restoring token, we may need to validate it in production apps
+
+      // This will switch to the App screen or Auth screen and this loading
+      // screen will be unmounted and thrown away.
+      dispatch({ type: 'RESTORE_TOKEN', token: userToken });
+    };
+
+    bootstrapAsync();
+  }, []);
+
+  const authContext = React.useMemo(
+    () => ({
+      signIn: async data => {
+        // In a production app, we need to send some data (usually username, password) to server and get a token
+        // We will also need to handle errors if sign in failed
+        // After getting token, we need to persist the token using `SecureStore`
+        // In the example, we'll use a dummy token
+
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+      },
+      signOut: () => dispatch({ type: 'SIGN_OUT' }),
+      signUp: async data => {
+        // In a production app, we need to send user data to server and get a token
+        // We will also need to handle errors if sign up failed
+        // After getting token, we need to persist the token using `SecureStore`
+        // In the example, we'll use a dummy token
+
+        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
+      },
+    }),
+    []
+  );
+
+
+  return (
+    <AuthContext.Provider value={authContext}>
+      <NavigationContainer
+      linking={LinkingConfiguration}
+      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+      >
+          {state.userToken == null ? (
+            <AuthenticationNavigator/>
+          ) : (
+            <RootNavigator/>
+          )}
+      </NavigationContainer>
+    </AuthContext.Provider>
+  );
+
+  /*
   return (
     <AuthProvider>
       <NavigationContainer
@@ -56,17 +147,28 @@ export default function AuthNavigation({ colorScheme}) {
       </NavigationContainer>
     </AuthProvider>
   )
+  */
 }
 
 export function SwitchStackNavigators({ ...props }) {
-  // token._2 property is 1 (true) or 0 (false), if true a token exists then signin
+  //if (React.useContext(AuthContext).token._3 (//mongo ObjectId stored in token) == mongo ObjectId stored in SecureStore ) {
+  //if (React.useContext(AuthContext).token._3 == res.body.id ) {
+  //if (React.useContext(AuthContext).token._3 == '635c90b27d2c3098af42b94a') {
   if (React.useContext(AuthContext).token._3 != null) {
+    console.log('===AuthContext Below for RootNav===')
+    console.log(React.useContext(AuthContext).token)
+    console.log("===SecureStore BELOW (RootNav)====")
+    console.log(SecureStore.getItemAsync('token29'))
     //if (React.useContext(AuthContext).token._3 == SecureStore.getItemAsync(token._3)) {
     // console.log("BEFORE")
     // console.log(React.useContext(AuthContext).token)
     // console.log("AFTER")
     return (<RootNavigator/>)
   } else { 
+    console.log('===AuthContext Below for AuthNav==')
+    console.log(React.useContext(AuthContext).token)
+    console.log("===SecureStore BELOW (AuthNav)==")
+    console.log(SecureStore.getItemAsync('token29'))
     return (<AuthenticationNavigator/>)
   }
 }
@@ -88,6 +190,7 @@ function AuthenticationNavigator() {
       <Stack.Screen name="SignupScreen4" component={SignupScreen4} options={{ headerShown: false }} />
       <Stack.Screen name="SignupScreen5" component={SignupScreen5} options={{ headerShown: false }} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
     </Stack.Navigator>
   )
 }

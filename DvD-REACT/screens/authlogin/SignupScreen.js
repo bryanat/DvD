@@ -16,10 +16,11 @@ export default function SignupScreen({ navigation }) {
   const imageHeight = 825*aspectRatio //multiple actual image height (825) by aspect ratio
 
   function moveToQuestion() {
-    console.log('idk?')
+    console.log('idk??')
   }
 
   function devSignupSubmitPress() {
+    // set username = 'devuser' (to put user data somewhere)
     navigation.navigate('SignupScreen2')
   }
 
@@ -30,7 +31,7 @@ export default function SignupScreen({ navigation }) {
       // if password has at least 8 characters, one letter, one number (checked via regex match)
       if (passwordState.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/) != null) {
         setPasswordValidityState('')
-        axios.put('http://192.168.1.147:8088/logins/signup', {
+        axios.put('http://192.168.1.214:8088/users/signup', {
           email: emailState,
           password: passwordState,
         })

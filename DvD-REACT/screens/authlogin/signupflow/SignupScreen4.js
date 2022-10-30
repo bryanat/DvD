@@ -11,7 +11,7 @@ import axios from 'axios'
 export default function SignupScreen4({navigation}) {
   const [goalweightState, setGoalweightState] = React.useState()
 
-  function pressableNext() { 
+  function pressNext() { 
     axios.put('http://192.168.1.214:8088/users/userdata/goalweight', {
       goalweight: +goalweightState ?? null,
     }).then( function (response) {
@@ -32,9 +32,12 @@ export default function SignupScreen4({navigation}) {
         onChangeText={setGoalweightState}
         value={goalweightState}
       />
-      <Pressable onPress={pressableNext} style={styles.nextPressable}>
-        <Text style={styles.nextText}>Next</Text>
-      </Pressable>
+
+      <View style={{flex:1, justifyContent: 'flex-end'}}>
+        <Pressable onPress={pressNext} style={styles.nextPressable}>
+          <Text style={styles.nextText}>Next</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
@@ -55,6 +58,7 @@ const styles = StyleSheet.create({
     height:50,
     alignItems:"center",
     justifyContent:"center",
+    alignSelf: "center",
     marginTop:10,
     marginBottom:10
   },

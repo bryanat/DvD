@@ -12,11 +12,13 @@ export default function SignupScreen3({navigation}) {
   const [heightState, setHeightState] = React.useState();
   const [weightState, setWeightState] = React.useState();
   const [weightSwitchState, setWeightSwitchState] = React.useState();
+  const [heightSwitchState, setHeightSwitchState] = React.useState();
   const [errorTextState, setErrorTextState] = React.useState();
 
   const toggleWeightSwitch = () => setWeightSwitchState(previousState => !previousState);
+  const toggleHeightSwitch = () => setHeightSwitchState(previousState => !previousState);
 
-  function pressableNext() {
+  function pressNext() {
     // will add numeric type checking later
     // skipping conditional if logic right now while developing screens (for speed)
     //if (heightState != undefined && weightState != undefined) {
@@ -37,6 +39,13 @@ export default function SignupScreen3({navigation}) {
   return (
     <View style={styles.topView}>
       <Text style={styles.topText}>What is your height?</Text>
+      <Switch 
+        trackColor={{ false: "#f7a6a4", true: "#457B9D" }}
+        thumbColor={weightState ? "#faf3ee" : "#faf3ee"}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleHeightSwitch}
+        value={heightSwitchState}
+      />
       <TextInput
         style={styles.textInput}
         placeholder="type height here"
@@ -44,14 +53,9 @@ export default function SignupScreen3({navigation}) {
         onChangeText={setHeightState}
         value={heightState}
       />
+      <Text>{heightSwitchState ? 'in' : 'cm'}</Text>
+
       <Text style={styles.topText}>What is your weight?</Text>
-      <TextInput
-        style={styles.textInput}
-        placeholder="type weight here"
-        placeholderTextColor="white"
-        onChangeText={setWeightState}
-        value={weightState}
-      />
       <Switch 
         trackColor={{ false: "#f7a6a4", true: "#457B9D" }}
         thumbColor={weightState ? "#faf3ee" : "#faf3ee"}
@@ -59,10 +63,23 @@ export default function SignupScreen3({navigation}) {
         onValueChange={toggleWeightSwitch}
         value={weightSwitchState}
       />
-      <Pressable onPress={pressableNext} style={styles.nextPressable}>
-        <Text style={styles.nextText}>Next</Text>
-      </Pressable>
+      <TextInput
+        style={styles.textInput}
+        placeholder="type weight here"
+        placeholderTextColor="white"
+        onChangeText={setWeightState}
+        value={weightState}
+      />
+      <Text>{weightSwitchState ? 'kg' : 'lb'}</Text>
+      
+
       <Text>{errorTextState}</Text>
+
+      <View style={{flex:1, justifyContent: 'flex-end'}}>
+        <Pressable onPress={pressNext} style={styles.nextPressable}>
+          <Text style={styles.nextText}>Next</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
@@ -91,6 +108,7 @@ const styles = StyleSheet.create({
     height:50,
     alignItems:"center",
     justifyContent:"center",
+    alignSelf: "center",
     marginTop:10,
     marginBottom:10
   },
