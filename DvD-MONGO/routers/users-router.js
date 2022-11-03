@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import { ObjectId } from 'mongodb';
+import jwt from 'jsonwebtoken'
 // users is a collection accessed through Mongo client
 import { users } from '../om/om-client.js'
 
@@ -55,6 +57,25 @@ router.put('/userdata/heightweight', async(req, res) => {
 })
 
 // put user data goal weight into users collection by user
+router.put('/userdata/goal', async(req, res) => {
+  const userReq = req.body
+  //users.updateOne
+  const insertResult = await users.updateOne(
+    // {name: req.body.name }, 
+    //{name: 'Julius Caesar' }, 
+    {_id: ObjectId(req.body.id)},
+   // {_id: ObjectId('6333ec2e28ac6c558456f404') }, 
+    { $set: 
+      {
+      agexx: req.body.age ?? null,
+      random: req.body.random ?? null,
+      }
+    })
+  console.log(`Created document: ${insertResult}`)
+  res.send({log: `Updated mongo document _id: ${insertResult.insertedId}`})
+})
+
+// put user data goal weight into users collection by user
 router.put('/userdata/goalweight', async(req, res) => {
   const userReq = req.body
   //users.updateOne
@@ -75,4 +96,52 @@ router.put('/userdata/genderbirthday', async(req, res) => {
   })
   console.log(`Created document: ${insertResult}`)
   res.send({log: `Updated mongo document _id: ${insertResult.insertedId}`})
+})
+
+
+
+
+
+
+////////////////////////////////////////////////////
+
+// LOGIN ROUTE IMPORT
+// R (read/find/get) user login from users collection
+router.post('/login', async (req, res) => {
+  // find the mongo user login object via email
+  const result = await (await users.find({email: {$eq: req.body.email}}).toArray()).pop()
+  console.log("====dsf=sd=f=sdf=")
+  console.log(result._id)
+  // if a user is found (because result is not undefined)
+  console.log(req.body)
+  if (result != undefined) {
+    // check that password (from client) matches email password (from mongo server)
+    if (result.password == req.body.password) {
+      console.log({log: 'username and password found and match', authenticated: true})
+      // gotta integrate mongo _id ObjectId with jwt
+      res.send({log: 'username and password found and match', authenticated: true, tokenID: result._id, token: jwt.sign({payload: 'value'}, 'secretKey')})
+    } else {
+      res.send({log: `incorrent password for ${req.body.email},`, authenticated: false})
+      console.log(`client password ${req.body.password} does not match server password`)
+    }
+  } 
+  // if a user is not found, guide to go to signup screen 
+  else {
+    console.log(`The client entered username ${req.body.email} does not match any server user`)
+    res.send({log: 'username was not found', authenticated: false})
+  }
+})
+
+// SIGNUP ROUTE IMPORT
+// C (create/insert/put) user login into users collection
+router.put('/signup', async (req, res) => {
+  const result = await users.insertOne({
+    email: req.body.email ?? null,
+    password: req.body.password ?? null,
+  })
+  res.send({ log: `Successfully added user ${req.body.email}` })
+})
+
+router.get('/testRoute', async (req, res) => {
+  res.send({log: "TEST ROUTE HIT"})
 })

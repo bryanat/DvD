@@ -6,7 +6,6 @@ import HomeScreen from '../home/HomeScreen';
 const OnboardingScreen = ({ navigation }) => {
 
     const [showApp, setShowApp] = useState(false);
-    // const context = useContext(AuthContext)
 
     const [screenWidth, screenHeight] = [Dimensions.get('screen').width, Dimensions.get('screen').height]
     const aspectRatio = screenWidth/906 //divide by screen width by actual image width (612)

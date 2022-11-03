@@ -8,12 +8,14 @@ import * as React from 'react'
 import { Pressable, StyleSheet } from 'react-native';
 import { Text, View } from '../../../components/Themed';
 import axios from 'axios'
-import { AuthContext } from '../../../hooks/AuthProviderBackup';
+import { AuthContext } from '../../../hooks/AuthProvider';
 import * as SecureStore from 'expo-secure-store'
 
 export default function SignupScreen2({navigation}) {
-
-  const userIDFromAuthContextToken = React.useContext(AuthContext).token._3
+  
+  const { authState } = React.useContext(AuthContext)
+  // const userIDFromAuthContextToken = React.useContext(AuthContext).token._3
+  // next step is how to integrate userId (mongoId) into authState.userToken
 
   const [goalState, setGoalState] = React.useState()
 
@@ -31,12 +33,10 @@ export default function SignupScreen2({navigation}) {
   }
 
   function pressNext() {
-    console.log('before =====x====')
-    console.log(userIDFromAuthContextToken)
-    console.log('after =====x====')
-
     axios.put('http://192.168.1.214:8088/users/userdata/goal', {
-        id: userIDFromAuthContextToken ?? null,
+        // id: userIDFromAuthContextToken ?? null,
+        // id: authState.userToken ?? null,
+        id: 'tmpId' ?? null,
         age: 55 ?? null,
         random: 'tmpxx' ?? null,
       }).then( function (response) {

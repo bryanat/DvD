@@ -10,21 +10,18 @@
  import { StyleSheet, Pressable, Image, Dimensions } from 'react-native';
  import { Text, View, TextInput } from '../../components/Themed';
  import axios from 'axios'
- //import { AuthContext } from '../../hooks/AuthProvider';
- import { AuthContext } from '../../navigation';
+ import { AuthContext } from '../../hooks/AuthProvider';
  import * as SecureStore from 'expo-secure-store'
  
  export default function LoginScreen({ navigation }) {
  
-   /////////////////////////////////////////////////////////////////////////////
- 
-   
  
    /////////////////////////////////////////////////////////////////////////////
    //const { loading, setLoading, token, setToken } = React.useContext(AuthContext)
 
 
-  const { signIn } = React.useContext(AuthContext);
+  // const { signIn, signOut, signUp, authState } = React.useContext(AuthContext);
+  const { state, dispatch } = React.useContext(AuthContext);
 
 
    const [emailState, setEmailState] = React.useState('')
@@ -67,19 +64,10 @@
                 //  setToken(await SecureStore.getItemAsync('token'))
                 //setToken(response.data.token)
                 // navigation.navigate('Root')
-                signIn({ emailState, passwordState })
-                 console.log('LOGINSCREEN==')
-                 console.log(token)
-                 console.log("==================================================================")
+                // signIn({ emailState, passwordState })
+                dispatch({ type: 'SIGN_IN', token: 'dumb-token'})
                 }
                )
-               /*
-               .then(
-                 // if (user health data == undefined) then { navigation.navigate('IntroDataScreen') }
-                 // else if (user health data == exists ) then { navigation.navigate('HomeScreen') }
-                 navigation.navigate('IntroDataScreen')
-               )
-               */
              console.log(`${emailState} logged in.`)
            } else {
              // set auth context to authenticated = false (or just dont change it at all)
@@ -100,6 +88,43 @@
        console.log("enter an email address in the format: abcdefgh@mail.com")
      }
    }
+
+   function devPressLoginButton() {
+    setLoginDoesNotExistState('')
+      axios.post('http://192.168.1.214:8088/users/login', {
+          email: 'Xeno@gmail.com',
+          password: 'Xoxo11!!',
+        })
+        // if response from server is true then set react auth Context to loggedIn true
+        .then( async function (response) {
+          // could be a ternary operator instead... response.loggedIn == true ? AuthContext.loggedIn = true : AuthContext.loggedIn = false
+          if (response.data.authenticated == true) {
+            // set auth context to loggedIn = true causes navigation to switch to RootNavigator and move to home screen
+            await SecureStore.setItemAsync('token', response.data.token)
+              .then( async function() {
+               // setLoading(false)
+                //React.useContext(AuthContext).setToken(SecureStore.getItemAsync('token'))
+                // PROBLEM IS SETTING TOKEN HERE DOESNT CHANGE THE GLOBAL CONTEXT TOKEN
+               //  setToken(await SecureStore.getItemAsync('token'))
+               //setToken(response.data.token)
+               // navigation.navigate('Root')
+               // signIn({ emailState, passwordState })
+               dispatch({ type: 'SIGN_IN', token: 'dumb-token'})
+               }
+              )
+            console.log(`${emailState} logged in.`)
+          } else {
+            // set auth context to authenticated = false (or just dont change it at all)
+            setLoginDoesNotExistState('Email and Password not found.')
+            console.log("Not logged in, retry...")
+          }
+          // console.log(response.data)
+        })
+        .catch( function (error) {
+          console.log(error)
+        })
+      }
+  
    
    const navigateSignup = () => {
      navigation.navigate('SignupScreen')
@@ -136,6 +161,9 @@
        </Pressable>
        <Pressable onPress={pressLoginButton} style={styles.loginBtn}>
          <Text>Login</Text>
+       </Pressable>
+       <Pressable onPress={devPressLoginButton} style={styles.loginBtn}>
+         <Text>Dev Login</Text>
        </Pressable>
        <Text style={styles.validityLoginButtonText}>{loginDoesNotExistState}</Text>
        <Text style={styles.loginText}>Don't have an account?</Text>

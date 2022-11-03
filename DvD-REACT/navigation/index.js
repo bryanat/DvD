@@ -11,8 +11,8 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import * as React from 'react';
 import { Pressable, useColorScheme } from 'react-native';
 import { View } from '../components/Themed'
-
 import Colors from '../constants/Colors';
+
 import FriendslistModal from '../screens/menubuttons/FriendslistModal';
 import NotificationsModal from '../screens/menubuttons/NotificationsModal';
 import SettingsModal from '../screens/menubuttons/SettingsModal';
@@ -27,150 +27,69 @@ import GroupchatScreen from '../screens/chat/GroupchatScreen';
 import LoginScreen from '../screens/authlogin/LoginScreen';
 import OnboardingScreen from '../screens/authlogin/OnboardingScreen';
 import SignupScreen from '../screens/authlogin/SignupScreen';
-import IntroDataScreen from '../screens/authlogin/IntroDataScreen';
 import ExerciseScreen from '../screens/home/ExerciseScreen';
 import SignupScreen2 from '../screens/authlogin/signupflow/SignupScreen2';
 import SignupScreen3 from '../screens/authlogin/signupflow/SignupScreen3';
 import SignupScreen4 from '../screens/authlogin/signupflow/SignupScreen4';
 import SignupScreen5 from '../screens/authlogin/signupflow/SignupScreen5';
 
-import AuthProvider from '../hooks/AuthProviderBackup';
-//import { AuthContext } from '../hooks/AuthProviderBackup';
-import IntroDataProvider from '../hooks/IntroDataProvider';
-import { IntroDataContext } from '../hooks/IntroDataProvider';
+import AuthProvider from '../hooks/AuthProvider';
+import { AuthContext } from '../hooks/AuthProvider';
 import * as SecureStore from 'expo-secure-store'
 
 
-
-export const AuthContext = React.createContext()
-
-export default function AuthNavigation({ colorScheme}) {
-
-  const [state, dispatch] = React.useReducer(
-    (prevState, action) => {
-      switch (action.type) {
-        case 'RESTORE_TOKEN':
-          return {
-            ...prevState,
-            userToken: action.token,
-            isLoading: false,
-          };
-        case 'SIGN_IN':
-          return {
-            ...prevState,
-            isSignout: false,
-            userToken: action.token,
-          };
-        case 'SIGN_OUT':
-          return {
-            ...prevState,
-            isSignout: true,
-            userToken: null,
-          };
-      }
-    },
-    {
-      isLoading: true,
-      isSignout: false,
-      userToken: null,
-    }
-  );
-
-  React.useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
-    const bootstrapAsync = async () => {
-      let userToken;
-
-      try {
-        userToken = await SecureStore.getItemAsync('userToken');
-      } catch (e) {
-        // Restoring token failed
-      }
-
-      // After restoring token, we may need to validate it in production apps
-
-      // This will switch to the App screen or Auth screen and this loading
-      // screen will be unmounted and thrown away.
-      dispatch({ type: 'RESTORE_TOKEN', token: userToken });
-    };
-
-    bootstrapAsync();
-  }, []);
-
-  const authContext = React.useMemo(
-    () => ({
-      signIn: async data => {
-        // In a production app, we need to send some data (usually username, password) to server and get a token
-        // We will also need to handle errors if sign in failed
-        // After getting token, we need to persist the token using `SecureStore`
-        // In the example, we'll use a dummy token
-
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
-      },
-      signOut: () => dispatch({ type: 'SIGN_OUT' }),
-      signUp: async data => {
-        // In a production app, we need to send user data to server and get a token
-        // We will also need to handle errors if sign up failed
-        // After getting token, we need to persist the token using `SecureStore`
-        // In the example, we'll use a dummy token
-
-        dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
-      },
-    }),
-    []
-  );
-
-
-  return (
-    <AuthContext.Provider value={authContext}>
-      <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
-      >
-          {state.userToken == null ? (
-            <AuthenticationNavigator/>
-          ) : (
-            <RootNavigator/>
-          )}
-      </NavigationContainer>
-    </AuthContext.Provider>
-  );
-
-  /*
+export default function AuthNavigation() {
   return (
     <AuthProvider>
-      <NavigationContainer
+        <SwitchStackNavigators/>
+    </AuthProvider>
+  )
+}
+
+// Probably will delete SwitchStackNavigators
+export function SwitchStackNavigators() {
+  const colorScheme = useColorScheme()
+  const { state, dispatch } = React.useContext(AuthContext);
+  return (
+    <NavigationContainer
       linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
       >
-        <SwitchStackNavigators/>
-      </NavigationContainer>
-    </AuthProvider>
-  )
-  */
-}
+        {state.userToken == null ? (
+          <AuthenticationNavigator/>
+        ) : (
+          <RootNavigator/>
+        )}
+    </NavigationContainer>
+  )        
 
-export function SwitchStackNavigators({ ...props }) {
+  // if (authState) violates rules of hooks: don't call hooks inside conditions
+  // if (authState.userToken = null) {
+  //   return (<RootNavigator/>)
+  // } else { 
+  //   return (<AuthenticationNavigator/>)
+  // }
+
   //if (React.useContext(AuthContext).token._3 (//mongo ObjectId stored in token) == mongo ObjectId stored in SecureStore ) {
   //if (React.useContext(AuthContext).token._3 == res.body.id ) {
   //if (React.useContext(AuthContext).token._3 == '635c90b27d2c3098af42b94a') {
-  if (React.useContext(AuthContext).token._3 != null) {
-    console.log('===AuthContext Below for RootNav===')
-    console.log(React.useContext(AuthContext).token)
-    console.log("===SecureStore BELOW (RootNav)====")
-    console.log(SecureStore.getItemAsync('token29'))
-    //if (React.useContext(AuthContext).token._3 == SecureStore.getItemAsync(token._3)) {
-    // console.log("BEFORE")
-    // console.log(React.useContext(AuthContext).token)
-    // console.log("AFTER")
-    return (<RootNavigator/>)
-  } else { 
-    console.log('===AuthContext Below for AuthNav==')
-    console.log(React.useContext(AuthContext).token)
-    console.log("===SecureStore BELOW (AuthNav)==")
-    console.log(SecureStore.getItemAsync('token29'))
-    return (<AuthenticationNavigator/>)
-  }
+  // if (React.useContext(AuthContext).token._3 != null) {
+  //   console.log('===AuthContext Below for RootNav===')
+  //   console.log(React.useContext(AuthContext).token)
+  //   console.log("===SecureStore BELOW (RootNav)====")
+  //   console.log(SecureStore.getItemAsync('token29'))
+  //   //if (React.useContext(AuthContext).token._3 == SecureStore.getItemAsync(token._3)) {
+  //   // console.log("BEFORE")
+  //   // console.log(React.useContext(AuthContext).token)
+  //   // console.log("AFTER")
+  //   return (<RootNavigator/>)
+  // } else { 
+  //   console.log('===AuthContext Below for AuthNav==')
+  //   console.log(React.useContext(AuthContext).token)
+  //   console.log("===SecureStore BELOW (AuthNav)==")
+  //   console.log(SecureStore.getItemAsync('token29'))
+  //   return (<AuthenticationNavigator/>)
+  // }
 }
 
 /**
@@ -180,10 +99,10 @@ export function SwitchStackNavigators({ ...props }) {
 const Stack = createNativeStackNavigator();
 
 function AuthenticationNavigator() {
+  console.log('entered auth navigator')
   return (
     <Stack.Navigator>
       <Stack.Screen name="OnBoardingScreen" component={OnboardingScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="IntroDataScreen" component={IntroDataScreen} options={{ headerShown: false }} />
       <Stack.Screen name="SignupScreen" component={SignupScreen} options={{ headerShown: false }} />
       <Stack.Screen name="SignupScreen2" component={SignupScreen2} options={{ headerShown: false }} />
       <Stack.Screen name="SignupScreen3" component={SignupScreen3} options={{ headerShown: false }} />
@@ -212,7 +131,6 @@ function RootNavigator() {
 const HomeStack = createNativeStackNavigator();
 
 function HomeStackNavigator() {
-  
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen

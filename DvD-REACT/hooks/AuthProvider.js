@@ -1,7 +1,16 @@
-import * as React from 'react';
-import * as SecureStore from 'expo-secure-store';
+import * as React from 'react'
+import * as SecureStore from 'expo-secure-store'
 
-export default function AuthProvider({ navigation }) {
+export const AuthContext = React.createContext()
+
+// export default function AuthProvider({ children }) => {
+export default function AuthProvider ({ children }) {
+  /**
+   * Refactor this code from its source
+   * updated AuthProvider to use reducer and dispatch actions to control state better
+   * since cannot modify the state of userToken directly within another component's nested function
+   * this is because calling hooks from within a conditional/control flow state violates the rules of hooks
+   */
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
       switch (action.type) {
@@ -25,6 +34,7 @@ export default function AuthProvider({ navigation }) {
           };
       }
     },
+    // below is the state object, think React.useState({ isLoading:true, isSignout:false, userToken:null })
     {
       isLoading: true,
       isSignout: false,
@@ -48,11 +58,15 @@ export default function AuthProvider({ navigation }) {
       // This will switch to the App screen or Auth screen and this loading
       // screen will be unmounted and thrown away.
       dispatch({ type: 'RESTORE_TOKEN', token: userToken });
+      
     };
-
     bootstrapAsync();
   }, []);
 
+  /**
+   * Will implement memoization later, right now it affecting auth state exports
+   */
+  /*
   const authContext = React.useMemo(
     () => ({
       signIn: async data => {
@@ -75,16 +89,12 @@ export default function AuthProvider({ navigation }) {
     }),
     []
   );
+  */
 
   return (
-    <AuthContext.Provider value={authContext}>
-      <Stack.Navigator>
-        {state.userToken == null ? (
-          <Stack.Screen name="SignIn" component={SignInScreen} />
-        ) : (
-          <Stack.Screen name="Home" component={HomeScreen} />
-        )}
-      </Stack.Navigator>
+    <AuthContext.Provider value={{ state, dispatch }}>
+      {children}
     </AuthContext.Provider>
   );
+
 }
