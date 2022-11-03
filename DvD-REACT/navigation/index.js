@@ -54,7 +54,7 @@ export function SwitchStackNavigators() {
     <NavigationContainer
       linking={LinkingConfiguration}
       // theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
+      theme={colorScheme === state.userDarkColorScheme ? DarkTheme : DefaultTheme}
       >
         {state.userToken == null ? (
           <AuthenticationNavigator/>
