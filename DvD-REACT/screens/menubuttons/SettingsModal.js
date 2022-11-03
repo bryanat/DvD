@@ -19,6 +19,7 @@ export default function SettingsModal() {
 
   function pressLightDark() {
     console.log('light dark button called')
+    dispatch({ type: 'SWAP_COLORSCHEME' })
   }
 
   return (

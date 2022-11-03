@@ -32,6 +32,11 @@ export default function AuthProvider ({ children }) {
             isSignout: true,
             userToken: null,
           };
+        case 'SWAP_COLORSCHEME':
+          return {
+            ...prevState,
+            userDarkColorScheme: 'light',
+          };
       }
     },
     // below is the state object, think React.useState({ isLoading:true, isSignout:false, userToken:null })
@@ -39,6 +44,7 @@ export default function AuthProvider ({ children }) {
       isLoading: true,
       isSignout: false,
       userToken: null,
+      userDarkColorScheme: 'dark',
     }
   );
 
