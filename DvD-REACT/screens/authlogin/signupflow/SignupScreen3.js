@@ -40,44 +40,48 @@ export default function SignupScreen3({navigation}) {
   return (
     <View style={styles.topView}>
       <Text style={styles.topText}>What is your height?</Text>
-      <Switch 
-        trackColor={{ false: "#f7a6a4", true: "#457B9D" }}
-        thumbColor={weightState ? "#faf3ee" : "#faf3ee"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleHeightSwitch}
-        value={heightSwitchState}
-      />
       <TextInput
-        style={styles.textInput}
+        style={[styles.nextPressable, {paddingLeft:10}]}
         placeholder="type height here"
         placeholderTextColor="white"
         onChangeText={setHeightState}
         value={heightState}
       />
-      <Text>{heightSwitchState ? 'in' : 'cm'}</Text>
+      <View style={{flexDirection: 'row', backgroundColor: '#F7A6A4'}}>
+        <Switch 
+          trackColor={{ false: "#457B9D", true: "#457B9D" }}
+          thumbColor={weightState ? "#faf3ee" : "#faf3ee"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleHeightSwitch}
+          value={heightSwitchState}
+        />
+        <Text>{heightSwitchState ? 'in' : 'cm'}</Text>
+      </View>
 
       <Text style={styles.topText}>What is your weight?</Text>
-      <Switch 
-        trackColor={{ false: "#f7a6a4", true: "#457B9D" }}
-        thumbColor={weightState ? "#faf3ee" : "#faf3ee"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={toggleWeightSwitch}
-        value={weightSwitchState}
-      />
       <TextInput
-        style={styles.textInput}
+        style={[styles.nextPressable, {paddingLeft:10}]}
         placeholder="type weight here"
         placeholderTextColor="white"
         onChangeText={setWeightState}
         value={weightState}
       />
-      <Text>{weightSwitchState ? 'kg' : 'lb'}</Text>
+      <View style={{flexDirection: 'row', backgroundColor: '#F7A6A4'}}>
+        <Switch 
+          trackColor={{ false: "#457B9D", true: "#457B9D" }}
+          thumbColor={weightState ? "#faf3ee" : "#faf3ee"}
+          ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleWeightSwitch}
+          value={weightSwitchState}
+        />
+        <Text>{weightSwitchState ? 'kg' : 'lb'}</Text>
+      </View>
       
 
       <Text>{errorTextState}</Text>
 
-      <View style={{flex:1, justifyContent: 'flex-end'}}>
-        <Pressable onPress={pressNext} style={styles.nextPressable}>
+      <View style={{flex:1, justifyContent: 'flex-end', backgroundColor: '#F7A6A4'}}>
+        <Pressable onPress={pressNext} style={[styles.pressableStyle, {backgroundColor: '#457B9D'}]}>
           <Text style={styles.nextText}>Next</Text>
         </Pressable>
       </View>
@@ -88,7 +92,7 @@ export default function SignupScreen3({navigation}) {
 const styles = StyleSheet.create({
   topView: {
     flex: 1,
-    backgroundColor: '#faf3ee',
+    backgroundColor: '#F7A6A4',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -96,18 +100,15 @@ const styles = StyleSheet.create({
     marginTop: 100,
     fontSize: 20,
     fontWeight: 'bold',
+    color: '#FFFFFF',
   },
-  inputHeight: {
-    height:50,
-    color:"white"
-  },
-  inputWeight: {
-    height:50,
-    color:"white"
+  textInput: {
+    color:"white",
+    backgroundColor: '#457B9D',
   },
   nextPressable: {
     width:"40%",
-    backgroundColor:"#457b9d",
+    backgroundColor:"#457B9D",
     borderRadius:25,
     height:50,
     alignItems:"center",
@@ -116,7 +117,13 @@ const styles = StyleSheet.create({
     marginTop:10,
     marginBottom:10
   },
-  nextText: {
-
-  }
+  pressableStyle: {
+    borderRadius:25,
+    height:50,
+    alignItems:'center',
+    justifyContent:'center',
+    marginTop:10,
+    marginBottom:10,
+    padding:10 
+  },
 });

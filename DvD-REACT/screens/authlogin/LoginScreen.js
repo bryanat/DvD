@@ -234,9 +234,5 @@
      color:"black",
      fontSize:11,
    },
-   pickerAge: {
-     backgroundColor: '#ffffff',
-     color: '#ff0000',
-   },
  });
  
