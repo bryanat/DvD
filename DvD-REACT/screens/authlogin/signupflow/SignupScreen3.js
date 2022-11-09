@@ -41,7 +41,7 @@ export default function SignupScreen3({navigation}) {
     <View style={styles.topView}>
       <Text style={styles.topText}>What is your height?</Text>
       <TextInput
-        style={[styles.nextPressable, {paddingLeft:10}]}
+        style={[styles.pressableStyle, {width: '50%'}]}
         placeholder="type height here"
         placeholderTextColor="white"
         onChangeText={setHeightState}
@@ -60,7 +60,7 @@ export default function SignupScreen3({navigation}) {
 
       <Text style={styles.topText}>What is your weight?</Text>
       <TextInput
-        style={[styles.nextPressable, {paddingLeft:10}]}
+        style={[styles.pressableStyle, {width: '50%'}]}
         placeholder="type weight here"
         placeholderTextColor="white"
         onChangeText={setWeightState}
@@ -81,7 +81,7 @@ export default function SignupScreen3({navigation}) {
       <Text>{errorTextState}</Text>
 
       <View style={{flex:1, justifyContent: 'flex-end', backgroundColor: '#F7A6A4'}}>
-        <Pressable onPress={pressNext} style={[styles.pressableStyle, {backgroundColor: '#457B9D'}]}>
+        <Pressable onPress={pressNext} style={[styles.pressableStyle]}>
           <Text style={styles.nextText}>Next</Text>
         </Pressable>
       </View>
@@ -106,18 +106,8 @@ const styles = StyleSheet.create({
     color:"white",
     backgroundColor: '#457B9D',
   },
-  nextPressable: {
-    width:"40%",
-    backgroundColor:"#457B9D",
-    borderRadius:25,
-    height:50,
-    alignItems:"center",
-    justifyContent:"center",
-    alignSelf: "center",
-    marginTop:10,
-    marginBottom:10
-  },
   pressableStyle: {
+    backgroundColor:"#457B9D",
     borderRadius:25,
     height:50,
     alignItems:'center',
