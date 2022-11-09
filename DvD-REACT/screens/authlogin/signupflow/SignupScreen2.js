@@ -49,7 +49,7 @@ export default function SignupScreen2({navigation}) {
 
   return (
     <View style={styles.topView}>
-      <View>
+      <View style={{backgroundColor: '#faf3ee'}}>
       <Text style={styles.topText}>What is your goal?</Text>
       <Text>{goalState}</Text>
 
@@ -82,7 +82,7 @@ export default function SignupScreen2({navigation}) {
       </Pressable>
       </View>
 
-      <View style={{flex:1, justifyContent: 'flex-end'}}>
+      <View style={{flex:1, justifyContent: 'flex-end', backgroundColor: '#faf3ee'}}>
         <Pressable onPress={pressNext} style={styles.nextPressable}>
           <Text style={styles.nextText}>Next</Text>
         </Pressable>
@@ -94,6 +94,9 @@ export default function SignupScreen2({navigation}) {
 const styles = StyleSheet.create({
   topView: {
     flex: 1,
+    backgroundColor: '#faf3ee',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   topText: {
     marginTop: 100,

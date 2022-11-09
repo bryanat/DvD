@@ -1,9 +1,13 @@
 import * as React from 'react'
 import { StyleSheet, Pressable, Image, Dimensions } from 'react-native';
 import { Text, View, TextInput } from '../../components/Themed';
+import { AuthContext } from '../../hooks/AuthProvider';
 import axios from 'axios'
 
 export default function SignupScreen({ navigation }) {
+
+  const { state, dispatch } = React.useContext(AuthContext);
+
   const [emailState, setEmailState] = React.useState('')
   const [passwordState, setPasswordState] = React.useState('')
   const [emailValidityState, setEmailValidityState] = React.useState('')

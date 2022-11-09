@@ -6,6 +6,7 @@
 import * as React from 'react'
 import { Pressable, StyleSheet, Button } from 'react-native';
 import { Text, View, TextInput } from '../../../components/Themed';
+import { AuthContext } from '../../../hooks/AuthProvider';
 import axios from 'axios'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
@@ -94,6 +95,9 @@ export default function SignupScreen5({navigation}) {
 const styles = StyleSheet.create({
   topView: {
     flex: 1,
+    backgroundColor: '#faf3ee',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   topText: {
     marginTop: 100,

@@ -13,17 +13,17 @@ import { AuthContext } from '../../hooks/AuthProvider'
 export default function SettingsModal() {
   const { state, dispatch } = React.useContext(AuthContext)
 
-  const [isDarkState, setSwitchState] = React.useState();
-  const [darkSwitchState, setDarkSwitchState] = React.useState();
+  const [darkSwitchState, setDarkSwitchState] = React.useState(true);
   
   function pressSignOut() {
     dispatch({type: 'SIGN_OUT'})
   }
 
   function pressLightDark() {
-    console.log('light dark button called.')
+    console.log('switch light dark button called.')
     setDarkSwitchState(previousState => !previousState)
-    dispatch({ type: 'SWAP_COLORSCHEME' })
+    let whatever = darkSwitchState ? 'light' : 'dark'
+    dispatch({ type: 'SWAP_COLORSCHEME', dispatchThemeLightOrDark: whatever })
   }
 
   return (
@@ -33,20 +33,16 @@ export default function SettingsModal() {
         <Text>Sign Out</Text>
       </Pressable>
 
-      <Pressable style={styles.signOut} onPress={pressLightDark}>
-        <Text>Change Light to Dark</Text>
-      </Pressable>
-
       <View style={{flexDirection: 'row'}}>
-        <Text style={[styles.topText, styles.colorSchemeText]}>Light</Text>
+        <Text style={[styles.topText, styles.colorSchemeText, darkSwitchState ? {} : {fontSize : 26}]}>Light</Text>
         <Switch 
-          trackColor={{ false: "#f7a6a4", true: "#457B9D" }}
-          thumbColor={isDarkState ? "#faf3ee" : "#faf3ee"}
+          trackColor={{ true: "#f8f8f8", false: "#333333" }}
+          thumbColor={darkSwitchState ? "#333333" : "#f8f8f8"}
           ios_backgroundColor="#3e3e3e"
           onValueChange={pressLightDark}
           value={darkSwitchState}
         />
-        <Text style={[styles.topText, styles.colorSchemeText, {fontWeight: 'bold'}]}>Dark</Text>
+      <Text style={[styles.topText, styles.colorSchemeText, darkSwitchState ? {fontSize : 26} : {}]}>Dark</Text> 
       </View>
       <Text>{darkSwitchState ? 'dark' : 'light'}</Text>
 

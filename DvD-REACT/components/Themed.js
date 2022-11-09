@@ -3,14 +3,13 @@
  * https://docs.expo.io/guides/color-schemes/
  */
 
+import * as React from 'react'
 import { Text as DefaultText, View as DefaultView, TextInput as DefaultTextInput, useColorScheme } from 'react-native';
-
 import Colors from '../constants/Colors';
+import { AuthContext } from '../hooks/AuthProvider';
 
-export function useThemeColor(
-  props,
-  colorName
-) {
+export function useThemeColor( props, colorName) {
+  const { state, dispatch } = React.useContext(AuthContext)
   const theme = useColorScheme();
   const colorFromProps = props[theme];
 

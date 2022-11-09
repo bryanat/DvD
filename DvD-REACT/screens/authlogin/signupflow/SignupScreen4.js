@@ -6,6 +6,7 @@
 import * as React from 'react'
 import { Pressable, StyleSheet } from 'react-native';
 import { Text, View, TextInput } from '../../../components/Themed';
+import { AuthContext } from '../../../hooks/AuthProvider';
 import axios from 'axios'
 
 export default function SignupScreen4({navigation}) {
@@ -45,6 +46,9 @@ export default function SignupScreen4({navigation}) {
 const styles = StyleSheet.create({
   topView: {
     flex: 1,
+    backgroundColor: '#faf3ee',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   topText: {
     marginTop: 100,

@@ -9,7 +9,7 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import * as React from 'react';
-import { Pressable, useColorScheme } from 'react-native';
+import { Pressable } from 'react-native';
 import { View } from '../components/Themed'
 import Colors from '../constants/Colors';
 
@@ -48,13 +48,11 @@ export default function AuthNavigation() {
 
 // Probably will delete SwitchStackNavigators
 export function SwitchStackNavigators() {
-  const colorScheme = useColorScheme()
   const { state, dispatch } = React.useContext(AuthContext);
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
-      // theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
-      theme={colorScheme === state.userDarkColorScheme ? DarkTheme : DefaultTheme}
+      theme={state.themeLightOrDark == 'dark' ? DarkTheme : DefaultTheme}
       >
         {state.userToken == null ? (
           <AuthenticationNavigator/>
@@ -151,12 +149,12 @@ function HomeStackNavigator() {
 const BottomTab = createBottomTabNavigator();
 
 function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
+  const { state, dispatch } = React.useContext(AuthContext);
   return (
     <BottomTab.Navigator
       initialRouteName="HomeScreen"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarActiveTintColor: Colors[state.themeLightOrDark].tint,
       }}>
       <BottomTab.Screen
         name="HomeStackNavigator"
@@ -165,7 +163,7 @@ function BottomTabNavigator() {
           title: 'Home',
           tabBarIcon: ({ color }) => <Ionicons name="home-outline" size={32} color={color} style={{ marginBottom: -3 }} />,
           headerRight: () => (
-            <View style={{ flexDirection: 'row' }}>
+            <View style={{ flexDirection: 'row', backgroundColor: Colors[state.themeLightOrDark].background }}>
             <Pressable
               onPress={() => navigation.navigate('Friendslist')}
               style={({ pressed }) => ({
@@ -174,7 +172,7 @@ function BottomTabNavigator() {
               <Ionicons
                 name="people-outline"
                 size={25}
-                color={Colors[colorScheme].text}
+                color={Colors[state.themeLightOrDark].text}
                 style={{ marginRight: 15 }}
               />
             </Pressable>
@@ -187,7 +185,7 @@ function BottomTabNavigator() {
                 //name=() => bell-plus-outline if notifications
                 name="notifications-outline"
                 size={25}
-                color={Colors[colorScheme].text}
+                color={Colors[state.themeLightOrDark].text}
                 style={{ marginRight: 15 }}
               />
             </Pressable>
@@ -199,7 +197,7 @@ function BottomTabNavigator() {
               <Ionicons
                 name="settings-outline"
                 size={25}
-                color={Colors[colorScheme].text}
+                color={Colors[state.themeLightOrDark].text}
                 style={{ marginRight: 15 }}
               />
             </Pressable>
