@@ -8,7 +8,7 @@ import { Pressable, StyleSheet, Button } from 'react-native';
 import { Text, View, TextInput } from '../../../components/Themed';
 import { AuthContext } from '../../../hooks/AuthProvider';
 import axios from 'axios'
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 export default function SignupScreen5({navigation}) {
   const [genderState, setGenderState] = React.useState()
@@ -58,16 +58,16 @@ export default function SignupScreen5({navigation}) {
     <View style={styles.topView}>
       <Text style={styles.topText}>Gender?</Text>
       <Text>{genderState}</Text>
-      <View style={{flexDirection: 'row'}}>
+      <View style={{flexDirection: 'row', backgroundColor: '#F7A6A4'}}>
         <Pressable onPress={pressMale} style={({pressed}) => [ pressed
-          ? [styles.buttonStyle, {backgroundColor:"#FFFFFF"}] //if pressed
-          : [styles.buttonStyle, {backgroundColor:"#457B9D"}] //if not pressed
+          ? [styles.buttonStyle, {backgroundColor:'#FFFFFF'}] //if pressed
+          : [styles.buttonStyle, {backgroundColor:'#457B9D'}] //if not pressed
         ]}>
           <Text>Male</Text>
         </Pressable>
         <Pressable onPress={pressFemale} style={({pressed}) => [ pressed
-          ? [styles.buttonStyle, {backgroundColor:"#FFFFFF"}] //if pressed
-          : [styles.buttonStyle, {backgroundColor:"#F7A6A4"}] //if not pressed
+          ? [styles.buttonStyle, {backgroundColor:'#FFFFFF'}] //if pressed
+          : [styles.buttonStyle, {backgroundColor:'#457B9D'}] //if not pressed
         ]}>
           <Text>Female</Text>
         </Pressable>
@@ -75,16 +75,16 @@ export default function SignupScreen5({navigation}) {
 
       <Text style={styles.topText}>Birthday?</Text>
       <Text>{birthdayState}</Text>
-      <Button title="Pick Birthday" onPress={showDatePicker} />
+      <Button title='Pick Birthday' onPress={showDatePicker} />
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
-        mode="date"
+        mode='date'
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
 
-      <View style={{flex:1, justifyContent: 'flex-end'}}>
-        <Pressable onPress={pressNext} style={styles.nextPressable}>
+      <View style={{flex:1, justifyContent: 'flex-end', backgroundColor: '#F7A6A4'}}>
+        <Pressable onPress={pressNext} style={styles.pressableStyle}>
           <Text style={styles.nextText}>Next</Text>
         </Pressable>
       </View>
@@ -93,9 +93,10 @@ export default function SignupScreen5({navigation}) {
 }
 
 const styles = StyleSheet.create({
+  
   topView: {
     flex: 1,
-    backgroundColor: '#faf3ee',
+    backgroundColor: '#F7A6A4',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -103,28 +104,29 @@ const styles = StyleSheet.create({
     marginTop: 100,
     fontSize: 20,
     fontWeight: 'bold',
+    color: '#FFFFFF',
+  },
+  textInput: {
+    color:'white',
+    backgroundColor: '#457B9D',
+  },
+  pressableStyle: {
+    backgroundColor:'#457B9D',
+    borderRadius:25,
+    height:50,
+    alignItems:'center',
+    justifyContent:'center',
+    marginTop:10,
+    marginBottom:10,
+    padding:10 
   },
   buttonStyle:{
-    width:"40%",
+    width:'40%',
     borderRadius:25,
     height:50,
-    alignItems:"center",
-    justifyContent:"center",
+    alignItems:'center',
+    justifyContent:'center',
     marginTop:10,
     marginBottom:10
   },
-  nextPressable: {
-    width:"40%",
-    backgroundColor:"#457b9d",
-    borderRadius:25,
-    height:50,
-    alignItems:"center",
-    justifyContent:"center",
-    alignSelf: "center",
-    marginTop:10,
-    marginBottom:10
-  },
-  nextText: {
-
-  }
 });
