@@ -101,7 +101,7 @@ export default function SignupScreen({ navigation }) {
         <Text>Signup</Text>
       </Pressable>
       <Pressable onPress={devSignupSubmitPress} style={styles.loginBtn}>
-        <Text>DEV SIGNUP BUTTON (skips email password)</Text>
+        <Text>Dev Signup Button</Text>
       </Pressable>
       <Text style={styles.validityLoginButtonText}></Text>
       {/* <TouchableOpacity onPress={
