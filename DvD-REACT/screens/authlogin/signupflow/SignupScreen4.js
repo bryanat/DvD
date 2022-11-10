@@ -29,8 +29,8 @@ export default function SignupScreen4({navigation}) {
       <View style={{flexDirection: 'row', backgroundColor: '#F7A6A4'}}>
       <TextInput
         style={[styles.pressableStyle, {width: '50%'}]}
-        placeholder="type goal weight here"
-        placeholderTextColor="white"
+        placeholder='type goal weight here'
+        placeholderTextColor='white'
         onChangeText={setGoalweightState}
         value={goalweightState}
       />
@@ -62,11 +62,11 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   textInput: {
-    color:"white",
+    color:'white',
     backgroundColor: '#457B9D',
   },
   pressableStyle: {
-    backgroundColor:"#457B9D",
+    backgroundColor:'#457B9D',
     borderRadius:25,
     height:50,
     alignItems:'center',

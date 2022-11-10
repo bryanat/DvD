@@ -5,7 +5,7 @@
  */
 
 import * as React from 'react'
-import { Pressable, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet, Image, Dimensions } from 'react-native';
 import { Text, View } from '../../../components/Themed';
 import axios from 'axios'
 import { AuthContext } from '../../../hooks/AuthProvider';
@@ -18,18 +18,31 @@ export default function SignupScreen2({navigation}) {
   // next step is how to integrate userId (mongoId) into authState.userToken
 
   const [goalState, setGoalState] = React.useState()
+  const [imageState, setImageState] = React.useState(require('../../../assets/images/gaining-muscle.png'))
 
-  function pressEatHealthier() {
-    setGoalState('eat healthier')
+  const screenHeight = Dimensions.get('screen').height
+
+  const imageEatingHealthier = require('../../../assets/images/gaining-muscle.png');
+  const imageLosingWeight = require('../../../assets/images/loving-my-body.png');
+  const imageGainingMuscle = require('../../../assets/images/gaining-muscle.png');
+  const imageLovingMyBody = require('../../../assets/images/loving-my-body.png');
+
+
+  function pressEatingHealthier() {
+    setImageState(imageEatingHealthier)
+    setGoalState('eating healthier')
   }
-  function pressLoosingWeight() {
-    setGoalState('loosing weight')
+  function pressLosingWeight() {
+    setImageState(imageLosingWeight)
+    setGoalState('losing weight')
   }
-  function pressGetMuscle() {
-    setGoalState('get muscle')
+  function pressGainingMuscle() {
+    setImageState(imageGainingMuscle)
+    setGoalState('gaining muscle')
   }
-  function pressBodyPositive() {
-    setGoalState('body positive')
+  function pressLovingMyBody() {
+    setImageState(imageLovingMyBody)
+    setGoalState('loving my body')
   }
 
   function pressNext() {
@@ -53,50 +66,53 @@ export default function SignupScreen2({navigation}) {
   return (
     <View style={styles.topView}>
       <View style={{backgroundColor: '#F7A6A4'}}>
-      <Text style={styles.topText}>What is your goal?</Text>
-      <Text>{goalState}</Text>
+        <Text style={styles.topText}>What is your goal?</Text>
 
-      <Pressable onPress={pressEatHealthier} style={({pressed}) => [ pressed
-        ? [styles.pressableStyle, {backgroundColor: backgroundColorPressed}] //if pressed
-        : [styles.pressableStyle, {backgroundColor: backgroundColorNotPressed}] //if not pressed
-      ]}>
-        <Text>eat healthier</Text>
-      </Pressable>
+        <Pressable onPress={pressEatingHealthier} style={({pressed}) => [ pressed
+          ? [styles.pressableStyle, {backgroundColor: backgroundColorPressed}] //if pressed
+          : [styles.pressableStyle, {backgroundColor: backgroundColorNotPressed}] //if not pressed
+        ]}>
+          <Text>eating healthier</Text>
+        </Pressable>
 
-      <Pressable onPress={pressLoosingWeight} style={({pressed}) => [ pressed
-        ? [styles.pressableStyle, {backgroundColor: backgroundColorPressed}] //if pressed
-        : [styles.pressableStyle, {backgroundColor: backgroundColorNotPressed}] //if not pressed
-      ]}>
-        <Text>loosing weight</Text>
-      </Pressable>
+        <Pressable onPress={pressLosingWeight} style={({pressed}) => [ pressed
+          ? [styles.pressableStyle, {backgroundColor: backgroundColorPressed}] //if pressed
+          : [styles.pressableStyle, {backgroundColor: backgroundColorNotPressed}] //if not pressed
+        ]}>
+          <Text>losing weight</Text>
+        </Pressable>
 
-      <Pressable onPress={pressGetMuscle} style={({pressed}) => [ pressed
-        ? [styles.pressableStyle, {backgroundColor: backgroundColorPressed}] //if pressed
-        : [styles.pressableStyle, {backgroundColor: backgroundColorNotPressed}] //if not pressed
-      ]}>
-        <Text>get muscle</Text>
-      </Pressable>
+        <Pressable onPress={pressGainingMuscle} style={({pressed}) => [ pressed
+          ? [styles.pressableStyle, {backgroundColor: backgroundColorPressed}] //if pressed
+          : [styles.pressableStyle, {backgroundColor: backgroundColorNotPressed}] //if not pressed
+        ]}>
+          <Text>gaining muscle</Text>
+        </Pressable>
 
-      <Pressable onPress={pressBodyPositive} style={({pressed}) => [ pressed
-        ? [styles.pressableStyle, {backgroundColor: backgroundColorPressed}] //if pressed
-        : [styles.pressableStyle, {backgroundColor: backgroundColorNotPressed}] //if not pressed
-      ]}>
-        <Text>feel better about my body</Text>
-      </Pressable>
+        <Pressable onPress={pressLovingMyBody} style={({pressed}) => [ pressed
+          ? [styles.pressableStyle, {backgroundColor: backgroundColorPressed}] //if pressed
+          : [styles.pressableStyle, {backgroundColor: backgroundColorNotPressed}] //if not pressed
+        ]}>
+          <Text>loving my body</Text>
+        </Pressable>
       </View>
 
-      <View style={{backgroundColor: '#F7A6A4'}}>
-        <Text>IMAGE</Text>
+
+      <View style={{height: screenHeight*0.45, backgroundColor: '#F7A6A4'}}>
+        <Image style={{flex: 1, resizeMode: 'contain'}} source={imageState} />
       </View>
 
+
+      <Text style={{marginBottom:0}}>{goalState}</Text>
       <View style={{flex:1, justifyContent: 'flex-end', backgroundColor: '#F7A6A4'}}>
-        <Pressable onPress={pressNext} style={[styles.pressableStyle, {backgroundColor: '#457B9D'}]}>
+        <Pressable onPress={pressNext} style={[styles.pressableStyle, {backgroundColor: '#457B9D', marginBottom: 10}]}>
           <Text>Next</Text>
         </Pressable>
       </View>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   topView: {
@@ -106,7 +122,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   topText: {
-    marginTop: 100,
+    marginTop: 50,
     fontSize: 20,
     fontWeight: 'bold',
     color: '#FFFFFF',
@@ -117,7 +133,6 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center',
     marginTop:10,
-    marginBottom:10,
     padding:10 
   },
 });
