@@ -16,13 +16,11 @@
  export default function LoginScreen({ navigation }) {
  
  
-   /////////////////////////////////////////////////////////////////////////////
-   //const { loading, setLoading, token, setToken } = React.useContext(AuthContext)
-
+  /////////////////////////////////////////////////////////////////////////////
+  //const { loading, setLoading, token, setToken } = React.useContext(AuthContext)
 
   // const { signIn, signOut, signUp, authState } = React.useContext(AuthContext);
   const { state, dispatch } = React.useContext(AuthContext);
-
 
    const [emailState, setEmailState] = React.useState('')
    const [passwordState, setPasswordState] = React.useState('')
@@ -235,10 +233,6 @@
    loginText:{
      color:"black",
      fontSize:11,
-   },
-   pickerAge: {
-     backgroundColor: '#ffffff',
-     color: '#ff0000',
    },
  });
  

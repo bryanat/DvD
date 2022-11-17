@@ -1,5 +1,6 @@
 import * as React from 'react'
 import * as SecureStore from 'expo-secure-store'
+import { useColorScheme } from 'react-native';
 
 export const AuthContext = React.createContext()
 
@@ -11,15 +12,18 @@ export default function AuthProvider ({ children }) {
    * since cannot modify the state of userToken directly within another component's nested function
    * this is because calling hooks from within a conditional/control flow state violates the rules of hooks
    */
+
+  const colorScheme = useColorScheme()
+
   const [state, dispatch] = React.useReducer(
     (prevState, action) => {
       switch (action.type) {
         case 'RESTORE_TOKEN':
-          return {
+            return {
             ...prevState,
             userToken: action.token,
             isLoading: false,
-          };
+          } ;
         case 'SIGN_IN':
           return {
             ...prevState,
@@ -32,6 +36,11 @@ export default function AuthProvider ({ children }) {
             isSignout: true,
             userToken: null,
           };
+        case 'SWAP_COLORSCHEME':
+          return {
+            ...prevState,
+            themeLightOrDark: action.dispatchThemeLightOrDark,
+          };
       }
     },
     // below is the state object, think React.useState({ isLoading:true, isSignout:false, userToken:null })
@@ -39,6 +48,7 @@ export default function AuthProvider ({ children }) {
       isLoading: true,
       isSignout: false,
       userToken: null,
+      themeLightOrDark: colorScheme,
     }
   );
 
@@ -65,7 +75,8 @@ export default function AuthProvider ({ children }) {
 
   /**
    * Will implement memoization later, right now it affecting auth state exports
-   */
+   * resolving useMemo would also resolve SWAP_COLORSCHEME
+  `*/
   /*
   const authContext = React.useMemo(
     () => ({

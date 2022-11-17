@@ -1,4 +1,6 @@
 # DvD
+![](readme-images/signup-screens.gif) 
+![](readme-images/SearchPage.png) 
 ![](readme-images/beautiful-drawings-homepage.jpg) 
 ![](readme-images/beautiful-drawings-exercise.jpg) 
 ![](readme-images/dieters-red-vs-blue-middle.png) 
