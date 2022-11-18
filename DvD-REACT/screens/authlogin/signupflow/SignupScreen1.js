@@ -38,7 +38,6 @@ export default function SignupScreen1({navigation}) {
           onChangeText={setNameState}
           value={nameState}
           borderBottomColor='white'
-          borderBottomWidth
           autoFocus={true}
         />
       <View style={{ backgroundColor: '#F7A6A4', width: '80%'}}>

@@ -42,8 +42,6 @@ export default function SignupScreen3({navigation}) {
   }
 
   return (
-    <KeyboardAvoidingView style={styles.container}behavior={Platform.OS === "ios" ? "padding" : "height"}>
-
     <View style={styles.topView}>
       <Text style={styles.topText}>What is your height?</Text>
       <TextInput
@@ -53,7 +51,6 @@ export default function SignupScreen3({navigation}) {
         onChangeText={setHeightState}
         value={heightState}
         borderBottomColor='white'
-        borderBottomWidth
         autoFocus={true}
       />
       <View style={{flexDirection: 'row', backgroundColor: '#F7A6A4'}}>
@@ -67,13 +64,12 @@ export default function SignupScreen3({navigation}) {
         <Text>{heightSwitchState ? 'in' : 'cm'}</Text>
       </View>
 
-      <Text style={[styles.topText, {marginTop: '-10'}]}>What is your weight?</Text>
+      <Text style={[styles.topText, {marginTop: -10}]}>What is your weight?</Text>
       <TextInput
         style={[styles.textInput, {width: '90%'}]}
         placeholder="0"
         placeholderTextColor="grey"
         borderBottomColor='white'
-        borderBottomWidth
         onChangeText={setWeightState}
         value={weightState}
       />
@@ -97,7 +93,6 @@ export default function SignupScreen3({navigation}) {
         </Pressable>
       </View>
     </View>
-    </KeyboardAvoidingView>
   );
 }
 

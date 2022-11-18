@@ -40,7 +40,6 @@ export default function SignupScreen4({navigation}) {
         onChangeText={setGoalweightState}
         value={goalweightState}
         borderBottomColor='white'
-        borderBottomWidth
         autoFocus={true}
       />
       {/** get 'lb' or 'kg' from stored user data via axios call */}
@@ -90,7 +89,6 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center',
     marginTop:10,
-    marginTop:200,
     marginBottom:10,
     padding:10 
   },

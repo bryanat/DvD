@@ -46,7 +46,7 @@ export default function SignupScreen2({navigation}) {
   }
 
   function pressNext() {
-    axios.put('http://192.168.1.236:8088/users/userdata/goal', {
+    axios.put('http://192.168.1.214:8088/users/userdata/goal', {
         // id: userIDFromAuthContextToken ?? null,
         // id: authState.userToken ?? null,
         id: state.userId,
@@ -63,7 +63,6 @@ export default function SignupScreen2({navigation}) {
   const backgroundColorNotPressed = '#457B9D'
 
   return (
-    <KeyboardAvoidingView style={styles.container}behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <View style={styles.topView}>
         <View style={{backgroundColor: '#F7A6A4'}}>
           <Text style={styles.topText}>What is your goal?</Text>
@@ -98,7 +97,7 @@ export default function SignupScreen2({navigation}) {
         </View>
 
 
-      <View style={{height: screenHeight*0.45, backgroundColor: '#F7A6A4'}}>
+      <View style={{height: screenHeight*0.35, backgroundColor: '#F7A6A4'}}>
         <Image style={{flex: 1, resizeMode: 'contain'}} source={imageState} />
       </View>
         {/* <Text style={{marginBottom:0}}>{goalState}</Text> */}
@@ -108,7 +107,6 @@ export default function SignupScreen2({navigation}) {
         </Pressable>
       </View>
     </View>
-    </KeyboardAvoidingView>
   );
 }
 

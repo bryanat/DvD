@@ -46,8 +46,6 @@ router.get('/test', async (req, res) => {
 
 // put user data height and weight into users collection by user
 router.put('/userdata/heightweight', async(req, res) => {
-  const userReq = req.body
-  //users.updateOne
   const insertResult = await users.updateOne(
     {_id: ObjectId(req.body.id)},
     {$set: {
@@ -61,8 +59,6 @@ router.put('/userdata/heightweight', async(req, res) => {
 
 // put user data goal weight into users collection by user
 router.put('/userdata/goal', async(req, res) => {
-  const userReq = req.body
-  //users.updateOne
   const insertResult = await users.updateOne(
     {_id: ObjectId(req.body.id)},
     // {_id: ObjectId('6333ec2e28ac6c558456f404') }, 
@@ -101,7 +97,6 @@ router.put('/userdata/genderbirthday', async(req, res) => {
 
 // put user data height and weight into users collection by user
 router.put('/userdata/name', async(req, res) => {
-  console.log(`hskjh ${req.body.name}`)
   const insertResult = await users.updateOne(
     {_id: ObjectId(req.body.id)}, 
     {$set: {
@@ -112,7 +107,10 @@ router.put('/userdata/name', async(req, res) => {
   res.send({log: `Updated mongo document _id: ${insertResult.insertedId}`})
 })
 
-
+router.get('/userdata/getwholeuserobject', async(req, res) => {
+  console.log('/userdata/getwholeuserobject route hit.')
+  res.send({name: 'test', weight: 163})
+})
 
 
 ////////////////////////////////////////////////////

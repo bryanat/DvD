@@ -20,6 +20,7 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import DieterVsDieterScreen from '../screens/vs/DieterVsDieterScreen'
 import LinkingConfiguration from './LinkingConfiguration';
 import BlogfeedScreen from '../screens/blog/BlogfeedScreen';
+import PersonalProfile from '../screens/personalchallenge/PersonalProfile';
 import PersonalChallengeScreen from '../screens/personalchallenge/PersonalChallengeScreen';
 import PersonalStatsScreen from '../screens/personalchallenge/PersonalStatsScreen';
 import HomeScreen from '../screens/home/HomeScreen';
@@ -250,18 +251,25 @@ const Tab = createMaterialTopTabNavigator();
 function PersonalTopTabsNavigator() {
   return (
     <Tab.Navigator>
-      <Tab.Screen 
-        name="Personal Challenge" 
-        component={PersonalChallengeScreen}
-        options={{
-          title:'Personal Challenge'
+      <Tab.Screen
+        name="Profile"
+        component={PersonalProfile}
+        option={{
+          title: 'Profile'
         }}
       />
       <Tab.Screen 
-        name="Personal Stats" 
+        name="Stats" 
         component={PersonalStatsScreen}
         options={{
-          title:'Personal Stats'
+          title:'Stats'
+        }}
+      />
+      <Tab.Screen 
+        name="Challenge" 
+        component={PersonalChallengeScreen}
+        options={{
+          title:'Challenge'
         }}
       />
     </Tab.Navigator>
