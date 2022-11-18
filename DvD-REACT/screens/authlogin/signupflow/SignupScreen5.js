@@ -11,6 +11,8 @@ import axios from 'axios'
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 export default function SignupScreen5({navigation}) {
+  const { state, dispatch } = React.useContext(AuthContext)
+
   const [genderState, setGenderState] = React.useState()
   const [birthdayState, setBirthdayState] = React.useState() 
 
@@ -85,7 +87,7 @@ export default function SignupScreen5({navigation}) {
 
       <View style={{flex:1, justifyContent: 'flex-end', backgroundColor: '#F7A6A4'}}>
         <Pressable onPress={pressNext} style={styles.pressableStyle}>
-          <Text style={styles.nextText}>Next</Text>
+          <Text style={styles.nextText}>Done</Text>
         </Pressable>
       </View>
     </View>

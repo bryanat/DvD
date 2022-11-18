@@ -19,13 +19,17 @@ export default function SignupScreen({ navigation }) {
   const aspectRatio = screenWidth/824 //divide actual image width (824) by screen width
   const imageHeight = 825*aspectRatio //multiple actual image height (825) by aspect ratio
 
-  function moveToQuestion() {
-    console.log('idk??')
+  function pressGoogleAuth() {
+    console.log('Google Auth pressed')
+  }
+
+  function pressAppleAuth() {
+    console.log('Apple Auth pressed')
   }
 
   function devSignupSubmitPress() {
     // set username = 'devuser' (to put user data somewhere)
-    navigation.navigate('SignupScreen2')
+    navigation.navigate('SignupScreen1')
   }
 
   function signupSubmitPress() {
@@ -87,11 +91,11 @@ export default function SignupScreen({ navigation }) {
       </View>
       <Text style={styles.validityText}>{passwordValidityState}</Text>
       {/* Need to be changed with Google OAUTH */}
-      <Pressable onPress={moveToQuestion} style={styles.loginBtn}>
+      <Pressable onPress={pressGoogleAuth} style={styles.loginBtn}>
         <Text>Signup with Google</Text>
       </Pressable>
       {/* Need to be changed with Apple OAUTH */}
-      <Pressable onPress={moveToQuestion} style={styles.loginBtn}>
+      <Pressable onPress={pressAppleAuth} style={styles.loginBtn}>
         <Text>Signup with Apple</Text>
       </Pressable>
       <Pressable>

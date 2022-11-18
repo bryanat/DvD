@@ -28,6 +28,7 @@ import LoginScreen from '../screens/authlogin/LoginScreen';
 import OnboardingScreen from '../screens/authlogin/OnboardingScreen';
 import SignupScreen from '../screens/authlogin/SignupScreen';
 import ExerciseScreen from '../screens/home/ExerciseScreen';
+import SignupScreen1 from '../screens/authlogin/signupflow/SignupScreen1';
 import SignupScreen2 from '../screens/authlogin/signupflow/SignupScreen2';
 import SignupScreen3 from '../screens/authlogin/signupflow/SignupScreen3';
 import SignupScreen4 from '../screens/authlogin/signupflow/SignupScreen4';
@@ -103,6 +104,7 @@ function AuthenticationNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="OnBoardingScreen" component={OnboardingScreen} options={{ headerShown: false }} />
       <Stack.Screen name="SignupScreen" component={SignupScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="SignupScreen1" component={SignupScreen1} options={{ headerShown: false }} />
       <Stack.Screen name="SignupScreen2" component={SignupScreen2} options={{ headerShown: false }} />
       <Stack.Screen name="SignupScreen3" component={SignupScreen3} options={{ headerShown: false }} />
       <Stack.Screen name="SignupScreen4" component={SignupScreen4} options={{ headerShown: false }} />
