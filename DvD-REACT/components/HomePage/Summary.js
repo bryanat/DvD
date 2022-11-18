@@ -3,6 +3,7 @@ import { View } from '../../components/Themed';
 import { StyleSheet, Dimensions, Text } from 'react-native';
 import { Card, Title} from 'react-native-paper';
 import CircularProgress, {CircularProgressBase} from 'react-native-circular-progress-indicator';
+import styles from './HomePageStyles';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -57,7 +58,6 @@ const Summary = () => {
                                 inActiveStrokeOpacity={0.2}
                                 progressValueColor={'black'}
                                 valueSuffix={'%'}
-                                onAnimationComplete={() => { alert('callback') }}
                         />
                     </View>
                     <View style={styles.smallBarContainer}>
@@ -70,7 +70,6 @@ const Summary = () => {
                                 inActiveStrokeOpacity={0.2}
                                 progressValueColor={'black'}
                                 valueSuffix={'%'}
-                                onAnimationComplete={() => { alert('callback') }}
                         />
                     </View>
                     <View style={styles.smallBarContainer}>
@@ -83,7 +82,6 @@ const Summary = () => {
                                 inActiveStrokeOpacity={0.2}
                                 progressValueColor={'black'}
                                 valueSuffix={'%'}
-                                onAnimationComplete={() => { alert('callback') }}
                         />
                     </View>
                 </View>
@@ -95,37 +93,3 @@ const Summary = () => {
 }
 
 export default Summary
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'column',
-        width: windowWidth,
-        height: 100,
-    },
-    card: {
-        borderRadius: 8,
-        padding: 10
-    },
-    calroies: {
-        flexDirection: 'row',
-        justifyContent:'space-around',
-        paddingBottom: 10
-    },
-    barContainer: {
-        backgroundColor: 'white',
-        flexDirection: 'row',
-        justifyContent:'space-around',
-    },
-    smallBarContainer: {
-        backgroundColor: 'white',
-        flexDirection: 'column',
-        justifyContent:'center'
-    },
-    titleContainer: {
-        textAlign: 'center'
-    },
-    titleSize: {
-        fontWeight: 'bold'
-    }
-  });

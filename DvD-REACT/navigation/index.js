@@ -33,9 +33,10 @@ import SignupScreen2 from '../screens/authlogin/signupflow/SignupScreen2';
 import SignupScreen3 from '../screens/authlogin/signupflow/SignupScreen3';
 import SignupScreen4 from '../screens/authlogin/signupflow/SignupScreen4';
 import SignupScreen5 from '../screens/authlogin/signupflow/SignupScreen5';
-
+import SearchPage from '../screens/search/SearchPage';
 import AuthProvider from '../hooks/AuthProvider';
 import { AuthContext } from '../hooks/AuthProvider';
+import Nutrient from '../components/HomePage/Nutrient';
 import * as SecureStore from 'expo-secure-store'
 
 
@@ -140,6 +141,7 @@ function HomeStackNavigator() {
         options={{ headerShown: false }}
       />
       <HomeStack.Screen name="ExerciseScreen" component={ExerciseScreen} options={{ headerShown: false }}/>
+      <HomeStack.Screen name="SearchScreen" component={SearchPage} />
     </HomeStack.Navigator>
   )
 }
