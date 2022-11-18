@@ -10,6 +10,9 @@ import { AuthContext } from '../../../hooks/AuthProvider';
 import axios from 'axios'
 
 export default function SignupScreen3({navigation}) {
+
+  const { state, dispatch } = React.useContext(AuthContext)
+
   const [heightState, setHeightState] = React.useState();
   const [weightState, setWeightState] = React.useState();
   const [weightSwitchState, setWeightSwitchState] = React.useState();
@@ -24,7 +27,8 @@ export default function SignupScreen3({navigation}) {
     // skipping conditional if logic right now while developing screens (for speed)
     //if (heightState != undefined && weightState != undefined) {
       axios.put('http://192.168.1.214:8088/users/userdata/heightweight', {
-        heigth: +heightState ?? null,
+        id: state.userId,
+        height: +heightState ?? null,
         weight: +weightState ?? null,
       }).then( function (response) {
         console.log(response.data)

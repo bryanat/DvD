@@ -10,10 +10,14 @@ import { AuthContext } from '../../../hooks/AuthProvider';
 import axios from 'axios'
 
 export default function SignupScreen4({navigation}) {
+
+  const { state, dispatch } = React.useContext(AuthContext)
+
   const [goalweightState, setGoalweightState] = React.useState()
 
   function pressNext() { 
     axios.put('http://192.168.1.214:8088/users/userdata/goalweight', {
+      id: state.userId,
       goalweight: +goalweightState ?? null,
     }).then( function (response) {
       console.log(response.data)

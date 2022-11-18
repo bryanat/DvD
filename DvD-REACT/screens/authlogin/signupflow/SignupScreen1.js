@@ -16,8 +16,9 @@ export default function SignupScreen1({navigation}) {
   const [nameState, setNameState] = React.useState()
 
   function pressNext() {
-    axios.put('http://192.168.1.214:8088/users/userdata/genderbirthday', {
-      name: +nameState ?? null,
+    axios.put('http://192.168.1.214:8088/users/userdata/name', {
+      id: state.userId,
+      name: nameState ?? null,
     }).then( function (response) {
       console.log(response.data)
       navigation.navigate('SignupScreen2')
@@ -40,7 +41,7 @@ export default function SignupScreen1({navigation}) {
 
       <View style={{flex:1, justifyContent: 'flex-end', backgroundColor: '#F7A6A4'}}>
         <Pressable onPress={pressNext} style={styles.pressableStyle}>
-          <Text style={styles.nextText}>Done</Text>
+          <Text style={styles.nextText}>Next</Text>
         </Pressable>
       </View>
     </View>

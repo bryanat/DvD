@@ -29,6 +29,7 @@ export default function SignupScreen({ navigation }) {
 
   function devSignupSubmitPress() {
     // set username = 'devuser' (to put user data somewhere)
+    dispatch({type: 'DEV_TOKEN'})
     navigation.navigate('SignupScreen1')
   }
 

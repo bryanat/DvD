@@ -13,7 +13,7 @@ import * as SecureStore from 'expo-secure-store'
 
 export default function SignupScreen2({navigation}) {
   
-  const { authState } = React.useContext(AuthContext)
+  const { state, dispatch } = React.useContext(AuthContext)
   // const userIDFromAuthContextToken = React.useContext(AuthContext).token._3
   // next step is how to integrate userId (mongoId) into authState.userToken
 
@@ -49,9 +49,8 @@ export default function SignupScreen2({navigation}) {
     axios.put('http://192.168.1.214:8088/users/userdata/goal', {
         // id: userIDFromAuthContextToken ?? null,
         // id: authState.userToken ?? null,
-        id: '635c92e17d2c3098af42b94d' ?? null,
-        age: 56 ?? null,
-        random: 'tmpx' ?? null,
+        id: state.userId,
+        goal: goalState ?? null,
       }).then( function (response) {
         console.log(response.data)
         navigation.navigate('SignupScreen3')
