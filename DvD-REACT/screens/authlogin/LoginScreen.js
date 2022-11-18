@@ -7,12 +7,14 @@
  */
 
  import * as React from 'react'
- import { StyleSheet, Pressable, Image, Dimensions } from 'react-native';
+ import { StyleSheet, Pressable, Image, Dimensions, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
  import { Text, View, TextInput } from '../../components/Themed';
  import axios from 'axios'
  import { AuthContext } from '../../hooks/AuthProvider';
  import * as SecureStore from 'expo-secure-store'
- 
+ import { FontAwesome5 } from '@expo/vector-icons'; 
+ import { Foundation } from '@expo/vector-icons';
+
  export default function LoginScreen({ navigation }) {
  
  
@@ -45,7 +47,7 @@
          setPasswordValidityState('')
          // check email and password authenticate with server by sending them via axios
        setEmailValidityState('')
-       axios.post('http://192.168.1.214:8088/users/login', {
+       axios.post('http://192.168.1.236:8088/users/login', {
            email: emailState,
            password: passwordState,
          })
@@ -89,7 +91,7 @@
 
    function devPressLoginButton() {
     setLoginDoesNotExistState('')
-      axios.post('http://192.168.1.214:8088/users/login', {
+      axios.post('http://192.168.1.236:8088/users/login', {
           email: 'Xeno@gmail.com',
           password: 'Xoxo11!!',
         })
@@ -129,50 +131,58 @@
    }
  
    return (
-     <View style={styles.topView}>
-       <Image 
-         style={[{width: screenWidth*0.5, height: imageHeight*0.5}, styles.logo]} 
-         source={require('../../assets/images/logo-dieters-sundown.png')} 
-       />
-       <View style={styles.inputView}>
-         <TextInput
-           style={styles.inputText}
-           placeholder="Email:"
-           placeholderTextColor="white"
-           onChangeText={setEmailState}
-           value={emailState}
-           />
-       </View>
-       <Text style={styles.validityText}>{emailValidityState}</Text>
-       <View style={styles.inputView}>
-         <TextInput
-           style={styles.inputText}
-           placeholder="Password:"
-           placeholderTextColor="white"
-           onChangeText={setPasswordState}
-           value={passwordState}
-           />
-       </View>
-       <Text style={styles.validityText}>{passwordValidityState}</Text>
-       <Pressable>
-         <Text style={styles.forgot}>Forgot Password?</Text>
-       </Pressable>
-       <Pressable onPress={pressLoginButton} style={styles.loginBtn}>
-         <Text>Login</Text>
-       </Pressable>
-       <Pressable onPress={devPressLoginButton} style={styles.loginBtn}>
-         <Text>Dev Login</Text>
-       </Pressable>
-       <Text style={styles.validityLoginButtonText}>{loginDoesNotExistState}</Text>
-       <Text style={styles.loginText}>Don't have an account?</Text>
-       <Pressable onPress={navigateSignup}>
-         <Text style={styles.signUpText}>SignUp</Text>
-       </Pressable>
-   </View>
+    <KeyboardAvoidingView style={styles.container}behavior={Platform.OS === "ios" ? "padding" : "height"}>
+      <View style={styles.topView}>
+        <Image 
+          style={[{width: screenWidth*0.5, height: imageHeight*0.5}, styles.logo]} 
+          source={require('../../assets/images/logo-dieters-sundown.png')} 
+        />
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            placeholder="Email:"
+            placeholderTextColor="white"
+            onChangeText={setEmailState}
+            value={emailState}
+            />
+        </View>
+        <Text style={styles.validityText}>{emailValidityState}</Text>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            placeholder="Password:"
+            placeholderTextColor="white"
+            onChangeText={setPasswordState}
+            value={passwordState}
+            />
+        </View>
+        <FontAwesome5 name="google" size={24} color="black" />
+        <Foundation name="social-apple" size={24} color="black" />
+        <Text style={styles.validityText}>{passwordValidityState}</Text>
+        <Pressable onPress={pressLoginButton} style={styles.loginBtn}>
+          <Text>Login</Text>
+        </Pressable>
+        <Pressable>
+          <Text style={styles.forgot}>Forgot Password?</Text>
+        </Pressable>
+        {/* <Pressable onPress={devPressLoginButton} style={styles.loginBtn}>
+          <Text>Dev Login</Text>
+        </Pressable> */}
+        <Pressable onPress={navigateSignup} style={styles.signupBtn}>
+          <Text style={styles.validityLoginButtonText}>{loginDoesNotExistState}</Text>
+          <Text style={styles.loginText}>Don't have an account?</Text>
+          <Text style={styles.signUpText}>SignUp</Text>
+        </Pressable>
+    </View>
+    </KeyboardAvoidingView>
+
    );
  }
  
  const styles = StyleSheet.create({
+   container:{
+    flex: 1,
+   },
    topView: {
      flex: 1,
      backgroundColor: '#faf3ee',
@@ -184,7 +194,8 @@
      color:"white"
    },
    logo:{
-     marginBottom: 40
+     marginTop: 40,
+     marginBottom: 20
    },
    logo2: {
      flex: 1,
@@ -228,11 +239,13 @@
    },
    signUpText: {
      color: "black",
-     fontSize: 11
+     fontSize: 11,
+     textAlign: "center",
    },
    loginText:{
      color:"black",
      fontSize:11,
+     textAlign: "center",
    },
  });
  

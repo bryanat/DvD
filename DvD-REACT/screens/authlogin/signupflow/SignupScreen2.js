@@ -5,7 +5,7 @@
  */
 
 import * as React from 'react'
-import { Pressable, StyleSheet, Image, Dimensions } from 'react-native';
+import { Pressable, StyleSheet, Image, Dimensions, KeyboardAvoidingView } from 'react-native';
 import { Text, View } from '../../../components/Themed';
 import axios from 'axios'
 import { AuthContext } from '../../../hooks/AuthProvider';
@@ -46,7 +46,7 @@ export default function SignupScreen2({navigation}) {
   }
 
   function pressNext() {
-    axios.put('http://192.168.1.214:8088/users/userdata/goal', {
+    axios.put('http://192.168.1.236:8088/users/userdata/goal', {
         // id: userIDFromAuthContextToken ?? null,
         // id: authState.userToken ?? null,
         id: '635c92e17d2c3098af42b94d' ?? null,
@@ -64,75 +64,82 @@ export default function SignupScreen2({navigation}) {
   const backgroundColorNotPressed = '#457B9D'
 
   return (
-    <View style={styles.topView}>
-      <View style={{backgroundColor: '#F7A6A4'}}>
-        <Text style={styles.topText}>What is your goal?</Text>
+    <KeyboardAvoidingView style={styles.container}behavior={Platform.OS === "ios" ? "padding" : "height"}>
+      <View style={styles.topView}>
+        <View style={{backgroundColor: '#F7A6A4'}}>
+          <Text style={styles.topText}>What is your goal?</Text>
 
-        <Pressable onPress={pressEatingHealthier} style={({pressed}) => [ pressed
-          ? [styles.pressableStyle, {backgroundColor: backgroundColorPressed}] //if pressed
-          : [styles.pressableStyle, {backgroundColor: backgroundColorNotPressed}] //if not pressed
-        ]}>
-          <Text>eating healthier</Text>
-        </Pressable>
+          <Pressable onPress={pressEatingHealthier} style={({pressed}) => [ pressed
+            ? [styles.pressableStyle, {backgroundColor: backgroundColorPressed}] //if pressed
+            : [styles.pressableStyle, {backgroundColor: backgroundColorNotPressed}] //if not pressed
+          ]}>
+            <Text style={styles.textSize}>eating healthier</Text>
+          </Pressable>
 
-        <Pressable onPress={pressLosingWeight} style={({pressed}) => [ pressed
-          ? [styles.pressableStyle, {backgroundColor: backgroundColorPressed}] //if pressed
-          : [styles.pressableStyle, {backgroundColor: backgroundColorNotPressed}] //if not pressed
-        ]}>
-          <Text>losing weight</Text>
-        </Pressable>
+          <Pressable onPress={pressLosingWeight} style={({pressed}) => [ pressed
+            ? [styles.pressableStyle, {backgroundColor: backgroundColorPressed}] //if pressed
+            : [styles.pressableStyle, {backgroundColor: backgroundColorNotPressed}] //if not pressed
+          ]}>
+            <Text style={styles.textSize}>losing weight</Text>
+          </Pressable>
 
-        <Pressable onPress={pressGainingMuscle} style={({pressed}) => [ pressed
-          ? [styles.pressableStyle, {backgroundColor: backgroundColorPressed}] //if pressed
-          : [styles.pressableStyle, {backgroundColor: backgroundColorNotPressed}] //if not pressed
-        ]}>
-          <Text>gaining muscle</Text>
-        </Pressable>
+          <Pressable onPress={pressGainingMuscle} style={({pressed}) => [ pressed
+            ? [styles.pressableStyle, {backgroundColor: backgroundColorPressed}] //if pressed
+            : [styles.pressableStyle, {backgroundColor: backgroundColorNotPressed}] //if not pressed
+          ]}>
+            <Text style={styles.textSize}>gaining muscle</Text>
+          </Pressable>
 
-        <Pressable onPress={pressLovingMyBody} style={({pressed}) => [ pressed
-          ? [styles.pressableStyle, {backgroundColor: backgroundColorPressed}] //if pressed
-          : [styles.pressableStyle, {backgroundColor: backgroundColorNotPressed}] //if not pressed
-        ]}>
-          <Text>loving my body</Text>
-        </Pressable>
-      </View>
+          <Pressable onPress={pressLovingMyBody} style={({pressed}) => [ pressed
+            ? [styles.pressableStyle, {backgroundColor: backgroundColorPressed}] //if pressed
+            : [styles.pressableStyle, {backgroundColor: backgroundColorNotPressed}] //if not pressed
+          ]}>
+            <Text style={styles.textSize}>loving my body</Text>
+          </Pressable>
+        </View>
 
 
       <View style={{height: screenHeight*0.45, backgroundColor: '#F7A6A4'}}>
         <Image style={{flex: 1, resizeMode: 'contain'}} source={imageState} />
       </View>
-
-
-      <Text style={{marginBottom:0}}>{goalState}</Text>
-      <View style={{flex:1, justifyContent: 'flex-end', backgroundColor: '#F7A6A4'}}>
+        {/* <Text style={{marginBottom:0}}>{goalState}</Text> */}
+        <View style={{flex:1, backgroundColor: '#F7A6A4', width: '80%', marginTop: 20}}>
         <Pressable onPress={pressNext} style={[styles.pressableStyle, {backgroundColor: '#457B9D', marginBottom: 10}]}>
-          <Text>Next</Text>
+          <Text style={styles.textSize}>Next</Text>
         </Pressable>
       </View>
     </View>
+    </KeyboardAvoidingView>
   );
 }
 
 
 const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+   },
   topView: {
     flex: 1,
     backgroundColor: '#F7A6A4',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingTop: 20,
   },
   topText: {
     marginTop: 50,
-    fontSize: 20,
+    fontSize: 40,
     fontWeight: 'bold',
     color: '#FFFFFF',
   },
   pressableStyle: {
     borderRadius:25,
     height:50,
-    alignItems:'center',
     justifyContent:'center',
+    alignItems:'center',
     marginTop:10,
-    padding:10 
+    padding:10,
+  },
+  textSize: {
+    fontSize: 20,
   },
 });

@@ -4,7 +4,7 @@
  */
 
 import * as React from 'react'
-import { Pressable, StyleSheet } from 'react-native';
+import { KeyboardAvoidingView, Pressable, StyleSheet } from 'react-native';
 import { Text, View, TextInput } from '../../../components/Themed';
 import { AuthContext } from '../../../hooks/AuthProvider';
 import axios from 'axios'
@@ -13,7 +13,7 @@ export default function SignupScreen4({navigation}) {
   const [goalweightState, setGoalweightState] = React.useState()
 
   function pressNext() { 
-    axios.put('http://192.168.1.214:8088/users/userdata/goalweight', {
+    axios.put('http://192.168.1.236:8088/users/userdata/goalweight', {
       goalweight: +goalweightState ?? null,
     }).then( function (response) {
       console.log(response.data)
@@ -24,31 +24,40 @@ export default function SignupScreen4({navigation}) {
   }
 
   return (
+    <KeyboardAvoidingView style={styles.container}behavior={Platform.OS === "ios" ? "padding" : "height"}>
+
     <View style={styles.topView}>
       <Text style={styles.topText}>What is your goal weight?</Text>
       <View style={{flexDirection: 'row', backgroundColor: '#F7A6A4'}}>
       <TextInput
-        style={[styles.pressableStyle, {width: '50%'}]}
-        placeholder='type goal weight here'
+        style={[styles.textInput, {width: '85%'}]}
+        placeholder='goal weight here'
         placeholderTextColor='white'
         onChangeText={setGoalweightState}
         value={goalweightState}
+        borderBottomColor='white'
+        borderBottomWidth
+        autoFocus={true}
       />
       {/** get 'lb' or 'kg' from stored user data via axios call */}
-      <Text style={{alignSelf: 'center', paddingLeft: 5}}>{true ? 'lb' : 'kg'}</Text>
+      <Text style={{alignSelf: 'center', paddingLeft: 5, marginTop: 35}}>{true ? 'lb' : 'kg'}</Text>
       </View>
 
 
-      <View style={{flex:1, justifyContent: 'flex-end', backgroundColor: '#F7A6A4'}}>
+      <View style={{flex:1, backgroundColor: '#F7A6A4',  width: '80%'}}>
         <Pressable onPress={pressNext} style={styles.pressableStyle}>
           <Text style={styles.nextText}>Next</Text>
         </Pressable>
       </View>
     </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+   },
   topView: {
     flex: 1,
     backgroundColor: '#F7A6A4',
@@ -57,13 +66,18 @@ const styles = StyleSheet.create({
   },
   topText: {
     marginTop: 100,
-    fontSize: 20,
+    fontSize: 40,
     fontWeight: 'bold',
     color: '#FFFFFF',
   },
   textInput: {
-    color:'white',
-    backgroundColor: '#457B9D',
+    fontSize: 30,
+    color:'#808080',
+    backgroundColor: '#F7A6A4',
+    width: '70%',
+    textAlign: 'center',
+    marginTop: 50,
+    marginBottom: 30,
   },
   pressableStyle: {
     backgroundColor:'#457B9D',
@@ -72,6 +86,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center',
     marginTop:10,
+    marginTop:200,
     marginBottom:10,
     padding:10 
   },

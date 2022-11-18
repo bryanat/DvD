@@ -1,8 +1,10 @@
 import * as React from 'react'
-import { StyleSheet, Pressable, Image, Dimensions } from 'react-native';
+import { StyleSheet, Pressable, Image, Dimensions, KeyboardAvoidingView } from 'react-native';
 import { Text, View, TextInput } from '../../components/Themed';
 import { AuthContext } from '../../hooks/AuthProvider';
 import axios from 'axios'
+import { FontAwesome5 } from '@expo/vector-icons'; 
+import { Foundation } from '@expo/vector-icons';
 
 export default function SignupScreen({ navigation }) {
 
@@ -39,7 +41,7 @@ export default function SignupScreen({ navigation }) {
       // if password has at least 8 characters, one letter, one number (checked via regex match)
       if (passwordState.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/) != null) {
         setPasswordValidityState('')
-        axios.put('http://192.168.1.214:8088/users/signup', {
+        axios.put('http://192.168.1.236:8088/users/signup', {
           email: emailState,
           password: passwordState,
         })
@@ -65,6 +67,7 @@ export default function SignupScreen({ navigation }) {
   }
 
   return (
+    <KeyboardAvoidingView style={styles.container}behavior={Platform.OS === "ios" ? "padding" : "height"}>
     <View style={styles.topView}>
       <Image 
         style={[{width: screenWidth*0.5, height: imageHeight*0.5}, styles.logo]} 
@@ -91,13 +94,9 @@ export default function SignupScreen({ navigation }) {
       </View>
       <Text style={styles.validityText}>{passwordValidityState}</Text>
       {/* Need to be changed with Google OAUTH */}
-      <Pressable onPress={pressGoogleAuth} style={styles.loginBtn}>
-        <Text>Signup with Google</Text>
-      </Pressable>
+      <FontAwesome5  onPress={pressGoogleAuth} name="google" size={24} color="black" />
       {/* Need to be changed with Apple OAUTH */}
-      <Pressable onPress={pressAppleAuth} style={styles.loginBtn}>
-        <Text>Signup with Apple</Text>
-      </Pressable>
+      <Foundation onPress={pressAppleAuth} name="social-apple" size={24} color="black" />
       <Pressable>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </Pressable>
@@ -107,19 +106,24 @@ export default function SignupScreen({ navigation }) {
       <Pressable onPress={devSignupSubmitPress} style={styles.loginBtn}>
         <Text>Dev Signup Button</Text>
       </Pressable>
-      <Text style={styles.validityLoginButtonText}></Text>
-      {/* <TouchableOpacity onPress={
-        () => { {navigateHome}; {axiosPressFunction};  }
-      } style={styles.loginBtn}><Text>Login</Text></TouchableOpacity> */}
-      <Text style={styles.loginText}>Already have an account?</Text>
       <Pressable onPress={onSkip}>
+        <Text style={styles.validityLoginButtonText}></Text>
+        {/* <TouchableOpacity onPress={
+          () => { {navigateHome}; {axiosPressFunction};  }
+        } style={styles.loginBtn}><Text>Login</Text></TouchableOpacity> */}
+        <Text style={styles.loginText}>Already have an account?</Text>
         <Text style={styles.signUpText}>Back to Login</Text>
       </Pressable>
   </View>
+  </KeyboardAvoidingView>
+
   );
 }
 
 const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+   },
   topView: {
     flex: 1,
     backgroundColor: '#faf3ee',
@@ -131,7 +135,8 @@ const styles = StyleSheet.create({
     color:"white"
   },
   logo:{
-    marginBottom: 40,
+    marginTop: 40,
+    marginBottom: 20
   },
   inputView:{
     width:"80%",
@@ -170,11 +175,13 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     color: "black",
-    fontSize: 11
+    fontSize: 11,
+    textAlign: "center",
   },
   loginText:{
     color:"black",
-    fontSize:11  
+    fontSize:11,
+    textAlign: "center",
   },
   pickerAge: {
     backgroundColor: '#ffffff',

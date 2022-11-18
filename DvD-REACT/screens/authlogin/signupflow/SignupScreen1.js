@@ -16,7 +16,7 @@ export default function SignupScreen1({navigation}) {
   const [nameState, setNameState] = React.useState()
 
   function pressNext() {
-    axios.put('http://192.168.1.214:8088/users/userdata/genderbirthday', {
+    axios.put('http://192.168.1.236:8088/users/userdata/genderbirthday', {
       name: +nameState ?? null,
     }).then( function (response) {
       console.log(response.data)
@@ -28,19 +28,21 @@ export default function SignupScreen1({navigation}) {
 
   return (
     <View style={styles.topView}>
-      <Text style={styles.topText}>Name?</Text>
-      <Text>{nameState}</Text>
-      <TextInput
-        style={[styles.pressableStyle, {width: '50%'}]}
-        placeholder="type name here"
-        placeholderTextColor="white"
-        onChangeText={setNameState}
-        value={nameState}
-      />
-
-      <View style={{flex:1, justifyContent: 'flex-end', backgroundColor: '#F7A6A4'}}>
+      <Text style={styles.topText}>What's your name?</Text>
+      {/* <Text>{nameState}</Text> */}
+        <TextInput
+          style={[styles.textInput, {width: '90%'}]}
+          placeholder="Your name"
+          placeholderTextColor="grey"
+          onChangeText={setNameState}
+          value={nameState}
+          borderBottomColor='white'
+          borderBottomWidth
+          autoFocus={true}
+        />
+      <View style={{ backgroundColor: '#F7A6A4', width: '80%'}}>
         <Pressable onPress={pressNext} style={styles.pressableStyle}>
-          <Text style={styles.nextText}>Done</Text>
+          <Text style={styles.nextText}>Next</Text>
         </Pressable>
       </View>
     </View>
@@ -53,17 +55,21 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F7A6A4',
     alignItems: 'center',
-    justifyContent: 'center',
   },
   topText: {
     marginTop: 100,
-    fontSize: 20,
+    fontSize: 40,
     fontWeight: 'bold',
     color: '#FFFFFF',
   },
   textInput: {
-    color:'white',
-    backgroundColor: '#457B9D',
+    fontSize: 30,
+    color:'#808080',
+    backgroundColor: '#F7A6A4',
+    width: '70%',
+    textAlign: 'center',
+    marginTop: 50,
+    marginBottom: 30,
   },
   pressableStyle: {
     backgroundColor:'#457B9D',
@@ -71,17 +77,8 @@ const styles = StyleSheet.create({
     height:50,
     alignItems:'center',
     justifyContent:'center',
-    marginTop:10,
+    marginTop:240,
     marginBottom:10,
-    padding:10 
-  },
-  buttonStyle:{
-    width:'40%',
-    borderRadius:25,
-    height:50,
-    alignItems:'center',
-    justifyContent:'center',
-    marginTop:10,
-    marginBottom:10
+    padding:10,
   },
 });

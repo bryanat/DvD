@@ -45,7 +45,7 @@ export default function SignupScreen5({navigation}) {
   ////////////////////////////////////////
 
   function pressNext() {
-    axios.put('http://192.168.1.214:8088/users/userdata/genderbirthday', {
+    axios.put('http://192.168.1.236:8088/users/userdata/genderbirthday', {
       gender: +genderState ?? null,
       birthday: +birthdayState ?? null,
     }).then( function (response) {
@@ -85,8 +85,8 @@ export default function SignupScreen5({navigation}) {
         onCancel={hideDatePicker}
       />
 
-      <View style={{flex:1, justifyContent: 'flex-end', backgroundColor: '#F7A6A4'}}>
-        <Pressable onPress={pressNext} style={styles.pressableStyle}>
+      <View style={{flex:1, backgroundColor: '#F7A6A4', width: '80%', marginTop: 20}}>
+        <Pressable onPress={pressNext} style={[styles.pressableStyle, {backgroundColor: '#457B9D', marginBottom: 10}]}>
           <Text style={styles.nextText}>Done</Text>
         </Pressable>
       </View>
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   topText: {
     marginTop: 100,
-    fontSize: 20,
+    fontSize: 40,
     fontWeight: 'bold',
     color: '#FFFFFF',
   },
@@ -113,14 +113,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#457B9D',
   },
   pressableStyle: {
-    backgroundColor:'#457B9D',
     borderRadius:25,
     height:50,
-    alignItems:'center',
     justifyContent:'center',
-    marginTop:10,
-    marginBottom:10,
-    padding:10 
+    alignItems:'center',
+    marginTop:350,
+    padding:10,
   },
   buttonStyle:{
     width:'40%',

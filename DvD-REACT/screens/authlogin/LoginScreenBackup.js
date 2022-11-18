@@ -45,7 +45,7 @@
          setPasswordValidityState('')
          // check email and password authenticate with server by sending them via axios
        setEmailValidityState('')
-       axios.post('http://192.168.1.214:8088/users/login', {
+       axios.post('http://192.168.1.236:8088/users/login', {
            email: emailState,
            password: passwordState,
          })
