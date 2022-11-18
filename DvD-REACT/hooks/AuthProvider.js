@@ -36,6 +36,11 @@ export default function AuthProvider ({ children }) {
             isSignout: true,
             userToken: null,
           };
+        case 'DEV_TOKEN':
+          return {
+            ...prevState,
+            userId: '635c90b27d2c3098af42b94a',
+          };
         case 'SWAP_COLORSCHEME':
           return {
             ...prevState,
@@ -47,6 +52,7 @@ export default function AuthProvider ({ children }) {
     {
       isLoading: true,
       isSignout: false,
+      userId: null,
       userToken: null,
       themeLightOrDark: colorScheme,
     }

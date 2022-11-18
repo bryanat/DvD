@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ObjectId } from 'mongodb';
+import { ObjectId, ReturnDocument } from 'mongodb';
 import jwt from 'jsonwebtoken'
 // users is a collection accessed through Mongo client
 import { users } from '../om/om-client.js'
@@ -48,10 +48,13 @@ router.get('/test', async (req, res) => {
 router.put('/userdata/heightweight', async(req, res) => {
   const userReq = req.body
   //users.updateOne
-  const insertResult = await users.insertOne({
-    weight: req.body.weight ?? null,
-    height: req.body.height ?? null,
-  })
+  const insertResult = await users.updateOne(
+    {_id: ObjectId(req.body.id)},
+    {$set: {
+      weight: req.body.weight ?? null,
+      height: req.body.height ?? null,
+    }}
+  )
   console.log(`Created document: ${insertResult}`)
   res.send({log: `Updated mongo document _id: ${insertResult.insertedId}`})
 })
@@ -61,44 +64,53 @@ router.put('/userdata/goal', async(req, res) => {
   const userReq = req.body
   //users.updateOne
   const insertResult = await users.updateOne(
-    // {name: req.body.name }, 
-    //{name: 'Julius Caesar' }, 
     {_id: ObjectId(req.body.id)},
-   // {_id: ObjectId('6333ec2e28ac6c558456f404') }, 
-    { $set: 
-      {
-      agexx: req.body.age ?? null,
-      random: req.body.random ?? null,
-      }
-    })
+    // {_id: ObjectId('6333ec2e28ac6c558456f404') }, 
+    {$set: {
+      goal: req.body.goal,
+    }}
+  )
   console.log(`Created document: ${insertResult}`)
   res.send({log: `Updated mongo document _id: ${insertResult.insertedId}`})
 })
 
 // put user data goal weight into users collection by user
 router.put('/userdata/goalweight', async(req, res) => {
-  const userReq = req.body
-  //users.updateOne
-  const insertResult = await users.insertOne({
-    goalweight: req.body.goalweight ?? null,
-  })
+  const insertResult = await users.updateOne(
+    {_id: ObjectId(req.body.id)},
+    {$set: {
+      goalweight: req.body.goalweight ?? null,
+    }}
+  )
   console.log(`Created document: ${insertResult}`)
   res.send({log: `Updated mongo document _id: ${insertResult.insertedId}`})
 })
 
 // put user data height and weight into users collection by user
 router.put('/userdata/genderbirthday', async(req, res) => {
-  const userReq = req.body
-  //users.updateOne
-  const insertResult = await users.insertOne({
-    gender: req.body.gender ?? null,
-    birthday: req.body.birthday ?? null,
-  })
+  const insertResult = await users.updateOne(
+    {_id: ObjectId(req.body.id)}, 
+    {$set: {
+      gender: req.body.gender ?? null,
+      birthday: req.body.birthday ?? null,
+    }}
+  )
   console.log(`Created document: ${insertResult}`)
   res.send({log: `Updated mongo document _id: ${insertResult.insertedId}`})
 })
 
-
+// put user data height and weight into users collection by user
+router.put('/userdata/name', async(req, res) => {
+  console.log(`hskjh ${req.body.name}`)
+  const insertResult = await users.updateOne(
+    {_id: ObjectId(req.body.id)}, 
+    {$set: {
+      name: req.body.name ?? null,
+    }}
+  )
+  console.log(`/userdata/name route hit. updated document: ${insertResult}`)
+  res.send({log: `Updated mongo document _id: ${insertResult.insertedId}`})
+})
 
 
 

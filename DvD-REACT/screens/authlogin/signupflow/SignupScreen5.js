@@ -45,9 +45,10 @@ export default function SignupScreen5({navigation}) {
   ////////////////////////////////////////
 
   function pressNext() {
-    axios.put('http://192.168.1.236:8088/users/userdata/genderbirthday', {
-      gender: +genderState ?? null,
-      birthday: +birthdayState ?? null,
+    axios.put('http://192.168.1.214:8088/users/userdata/genderbirthday', {
+      id: state.userId,
+      gender: genderState ?? null,
+      birthday: birthdayState ?? null,
     }).then( function (response) {
       console.log(response.data)
       navigation.navigate('LoginScreen')

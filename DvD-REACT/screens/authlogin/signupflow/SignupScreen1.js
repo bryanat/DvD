@@ -16,8 +16,9 @@ export default function SignupScreen1({navigation}) {
   const [nameState, setNameState] = React.useState()
 
   function pressNext() {
-    axios.put('http://192.168.1.236:8088/users/userdata/genderbirthday', {
-      name: +nameState ?? null,
+    axios.put('http://192.168.1.214:8088/users/userdata/name', {
+      id: state.userId,
+      name: nameState ?? null,
     }).then( function (response) {
       console.log(response.data)
       navigation.navigate('SignupScreen2')
