@@ -90,7 +90,7 @@
      }
    }
 
-   function devPressLoginButton() {
+   function pressDevLoginButton() {
     setLoginDoesNotExistState('')
       axios.post(`http://${localIpAddress}:8088/users/login`, {
           email: 'Xeno@gmail.com',
@@ -162,6 +162,9 @@
         <Text style={styles.validityText}>{passwordValidityState}</Text>
         <Pressable onPress={pressLoginButton} style={styles.loginBtn}>
           <Text>Login</Text>
+        </Pressable>
+        <Pressable onPress={pressDevLoginButton} style={styles.loginBtn}>
+          <Text>Dev Login</Text>
         </Pressable>
         <Pressable>
           <Text style={styles.forgot}>Forgot Password?</Text>

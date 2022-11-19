@@ -109,7 +109,12 @@ router.put('/userdata/name', async(req, res) => {
 
 router.get('/userdata/getwholeuserobject', async(req, res) => {
   console.log('/userdata/getwholeuserobject route hit.')
-  res.send({name: 'test', weight: 163})
+  const [fetchResult] = await users.aggregate([
+    {$match: {_id:ObjectId('635c90b27d2c3098af42b94a')}}
+  ]).toArray()
+  console.log(fetchResult)
+  res.send(fetchResult)
+  //res.send({name: 'test', weight: 163})
 })
 
 

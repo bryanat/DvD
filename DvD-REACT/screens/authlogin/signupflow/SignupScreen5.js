@@ -71,7 +71,7 @@ export default function SignupScreen5({navigation}) {
         </Pressable>
         <Pressable onPress={pressFemale} style={({pressed}) => [ pressed
           ? [styles.buttonStyle, {backgroundColor:'#FFFFFF'}] //if pressed
-          : [styles.buttonStyle, {backgroundColor:'#457B9D'}] //if not pressed
+          : [styles.buttonStyle, {backgroundColor:'orange'}] //if not pressed
         ]}>
           <Text>Female</Text>
         </Pressable>
@@ -89,7 +89,10 @@ export default function SignupScreen5({navigation}) {
 
       <View style={{flex:1, backgroundColor: '#F7A6A4', width: '80%', marginTop: 20}}>
         <Pressable onPress={pressNext} style={[styles.pressableStyle, {backgroundColor: '#457B9D', marginBottom: 10}]}>
-          <Text style={styles.nextText}>Done</Text>
+          <Text style={styles.nextText}>Press this button if faith is cool</Text>
+        </Pressable>
+        <Pressable onPress={pressNext} style={[styles.pressableStyle, {backgroundColor: '#f73d2d', marginBottom: 10}]}>
+          <Text style={styles.nextText}>Press this button if faith is super hungry</Text>
         </Pressable>
       </View>
     </View>
