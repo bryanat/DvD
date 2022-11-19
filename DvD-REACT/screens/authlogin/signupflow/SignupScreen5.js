@@ -9,6 +9,7 @@ import { Text, View, TextInput } from '../../../components/Themed';
 import { AuthContext } from '../../../hooks/AuthProvider';
 import axios from 'axios'
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import { localIpAddress } from '../../../constants/Network';
 
 export default function SignupScreen5({navigation}) {
   const { state, dispatch } = React.useContext(AuthContext)
@@ -45,7 +46,7 @@ export default function SignupScreen5({navigation}) {
   ////////////////////////////////////////
 
   function pressNext() {
-    axios.put('http://192.168.1.214:8088/users/userdata/genderbirthday', {
+    axios.put(`http://${localIpAddress}:8088/users/userdata/genderbirthday`, {
       id: state.userId,
       gender: genderState ?? null,
       birthday: birthdayState ?? null,

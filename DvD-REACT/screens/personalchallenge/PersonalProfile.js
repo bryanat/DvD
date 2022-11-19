@@ -5,6 +5,7 @@ import { StyleSheet, Pressable } from 'react-native';
 import { Text, View } from '../../components/Themed';
 import { AuthContext } from '../../hooks/AuthProvider';
 import axios from 'axios'
+import { localIpAddress } from '../../constants/Network';
 
 // user health stats (diet, charts, bmi, calorie history)
 export default function PersonalProfile({ navigation }) {
@@ -19,7 +20,7 @@ export default function PersonalProfile({ navigation }) {
 
   function pressGetAll(){
     console.log('axios getall called')
-    axios.get('http://192.168.1.214:8088/users/userdata/getwholeuserobject')
+    axios.get(`http://${localIpAddress}:8088/users/userdata/getwholeuserobject`)
       .then( function() {
         console.log(response)
         setDataState(response)

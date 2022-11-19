@@ -10,6 +10,7 @@ import { Text, View } from '../../../components/Themed';
 import axios from 'axios'
 import { AuthContext } from '../../../hooks/AuthProvider';
 import * as SecureStore from 'expo-secure-store'
+import { localIpAddress } from '../../../constants/Network';
 
 export default function SignupScreen2({navigation}) {
   
@@ -46,7 +47,7 @@ export default function SignupScreen2({navigation}) {
   }
 
   function pressNext() {
-    axios.put('http://192.168.1.214:8088/users/userdata/goal', {
+    axios.put(`http://${localIpAddress}:8088/users/userdata/goal`, {
         // id: userIDFromAuthContextToken ?? null,
         // id: authState.userToken ?? null,
         id: state.userId,

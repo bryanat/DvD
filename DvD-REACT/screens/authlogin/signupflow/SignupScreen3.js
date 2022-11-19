@@ -8,6 +8,7 @@ import { KeyboardAvoidingView, Pressable, StyleSheet, Switch } from 'react-nativ
 import { Text, View, TextInput } from '../../../components/Themed';
 import { AuthContext } from '../../../hooks/AuthProvider';
 import axios from 'axios'
+import { localIpAddress } from '../../../constants/Network';
 
 export default function SignupScreen3({navigation}) {
 
@@ -26,7 +27,7 @@ export default function SignupScreen3({navigation}) {
     // will add numeric type checking later
     // skipping conditional if logic right now while developing screens (for speed)
     //if (heightState != undefined && weightState != undefined) {
-      axios.put('http://192.168.1.214:8088/users/userdata/heightweight', {
+      axios.put(`http://${localIpAddress}:8088/users/userdata/heightweight`, {
         id: state.userId,
         height: +heightState ?? null,
         weight: +weightState ?? null,

@@ -5,6 +5,7 @@ import { AuthContext } from '../../hooks/AuthProvider';
 import axios from 'axios'
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import { Foundation } from '@expo/vector-icons';
+import { localIpAddress } from '../../constants/Network';
 
 export default function SignupScreen({ navigation }) {
 
@@ -42,7 +43,7 @@ export default function SignupScreen({ navigation }) {
       // if password has at least 8 characters, one letter, one number (checked via regex match)
       if (passwordState.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/) != null) {
         setPasswordValidityState('')
-        axios.put('http://192.168.1.214:8088/users/signup', {
+        axios.put(`http://${localIpAddress}:8088/users/signup`, {
           email: emailState,
           password: passwordState,
         })

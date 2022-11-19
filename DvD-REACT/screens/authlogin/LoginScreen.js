@@ -14,6 +14,7 @@
  import * as SecureStore from 'expo-secure-store'
  import { FontAwesome5 } from '@expo/vector-icons'; 
  import { Foundation } from '@expo/vector-icons';
+ import { localIpAddress } from '../../constants/Network';
 
  export default function LoginScreen({ navigation }) {
  
@@ -47,7 +48,7 @@
          setPasswordValidityState('')
          // check email and password authenticate with server by sending them via axios
        setEmailValidityState('')
-       axios.post('http://192.168.1.236:8088/users/login', {
+       axios.post(`http://${localIpAddress}:8088/users/login`, {
            email: emailState,
            password: passwordState,
          })
@@ -91,7 +92,7 @@
 
    function devPressLoginButton() {
     setLoginDoesNotExistState('')
-      axios.post('http://192.168.1.236:8088/users/login', {
+      axios.post(`http://${localIpAddress}:8088/users/login`, {
           email: 'Xeno@gmail.com',
           password: 'Xoxo11!!',
         })
