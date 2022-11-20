@@ -91,6 +91,7 @@
    }
 
    function pressDevLoginButton() {
+    // dispatch({type: 'DEV_TOKEN'})
     setLoginDoesNotExistState('')
       axios.post(`http://${localIpAddress}:8088/users/login`, {
           email: 'Xeno@gmail.com',
@@ -110,7 +111,9 @@
                //setToken(response.data.token)
                // navigation.navigate('Root')
                // signIn({ emailState, passwordState })
-               dispatch({ type: 'SIGN_IN', token: 'dumb-token'})
+               console.log(response.data.tokenId)
+               console.log("==========ABOVE==========")
+               dispatch({ type: 'SIGN_IN', token: 'dumb-token', id: '635c90b27d2c3098af42b94a'})
                }
               )
             console.log(`${emailState} logged in.`)

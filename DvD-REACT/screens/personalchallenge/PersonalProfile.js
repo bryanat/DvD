@@ -17,7 +17,7 @@ export default function PersonalProfile({ navigation }) {
     console.log('PersonalProfile.js useEffect hit')
     //axios call
     console.log('axios getall called')
-    axios.get(`http://${localIpAddress}:8088/users/userdata/getwholeuserobject`)
+    axios.get(`http://${localIpAddress}:8088/users/userdata/getwholeuserobject/${state.userId}`)
       .then( function(response) {
         console.log('faith is cool')
         console.log(response.data)
@@ -30,7 +30,7 @@ export default function PersonalProfile({ navigation }) {
 
   function pressUpdateUserdata(){
     console.log('axios getall called')
-    axios.get(`http://${localIpAddress}:8088/users/userdata/getwholeuserobject`)
+    axios.get(`http://${localIpAddress}:8088/users/userdata/getwholeuserobject/${state.userId}`)
       .then( function(response) {
         console.log('faith is cool')
         console.log(response.data)

@@ -107,17 +107,15 @@ router.put('/userdata/name', async(req, res) => {
   res.send({log: `Updated mongo document _id: ${insertResult.insertedId}`})
 })
 
-router.get('/userdata/getwholeuserobject', async(req, res) => {
+router.get('/userdata/getwholeuserobject/:id', async(req, res) => {
   console.log('/userdata/getwholeuserobject route hit.')
+  console.log(req.params.id)
   const [fetchResult] = await users.aggregate([
-    {$match: {_id:ObjectId('635c90b27d2c3098af42b94a')}}
+    {$match: {_id:ObjectId(req.params.id)}}
   ]).toArray()
   console.log(fetchResult)
   res.send(fetchResult)
-  //res.send({name: 'test', weight: 163})
 })
-
-
 ////////////////////////////////////////////////////
 
 // LOGIN ROUTE IMPORT
@@ -125,10 +123,8 @@ router.get('/userdata/getwholeuserobject', async(req, res) => {
 router.post('/login', async (req, res) => {
   // find the mongo user login object via email
   const result = await (await users.find({email: {$eq: req.body.email}}).toArray()).pop()
-  console.log("====dsf=sd=f=sdf=")
   console.log(result._id)
   // if a user is found (because result is not undefined)
-  console.log(req.body)
   if (result != undefined) {
     // check that password (from client) matches email password (from mongo server)
     if (result.password == req.body.password) {

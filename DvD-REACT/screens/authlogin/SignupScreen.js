@@ -49,7 +49,7 @@ export default function SignupScreen({ navigation }) {
         })
           .then( function (response) {
             console.log(response.data.log ?? "undefined")
-            navigation.navigate('SignupScreen2')
+            navigation.navigate('SignupScreen1')
           })
           .catch( function (error) {
             console.log(error)
