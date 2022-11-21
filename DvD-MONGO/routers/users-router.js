@@ -106,7 +106,7 @@ router.put('/userdata/name', async(req, res) => {
   console.log(`/userdata/name route hit. updated document: ${insertResult}`)
   res.send({log: `Updated mongo document _id: ${insertResult.insertedId}`})
 })
-
+  
 router.get('/userdata/getwholeuserobject/:id', async(req, res) => {
   console.log('/userdata/getwholeuserobject route hit.')
   console.log(req.params.id)
@@ -116,8 +116,16 @@ router.get('/userdata/getwholeuserobject/:id', async(req, res) => {
   console.log(fetchResult)
   res.send(fetchResult)
 })
-////////////////////////////////////////////////////
 
+router.get('/getavatar/:id', async (req, res) => {
+  const [fetchResult] = await users.aggregate([
+    {$match: {_id:ObjectId(req.params.id)}}
+  ]).toArray()
+  res.download(`../data/images/${fetchResult.avatar}.jpg`)
+})
+
+////////////////////////////////////////////////////
+  
 // LOGIN ROUTE IMPORT
 // R (read/find/get) user login from users collection
 router.post('/login', async (req, res) => {

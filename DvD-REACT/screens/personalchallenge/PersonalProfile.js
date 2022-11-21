@@ -45,7 +45,7 @@ export default function PersonalProfile({ navigation }) {
   return (
     <View style={styles.topView}>
       <View style={{alignItems: 'center'}}>
-        <Image style={styles.avatarImage} source={require('../../assets/images/a87sxszn.jpg')}/>
+        <Image style={styles.avatarImage} source={{uri: `http://${localIpAddress}:8088/users/getavatar/${state.userId}`}}/>
         <Text style={styles.nameText}>{userdataState.name}</Text>
       </View>
       <View style={styles.heightweightView}>

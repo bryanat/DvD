@@ -1,6 +1,7 @@
 node_modules/
 TODO.md
 .env
+# will add data images to separate folder above git repo when moved to cloud
 
 # react
 .expo/
