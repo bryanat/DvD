@@ -1,4 +1,6 @@
 import * as React from 'react'
+import { StyleSheet, Pressable } from 'react-native';
+import { View, Text } from './Themed'
 import { Camera, CameraType } from 'expo-camera'
 
 export default function CameraComponent() {
@@ -29,9 +31,9 @@ export default function CameraComponent() {
         ) : 
         (
           <View style={styles.cameraView}>
-            <TouchableOpacity onPress={pressStartCamera} style={styles.cameraStartButton}>
+            <Pressable onPress={pressStartCamera} style={styles.cameraStartButton}>
               <Text style={styles.cameraText}>Take picture</Text>
-            </TouchableOpacity>
+            </Pressable>
           </View>
         )
       }
