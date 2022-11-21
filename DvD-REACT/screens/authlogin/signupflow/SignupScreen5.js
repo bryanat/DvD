@@ -10,6 +10,7 @@ import { AuthContext } from '../../../hooks/AuthProvider';
 import axios from 'axios'
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { localIpAddress } from '../../../constants/Network';
+import { Foundation } from '@expo/vector-icons';
 
 export default function SignupScreen5({navigation}) {
   const { state, dispatch } = React.useContext(AuthContext)
@@ -68,12 +69,20 @@ export default function SignupScreen5({navigation}) {
           : [styles.buttonStyle, {backgroundColor:'#457B9D'}] //if not pressed
         ]}>
           <Text>Male</Text>
+          <View style={{flexDirection:"row", backgroundColor:'rgba(0,0,0,0)'}}>
+            <Foundation name="male" size={24} color="white" />
+            <Foundation name="male-symbol" size={24} color="white" style={{paddingLeft: 3}} />
+          </View>
         </Pressable>
         <Pressable onPress={pressFemale} style={({pressed}) => [ pressed
           ? [styles.buttonStyle, {backgroundColor:'#FFFFFF'}] //if pressed
           : [styles.buttonStyle, {backgroundColor:'orange'}] //if not pressed
         ]}>
           <Text>Female</Text>
+          <View style={{flexDirection:"row", backgroundColor:'rgba(0,0,0,0)'}}>
+            <Foundation name="female" size={24} color="white" />
+            <Foundation name="female-symbol" size={24} color="white" style={{paddingLeft: 3}} />
+          </View>
         </Pressable>
       </View>
 
