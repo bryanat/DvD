@@ -131,14 +131,16 @@ router.get('/getavatar/:id', async (req, res) => {
 router.post('/login', async (req, res) => {
   // find the mongo user login object via email
   const result = await (await users.find({email: {$eq: req.body.email}}).toArray()).pop()
-  console.log(result._id)
+  console.log("======asjanskd=====")
+  console.log(result)
   // if a user is found (because result is not undefined)
   if (result != undefined) {
     // check that password (from client) matches email password (from mongo server)
     if (result.password == req.body.password) {
       console.log({log: 'username and password found and match', authenticated: true})
       // gotta integrate mongo _id ObjectId with jwt
-      res.send({log: 'username and password found and match', authenticated: true, tokenID: result._id, token: jwt.sign({payload: 'value'}, 'secretKey')})
+      res.send({log: 'username and password found and match', authenticated: true, tokenID: result._id, token: jwt.sign({payload: 'value'}, 'secretKey'), mongoObj: result})
+      
     } else {
       res.send({log: `incorrent password for ${req.body.email},`, authenticated: false})
       console.log(`client password ${req.body.password} does not match server password`)
@@ -158,7 +160,7 @@ router.put('/signup', async (req, res) => {
     email: req.body.email ?? null,
     password: req.body.password ?? null,
   })
-  res.send({ log: `Successfully added user ${req.body.email}` })
+  res.send({ log: `Successfully added user ${req.body.email}`, mongoObj: result })
 })
 
 router.get('/testRoute', async (req, res) => {

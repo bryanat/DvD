@@ -32,7 +32,7 @@ export default function SignupScreen({ navigation }) {
 
   function devSignupSubmitPress() {
     // set username = 'devuser' (to put user data somewhere)
-    dispatch({type: 'DEV_TOKEN'})
+    dispatch({type: 'DEV_TOKEN', userId: '635c90b27d2c3098af42b94a'})
     navigation.navigate('SignupScreen1')
   }
 
@@ -49,6 +49,10 @@ export default function SignupScreen({ navigation }) {
         })
           .then( function (response) {
             console.log(response.data.log ?? "undefined")
+            // dispatch({type: 'DEV_TOKEN', userId: '635c90b27d2c3098af42b94a'})
+            console.log(response.data)
+            console.log("=====ABOVE====")
+            dispatch({type: 'DEV_TOKEN', userId: response.data.mongoObj.insertedId})
             navigation.navigate('SignupScreen1')
           })
           .catch( function (error) {

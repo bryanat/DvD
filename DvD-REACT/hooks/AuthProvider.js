@@ -41,7 +41,7 @@ export default function AuthProvider ({ children }) {
         case 'DEV_TOKEN':
           return {
             ...prevState,
-            userId: '635c90b27d2c3098af42b94a',
+            userId: action.userId,
           };
         case 'SWAP_COLORSCHEME':
           return {

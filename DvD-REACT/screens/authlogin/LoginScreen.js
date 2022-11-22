@@ -66,7 +66,9 @@
                 //setToken(response.data.token)
                 // navigation.navigate('Root')
                 // signIn({ emailState, passwordState })
-                dispatch({ type: 'SIGN_IN', token: 'dumb-token'})
+                console.log(response.data.mongoObj)
+                console.log("=======test===")
+                dispatch({ type: 'SIGN_IN', token: 'dumb-token', id: response.data.mongoObj._id})
                 }
                )
              console.log(`${emailState} logged in.`)
