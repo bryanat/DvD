@@ -10,11 +10,28 @@ import { AuthContext } from '../../../hooks/AuthProvider';
 import axios from 'axios'
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { localIpAddress } from '../../../constants/Network';
+import * as ImagePicker from 'expo-image-picker'
 
 export default function SignupScreen1({navigation}) {
   const { state, dispatch } = React.useContext(AuthContext)
-
   const [nameState, setNameState] = React.useState()
+  const [imageState, setImageState] = React.useState()
+
+  const pressPickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    })
+
+    console.log(result)
+
+    if (!result.canceled) {
+      setImageState(result.assets[0].uri)
+    }
+  }
+
 
   function pressNext() {
     axios.put(`http://${localIpAddress}:8088/users/userdata/name`, {
@@ -41,6 +58,10 @@ export default function SignupScreen1({navigation}) {
           borderBottomColor='white'
           autoFocus={true}
         />
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#F7A6A4' }}>
+        <Button title="Pick an image from camera roll" onPress={pressPickImage} />
+        {imageState && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+      </View>
       <View style={{ backgroundColor: '#F7A6A4', width: '80%'}}>
         <Pressable onPress={pressNext} style={styles.pressableStyle}>
           <Text style={styles.nextText}>Next</Text>
